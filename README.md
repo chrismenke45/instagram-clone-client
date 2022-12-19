@@ -1,0 +1,1 @@
+This is the front end of my instagram clone.  I am making it to practice/learn TypeScript and Redux. The backend will be made with rails and the repository is https://github.com/chrismenke45/instagram-clone-api
