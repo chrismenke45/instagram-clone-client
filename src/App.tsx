@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ImageSelector from './components/ImageSelector';
 
-function App() {
+const App: React.FC = () => {
+
   return (
     <div>
-      yeehaw
+     yee
+     <ImageSelector />
     </div>
   );
 }
