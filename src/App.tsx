@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import ImageSelector from './components/ImageSelector';
+import React from 'react';
+import ImageCropper from './components/ImageCropper';
 
 const App: React.FC = () => {
 
   return (
     <div>
      yee
-     <ImageSelector />
+     <ImageCropper />
     </div>
   );
 }
