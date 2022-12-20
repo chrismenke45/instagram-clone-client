@@ -1,10 +1,6 @@
 import React, { useState, useRef } from 'react';
-import ImageCrop from './ImageCrop';
 import ReactCrop, {
-    centerCrop,
-    makeAspectCrop,
     Crop,
-    PixelCrop
 } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
@@ -14,11 +10,11 @@ import {
     extractImageFileExtensionFromBase64,
     image64toCanvasRef
 } from '../ExternalFiles/ResuableUtils'
-import { type } from 'os';
 
 const ImageCropper: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const originalImageRef = useRef<HTMLImageElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
     const [crop, setCrop] = useState<Crop>()
     const [imgSrc, setImgSrc] = useState<string>('')
     const [imgExt, setImgExt] = useState<string>('')
@@ -31,7 +27,6 @@ const ImageCropper: React.FC = () => {
             const currentFile: File = files[0]
             const currentFileType = currentFile.type
             const currentFileSize = currentFile.size
-            //console.log(currentFileSize, currentFileType)
             if (currentFileSize > acceptedImageMaxSize) {
                 alert("This file is not allowed. " + currentFileSize + " bytes is too large")
                 return false
@@ -46,19 +41,14 @@ const ImageCropper: React.FC = () => {
 
     const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
-            //verifyFile(e.target.files)
-
             if (verifyFile(e.target.files)) {
                 // imageBase64Data 
                 const currentFile: File | null = e.target.files[0]
                 const myFileItemReader = new FileReader()
                 myFileItemReader.addEventListener("load", () => {
-                    //const myResult = myFileItemReader.result
                     const myResult = myFileItemReader.result?.toString() || ""
-                    //console.log(myResult)
                     setImgSrc(myResult)
                     setImgExt(extractImageFileExtensionFromBase64(myResult))
-                    //console.log(typeof extractImageFileExtensionFromBase64(myResult), extractImageFileExtensionFromBase64(myResult))
                 }, false)
 
                 myFileItemReader.readAsDataURL(currentFile)
@@ -67,20 +57,17 @@ const ImageCropper: React.FC = () => {
         }
     }
 
-    const onImgLoaded = (image: any) => {
-        console.log(image)
+    // const onImgLoaded = (image: any) => {
+    //     console.log(image)
+    // }
+    const onCropChange = (pixelCrop: Crop, percentCrop: Crop) => {
+        setCrop(percentCrop)
     }
-    const onCropChange = (_: any, crop: Crop) => {
-        //console.log(_, crop)
-        setCrop(crop)
-    }
-    const onCropComplete = (pixelCrop: Crop, percentCrop: any) => {
+    const onCropComplete = (pixelCrop: Crop, percentCrop: Crop) => {
         const originalDims = {
             height: originalImageRef.current?.naturalHeight,
             width: originalImageRef.current?.naturalWidth,
         }
-        console.log(originalDims)
-        console.log(percentCrop, pixelCrop)
         image64toCanvasRef(canvasRef.current, imgSrc, percentCrop, originalDims)
     }
 
@@ -103,6 +90,19 @@ const ImageCropper: React.FC = () => {
         
 
     }
+    const onClearToDefault = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
+        if (e) e.preventDefault()
+        const canvas = canvasRef.current
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx && ctx.clearRect(0, 0, canvas.width, canvas.height)
+        }
+        
+        setImgSrc('')
+        setImgExt('')
+        setCrop(undefined)
+        if (inputRef && inputRef.current) {inputRef.current.value = ""}
+    }
 
 
     return (
@@ -113,6 +113,7 @@ const ImageCropper: React.FC = () => {
             </label>
             <input
                 type="file"
+                ref={inputRef}
                 name="picture"
                 accept="image/png, image/gif, image/jpeg"
                 multiple={false}
@@ -129,13 +130,13 @@ const ImageCropper: React.FC = () => {
                     src={imgSrc}
                     alt="crop"
                     id="imageToCrop"
-                    ref={originalImageRef}
-                    onLoad={onImgLoaded} />
+                    ref={originalImageRef} />
                 }
             </ReactCrop>
             <p>Preview Canvas</p>
             <canvas ref={canvasRef}></canvas>
             {canvasRef.current && <button onClick={(e) => onCropImageClick(e)}>yee</button>}
+            {canvasRef.current && <button onClick={(e) => onClearToDefault(e)}>clear</button>}
         </div>
     );
 }

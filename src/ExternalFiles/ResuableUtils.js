@@ -42,7 +42,6 @@ export function base64StringtoFile (base64String, filename) {
     const image = new Image()
     //console.log(percentCrop)
     image.src = image64
-    console.log(percentCrop.width * naturalDims.width / 100, percentCrop.height * naturalDims.height / 100)
     image.onload = function () {
       ctx.drawImage(
         image,
