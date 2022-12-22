@@ -1,12 +1,14 @@
 import React from 'react';
-import ImageCropper from './components/ImageCropper';
+import Banner from './components/Banner';
+import NavFooter from './components/NavFooter';
 
 const App: React.FC = () => {
 
   return (
-    <div>
-     yee
-     <ImageCropper />
+    <div id="app">
+      <Banner />
+      <main>Main</main>
+      <NavFooter />
     </div>
   );
 }

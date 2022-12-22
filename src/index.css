@@ -1,3 +1,71 @@
-#imageToCrop {
-  /* max-width: 300px; */
+
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Rochester&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');*/
+:root {
+  --insta-dark-blue: #2a608d;
+  --insta-text-blue: #2a608d;
+  --insta-dark-grey: #272e30;
+  --insta-selected-dark-grey: #1a1c20;
+  --insta-icon-grey: #9fa5aa;
+  --insta-white: #FFFFFF;
+
 }
+
+html {
+  background: rgb(134, 211, 223);
+  font-size: 62.5%;
+}
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+#app {
+  width: 100%;
+  max-width: 400px;
+  background: red;
+  height: 100vh;
+  max-height: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+header {
+  width: 100%;
+  flex: 0 0 50px;
+  background: var(--insta-dark-blue);
+  color: var(--insta-white);
+  font-family: "Grand Hotel";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+main {
+  flex: 1;
+}
+footer {
+  width: 100%;
+  background: var(--insta-dark-grey);
+  flex: 0 0 50px;
+  color: var(--insta-icon-grey);
+  font-size: 3rem;
+}
+footer * {
+  height: 100%;
+}
+nav > ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+nav ul li {
+  flex: 1;
+  text-align: center;
+}
+nav ul li:hover {
+  background-color: var(--insta-selected-dark-grey);
+}
+
+
