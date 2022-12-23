@@ -30,7 +30,7 @@ body {
 #app {
   width: 100%;
   max-width: 450px;
-  background: red;
+  background: var(--insta-white);
   height: 100vh;
   max-height: 950px;
   display: flex;
@@ -72,6 +72,9 @@ nav ul li {
 }
 nav ul li:hover {
   background-color: var(--insta-selected-dark-grey);
+}
+nav ul li a {
+  color: inherit;
 }
 
 

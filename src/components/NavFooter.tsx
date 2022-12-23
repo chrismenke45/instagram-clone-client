@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { AiFillHome, AiFillInstagram } from "react-icons/ai"
 import { FiSearch } from "react-icons/fi"
 import { FaRegHeart } from "react-icons/fa"
@@ -12,19 +13,29 @@ const NavFooter: React.FC = () => {
             <nav>
                 <ul>
                     <li>
-                        <AiFillHome></AiFillHome>
+                        <Link to="/">
+                            <AiFillHome></AiFillHome>
+                        </Link>
                     </li>
                     <li>
-                        <FiSearch></FiSearch>
+                        <Link to="/search">
+                            <FiSearch></FiSearch>
+                        </Link>
                     </li>
                     <li>
-                        <AiFillInstagram></AiFillInstagram>
+                        <Link to="/post">
+                            <AiFillInstagram></AiFillInstagram>
+                        </Link>
                     </li>
                     <li>
-                        <FaRegHeart></FaRegHeart>
+                        <Link to="/likes">
+                            <FaRegHeart></FaRegHeart>
+                        </Link>
                     </li>
                     <li>
-                        <BsFillPersonFill></BsFillPersonFill>
+                        <Link to="/profile">
+                            <BsFillPersonFill></BsFillPersonFill>
+                        </Link>
                     </li>
                 </ul>
             </nav>
