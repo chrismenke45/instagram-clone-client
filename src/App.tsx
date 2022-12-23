@@ -1,11 +1,13 @@
 import React from 'react';
-import Banner from './components/Banner';
-import Home from './components/Home';
-import Search from './components/Search'
-import Post from './components/Post'
-import Likes from './components/Likes'
-import Profile from './components/Profile'
-import NavFooter from './components/NavFooter';
+
+import HomePage from './pages/HomePage';
+import SearchPage from './pages/SearchPage'
+import PostPage from './pages/PostPage'
+import LikesPage from './pages/LikesPage'
+import ProfilePage from './pages/ProfilePage'
+import CommentsPage from './pages/CommentsPage'
+import ErrorPage from './pages/ErrorPage'
+
 
 import {
   //BrowserRouter as Router,
@@ -16,47 +18,54 @@ import {
 } from "react-router-dom";
 
 const App: React.FC = () => {
-
   return (
     <div id="app">
       <Router>
-        <Banner />
-
         <Routes>
           <Route
             path='/'
             element={
-              <Home />
+              <HomePage />
             }>
           </Route>
           <Route
             path='/search'
             element={
-              <Search />
+              <SearchPage />
             }>
           </Route>
           <Route
             path='/post'
             element={
-              <Post />
+              <PostPage />
             }>
           </Route>
           <Route
             path='/likes'
             element={
-              <Likes />
+              <LikesPage />
             }>
           </Route>
           <Route
             path='/profile'
             element={
-              <Profile />
+              <ProfilePage />
+            }>
+          </Route>
+          <Route
+            path='/posts/:id/comments'
+            element={
+              <CommentsPage />
+            }>
+          </Route>
+          <Route
+            path='/*'
+            element={
+              <ErrorPage />
             }>
           </Route>
 
         </Routes>
-
-        <NavFooter />
       </Router>
     </div>
   );

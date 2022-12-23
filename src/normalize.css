@@ -7,4 +7,13 @@ li {
 }
 * {
     box-sizing: border-box;
-  }
+    font-family: Times, 'Times New Roman', Serif;
+    font-weight: 400;
+}
+svg {
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}

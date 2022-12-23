@@ -9,7 +9,7 @@ import {
     downloadBase64File,
     extractImageFileExtensionFromBase64,
     image64toCanvasRef
-} from '../ExternalFiles/ResuableUtils'
+} from '../../ExternalFiles/ResuableUtils'
 
 const ImageCropper: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
