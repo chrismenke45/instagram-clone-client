@@ -1,11 +1,12 @@
 import React from 'react';
+import PostOnFeed from './PostOnFeed';
 
 const Home: React.FC = () => {
 
 
     return (
         <main>
-            <h1>Home</h1>
+            <PostOnFeed />
         </main>
     );
 }

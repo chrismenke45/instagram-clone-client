@@ -9,12 +9,13 @@
   --insta-selected-dark-grey: #1a1c20;
   --insta-icon-grey: #9fa5aa;
   --insta-white: #FFFFFF;
-
+  box-sizing: border-box;
 }
 
 html {
   background: rgb(134, 211, 223);
   font-size: 62.5%;
+  box-sizing: border-box;
 }
 body {
   height: 100vh;
@@ -50,6 +51,7 @@ header {
 }
 main {
   flex: 1;
+  width: 100%;
 }
 footer {
   width: 100%;
@@ -75,6 +77,59 @@ nav ul li:hover {
 }
 nav ul li a {
   color: inherit;
+}
+
+.flexVertCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.postOnFeed {
+  width: 100%;
+}
+.postHeader {
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.postHeader img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+.postHeader div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.postHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.postImg {
+  width: 100%;
+}
+.postOptions {
+  width: 100%;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 3rem;
+  color: var(--insta-icon-grey);
+}
+.postOptions svg {
+  margin-right: 15px;
+}
+.postLikes {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5px 10px;
+  color: var(--insta-text-blue);
 }
 
 
