@@ -2,11 +2,16 @@ import React, { useState, useRef } from 'react';
 import ReactCrop, {
     Crop,
 } from 'react-image-crop';
+import { storage } from '../../firebase';
+import {
+    ref,
+    uploadString,
+    getDownloadURL,
+} from 'firebase/storage';
+import { v4 } from "uuid"
 import 'react-image-crop/dist/ReactCrop.css';
 
 import {
-    base64StringtoFile,
-    downloadBase64File,
     extractImageFileExtensionFromBase64,
     image64toCanvasRef
 } from '../../ExternalFiles/ResuableUtils'
@@ -20,6 +25,16 @@ const ImageCropper: React.FC = () => {
     const [imgExt, setImgExt] = useState<string>('')
     const acceptedImageFileTypesArray: string[] = ["image/png", "image/gif", "image/jpeg"]
     const acceptedImageMaxSize: number = 100000
+
+    const uploadFile = (imageFile: any) => {
+        if (imageFile == null) return;
+        const imageRef = ref(storage, `posts/${v4()}`);
+        uploadString(imageRef, imageFile, 'data_url').then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                console.log(url)
+            });
+        });
+    };
 
 
     const verifyFile = (files: FileList | null) => {
@@ -57,9 +72,6 @@ const ImageCropper: React.FC = () => {
         }
     }
 
-    // const onImgLoaded = (image: any) => {
-    //     console.log(image)
-    // }
     const onCropChange = (pixelCrop: Crop, percentCrop: Crop) => {
         setCrop(percentCrop)
     }
@@ -71,37 +83,32 @@ const ImageCropper: React.FC = () => {
         image64toCanvasRef(canvasRef.current, imgSrc, percentCrop, originalDims)
     }
 
-    const onCropImageClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const onCropImageClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        if (imgSrc && canvasRef.current) {
+        if (imgSrc && canvasRef.current && canvasRef.current) {
 
             const imageData64 = canvasRef.current.toDataURL('image/' + imgExt)
-
-      
-            const myFilename:string = Date.now().toString() + (Math.floor(Math.random() * 1000)).toString() + "." + imgExt
-
-            // file to be uploaded
-            const myNewCroppedFile = base64StringtoFile(imageData64, myFilename)
-            // download file
             
-            downloadBase64File(imageData64, myFilename)
-            //this.handleClearToDefault()
+            uploadFile(imageData64)
+            
+            // download file
+            //downloadBase64File(imageData64, myFilename)
         }
-        
+
 
     }
-    const onClearToDefault = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
+    const onClearToDefault = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (e) e.preventDefault()
         const canvas = canvasRef.current
         if (canvas) {
             const ctx = canvas.getContext('2d');
             ctx && ctx.clearRect(0, 0, canvas.width, canvas.height)
         }
-        
+
         setImgSrc('')
         setImgExt('')
         setCrop(undefined)
-        if (inputRef && inputRef.current) {inputRef.current.value = ""}
+        if (inputRef && inputRef.current) { inputRef.current.value = "" }
     }
 
 
@@ -137,6 +144,7 @@ const ImageCropper: React.FC = () => {
             <canvas ref={canvasRef}></canvas>
             {canvasRef.current && <button onClick={(e) => onCropImageClick(e)}>yee</button>}
             {canvasRef.current && <button onClick={(e) => onClearToDefault(e)}>clear</button>}
+            <img src="https://firebasestorage.googleapis.com/v0/b/insta-clone-358fb.appspot.com/o/posts%2F15d413ee-ca23-4954-89ce-65e025f31f16?alt=media&token=7a272218-aad3-4342-b5cb-22c5d5c21c4b"></img>
         </div>
     );
 }

@@ -16,11 +16,12 @@ import {
   Route,
   //Navigate
 } from "react-router-dom";
+import ImageCropper from './components/inner/ImageCropper';
 
 const App: React.FC = () => {
   return (
     <div id="app">
-      <Router>
+      {/*<Router>
         <Routes>
           <Route
             path='/'
@@ -66,7 +67,8 @@ const App: React.FC = () => {
           </Route>
 
         </Routes>
-      </Router>
+          </Router>*/}
+          <ImageCropper />
     </div>
   );
 }
