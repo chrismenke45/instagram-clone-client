@@ -2,13 +2,14 @@ import React, { useState, useRef } from 'react';
 import ReactCrop, {
     Crop,
 } from 'react-image-crop';
-import { storage } from '../../firebase';
-import {
-    ref,
-    uploadString,
-    getDownloadURL,
-} from 'firebase/storage';
-import { v4 } from "uuid"
+// import { storage } from '../../firebase/firebase';
+// import {
+//     ref,
+//     uploadString,
+//     getDownloadURL,
+// } from 'firebase/storage';
+// import { v4 } from "uuid"
+import uploadFile from '../../firebase/uploadFile';
 import 'react-image-crop/dist/ReactCrop.css';
 
 import {
@@ -26,15 +27,15 @@ const ImageCropper: React.FC = () => {
     const acceptedImageFileTypesArray: string[] = ["image/png", "image/gif", "image/jpeg"]
     const acceptedImageMaxSize: number = 100000
 
-    const uploadFile = (imageFile: any) => {
-        if (imageFile == null) return;
-        const imageRef = ref(storage, `posts/${v4()}`);
-        uploadString(imageRef, imageFile, 'data_url').then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
-                console.log(url)
-            });
-        });
-    };
+    // const uploadFile = (imageFile: any) => {
+    //     if (imageFile == null) return;
+    //     const imageRef = ref(storage, `posts/${v4()}`);
+    //     uploadString(imageRef, imageFile, 'data_url').then((snapshot) => {
+    //         getDownloadURL(snapshot.ref).then((url) => {
+    //             console.log(url)
+    //         });
+    //     });
+    // };
 
 
     const verifyFile = (files: FileList | null) => {
@@ -144,7 +145,6 @@ const ImageCropper: React.FC = () => {
             <canvas ref={canvasRef}></canvas>
             {canvasRef.current && <button onClick={(e) => onCropImageClick(e)}>yee</button>}
             {canvasRef.current && <button onClick={(e) => onClearToDefault(e)}>clear</button>}
-            <img src="https://firebasestorage.googleapis.com/v0/b/insta-clone-358fb.appspot.com/o/posts%2F15d413ee-ca23-4954-89ce-65e025f31f16?alt=media&token=7a272218-aad3-4342-b5cb-22c5d5c21c4b"></img>
         </div>
     );
 }
