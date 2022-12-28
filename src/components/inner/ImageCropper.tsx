@@ -141,8 +141,7 @@ const ImageCropper: React.FC = () => {
                     ref={originalImageRef} />
                 }
             </ReactCrop>
-            <p>Preview Canvas</p>
-            <canvas ref={canvasRef}></canvas>
+            <canvas className="previewCanvas" ref={canvasRef}></canvas>
             {canvasRef.current && <button onClick={(e) => onCropImageClick(e)}>yee</button>}
             {canvasRef.current && <button onClick={(e) => onClearToDefault(e)}>clear</button>}
         </div>

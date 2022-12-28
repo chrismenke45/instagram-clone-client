@@ -11,7 +11,8 @@ const uploadFile = (imageFile) => {
     const imageRef = ref(storage, `posts/${v4()}`);
     uploadString(imageRef, imageFile, 'data_url').then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
-            console.log(url)
+            // console.log(url)
+            return url
         });
     });
 };
