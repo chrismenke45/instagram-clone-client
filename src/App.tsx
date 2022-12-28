@@ -3,7 +3,7 @@ import React from 'react';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage'
 import PostPage from './pages/PostPage'
-import LikesPage from './pages/LikesPage'
+import MediaPage from './pages/MediaPage'
 import ProfilePage from './pages/ProfilePage'
 import CommentsPage from './pages/CommentsPage'
 import ErrorPage from './pages/ErrorPage'
@@ -16,12 +16,11 @@ import {
   Route,
   //Navigate
 } from "react-router-dom";
-import ImageCropper from './components/inner/ImageCropper';
 
 const App: React.FC = () => {
   return (
     <div id="app">
-      {/*<Router>
+      <Router>
         <Routes>
           <Route
             path='/'
@@ -42,9 +41,9 @@ const App: React.FC = () => {
             }>
           </Route>
           <Route
-            path='/likes'
+            path='/media'
             element={
-              <LikesPage />
+              <MediaPage />
             }>
           </Route>
           <Route
@@ -67,8 +66,7 @@ const App: React.FC = () => {
           </Route>
 
         </Routes>
-          </Router>*/}
-          <ImageCropper />
+      </Router>
     </div>
   );
 }

@@ -9,7 +9,7 @@ const NavFooter: React.FC = () => {
 
 
     return (
-        <footer>
+        <footer id="navFooter">
             <nav>
                 <ul>
                     <li>

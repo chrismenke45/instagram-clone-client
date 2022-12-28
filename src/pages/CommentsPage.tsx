@@ -1,11 +1,14 @@
 import React from 'react';
+import BackBanner from '../components/outer/BackBanner';
+import CommentFooter from '../components/outer/CommentFooter';
 
 const CommentsPage: React.FC = () => {
 
 
     return (
         <div id="page">
-            yeehaw
+            <BackBanner header="Comments"/>
+            <CommentFooter />
         </div>
     );
 }

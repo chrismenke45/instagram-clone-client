@@ -1,11 +1,12 @@
 import React from 'react';
+import ImageCropper from '../inner/ImageCropper';
 
 const Post: React.FC = () => {
 
 
     return (
         <main>
-            <h1>Post</h1>
+            <ImageCropper />
         </main>
     );
 }

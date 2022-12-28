@@ -9,6 +9,8 @@
   --insta-selected-dark-grey: #1a1c20;
   --insta-icon-grey: #9fa5aa;
   --insta-white: #FFFFFF;
+  --banner-height: 50px;
+  --footer-height: var(--banner-height);
   box-sizing: border-box;
 }
 
@@ -46,17 +48,17 @@ body {
   align-items: center;
 }
 header {
+  flex: 0 0 var(--banner-height);
   width: 100%;
-  flex: 0 0 50px;
+}
+#banner {
   background: var(--insta-dark-blue);
-  
-  
   display: flex;
   align-items: center;
   justify-content: center;
   
 }
-header > h1 {
+#banner > h1 {
   font-size: 2rem;
   color: var(--insta-white);
   font-family: "Grand Hotel";
@@ -68,8 +70,10 @@ main {
 }
 footer {
   width: 100%;
+  flex: 0 0 var(--footer-height);
+}
+#navFooter {
   background: var(--insta-dark-grey);
-  flex: 0 0 50px;
   color: var(--insta-icon-grey);
   font-size: 3rem;
 }
@@ -166,4 +170,49 @@ nav ul li:hover {
   font-weight: 700;
 }
 
-
+.previewCanvas {
+  display: none;
+}
+#backBanner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 10px;
+}
+#backBanner h1 {
+  font-size: 2rem;
+}
+#backArrow {
+  justify-self: flex-start;
+  font-size: 2rem;
+  margin: 0 30px 0 0;
+}
+#commentFooter {
+  padding: 0 10px;
+}
+#commentFooter form {
+  display: flex;
+  align-items: center;
+}
+#commentFooter form input {
+  flex: 1;
+  padding: 0 20px;
+  height: calc(var(--footer-height) * 0.5);
+  border: none;
+}
+#commentFooter form input:active {
+  outline: none;
+}
+#commentFooter form button {
+  flex: 0 0 var(--footer-height);
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  color: var(--insta-text-blue);
+}
+#commentFooter img {
+  --comment-footer-img-diameter: calc(var(--footer-height) * .8);
+  height: var(--comment-footer-img-diameter);
+  flex: 0 0 var(--comment-footer-img-diameter);
+  border-radius: 50%;
+}

@@ -4,7 +4,7 @@ const Banner: React.FC = () => {
 
 
     return (
-        <header>
+        <header id="banner">
             <h1>Instagram</h1>
         </header>
     );

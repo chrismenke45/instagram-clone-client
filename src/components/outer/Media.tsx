@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Likes: React.FC = () => {
+const Media: React.FC = () => {
 
 
     return (
         <main>
-            <h1>Likes</h1>
+            <h1>Media</h1>
         </main>
     );
 }
 
-export default Likes;
+export default Media;
