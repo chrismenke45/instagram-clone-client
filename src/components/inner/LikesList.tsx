@@ -16,7 +16,7 @@ const LikesList: React.FC = () => {
     return (
         <ul id="LikesList" className='flexVertCenter'>
             {likes.map(like => {
-                <li key={like.id}></li>
+                return <li key={like.id}></li>
             })}
         </ul>
     );

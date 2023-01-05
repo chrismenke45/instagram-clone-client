@@ -26,7 +26,7 @@ const post = {
         <article className='postOnFeed flexVertCenter'>
             <div className='postHeader'>
                 <div>
-                    <img src={post.user.photoUrl}></img>
+                    <img className="smallProfilePic" src={post.user.photoUrl}></img>
                     <h4>{post.user.name}</h4>
                 </div>
                 <FaEllipsisH></FaEllipsisH>

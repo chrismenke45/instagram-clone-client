@@ -28,7 +28,7 @@ const NavFooter: React.FC = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/likes">
+                        <Link to="/media">
                             <FaRegHeart></FaRegHeart>
                         </Link>
                     </li>

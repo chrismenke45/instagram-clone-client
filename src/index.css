@@ -11,6 +11,7 @@
   --insta-white: #FFFFFF;
   --banner-height: 50px;
   --footer-height: var(--banner-height);
+  --small-profile-pic-diameter: 40px;
   box-sizing: border-box;
 }
 
@@ -110,11 +111,12 @@ nav ul li:hover {
   width: 100%;
   padding: 5px 10px;
 }
-
-.postHeader img {
-  height: 40px;
-  width: 40px;
+.smallProfilePic {
+  height: var(--small-profile-pic-diameter);
+  width: var(--small-profile-pic-diameter);
   border-radius: 50%;
+}
+.postHeader img {
   margin-right: 10px;
 }
 .postHeader div, .postOptions, .postLikes, .postComments, .postCommentsPreview {
@@ -211,8 +213,24 @@ nav ul li:hover {
   color: var(--insta-text-blue);
 }
 #commentFooter img {
-  --comment-footer-img-diameter: calc(var(--footer-height) * .8);
-  height: var(--comment-footer-img-diameter);
-  flex: 0 0 var(--comment-footer-img-diameter);
+  height: var(--small-profile-pic-diameter);
+  flex: 0 0 var(--small-profile-pic-diameter);
   border-radius: 50%;
+}
+
+.commentInList {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--insta-icon-grey);
+}
+.commentInList .commentUserName {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+#commentsList {
+  padding: 0 10px;
+  width: 100%
 }

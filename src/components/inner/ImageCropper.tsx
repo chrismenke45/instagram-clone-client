@@ -2,13 +2,6 @@ import React, { useState, useRef } from 'react';
 import ReactCrop, {
     Crop,
 } from 'react-image-crop';
-// import { storage } from '../../firebase/firebase';
-// import {
-//     ref,
-//     uploadString,
-//     getDownloadURL,
-// } from 'firebase/storage';
-// import { v4 } from "uuid"
 import uploadFile from '../../firebase/uploadFile';
 import 'react-image-crop/dist/ReactCrop.css';
 
@@ -26,16 +19,6 @@ const ImageCropper: React.FC = () => {
     const [imgExt, setImgExt] = useState<string>('')
     const acceptedImageFileTypesArray: string[] = ["image/png", "image/gif", "image/jpeg"]
     const acceptedImageMaxSize: number = 100000
-
-    // const uploadFile = (imageFile: any) => {
-    //     if (imageFile == null) return;
-    //     const imageRef = ref(storage, `posts/${v4()}`);
-    //     uploadString(imageRef, imageFile, 'data_url').then((snapshot) => {
-    //         getDownloadURL(snapshot.ref).then((url) => {
-    //             console.log(url)
-    //         });
-    //     });
-    // };
 
 
     const verifyFile = (files: FileList | null) => {
