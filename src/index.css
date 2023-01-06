@@ -202,7 +202,7 @@ nav ul li:hover {
   height: calc(var(--footer-height) * 0.5);
   border: none;
 }
-#commentFooter form input:active {
+#commentFooter form input:focus {
   outline: none;
 }
 #commentFooter form button {
@@ -220,17 +220,39 @@ nav ul li:hover {
 
 .commentInList {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
   padding: 5px 0;
   border-bottom: 1px solid var(--insta-icon-grey);
 }
 .commentInList .commentUserName {
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--insta-dark-blue);
+}
+.commentInList * {
   font-size: 1.1rem;
+}
+.commentHeader {
+  display: flex;
+  align-items: center;
+  padding: 0 0 2px 0;
+}
+.commentDate {
+  font-size: 1rem;
+  padding: 0 5px;
+}
+.commentInList .commentTextBox {
+  padding: 0 0 0 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
 }
 #commentsList {
   padding: 0 10px;
-  width: 100%
+  width: 100%;
+  flex: auto;
+  overflow-y: scroll;
 }
