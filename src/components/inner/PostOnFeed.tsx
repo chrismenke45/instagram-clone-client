@@ -12,14 +12,8 @@ const post = {
         name: "chris45"
     },
     photoUrl: "square.jpeg",
-    likes: [],
+    likes: 3,
     commentCount: 2,
-    comment: {
-        user: {
-            name: "bob"
-        },
-        text: "yeehaw"
-    }
 }
 
     return (
@@ -36,8 +30,7 @@ const post = {
                 {post.liked ? <FaHeart className='likedHeart'></FaHeart> : <FaRegHeart></FaRegHeart>}
                 <Link to={`posts/${post.id}/comments`}><FaRegComment></FaRegComment></Link>
             </div>
-            <span className='postLikes'><FaHeart></FaHeart>&nbsp;{pluralize(post.likes.length, "like")}</span>
-            { post.commentCount === 1 && <span className='postCommentsPreview'><span>{post.comment.user.name}</span>&nbsp;{post.comment.text}</span>}
+            <Link to={`posts/${post.id}/likes`}  className='postLikes'><FaHeart></FaHeart>&nbsp;{pluralize(post.likes, "like")}</Link>
             { post.commentCount > 1 && <Link to={`posts/${post.id}/comments`} className='postComments'>View all {pluralize(post.commentCount, "comment")}</Link>}
         </article>
     );

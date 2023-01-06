@@ -218,19 +218,28 @@ nav ul li:hover {
   border-radius: 50%;
 }
 
-.commentInList {
+.commentInList, .likeInList {
   display: flex;
-  align-items: flex-start;
   justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
   padding: 5px 0;
   border-bottom: 1px solid var(--insta-icon-grey);
 }
-.commentInList .commentUserName {
+.commentInList, .commentInList .commentTextBox {
+  align-items: flex-start;
+}
+.likeInList, .likeInList .likeTextBox {
+  align-items: center;
+} 
+
+.commentInList .commentUserName, .likeInList .likeUserName {
   font-weight: 600;
+}
+.commentInList .commentUserName {
   color: var(--insta-dark-blue);
 }
-.commentInList * {
+.commentInList *, .likeInList * {
   font-size: 1.1rem;
 }
 .commentHeader {
@@ -242,15 +251,23 @@ nav ul li:hover {
   font-size: 1rem;
   padding: 0 5px;
 }
-.commentInList .commentTextBox {
+.commentInList .commentTextBox, .likeInList .likeTextBox {
   padding: 0 0 0 10px;
   display: flex;
-  align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
   height: 100%;
 }
-#commentsList {
+.likeInList .likeTextBox {
+  justify-content: center;
+  align-items: flex-start;
+}
+.likeInList .smallProfilePic {
+  height: calc(var(--small-profile-pic-diameter) * 1.2);
+  width: calc(var(--small-profile-pic-diameter) * 1.2);
+}
+
+#commentsList, #likesList {
   padding: 0 10px;
   width: 100%;
   flex: auto;

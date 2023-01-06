@@ -6,6 +6,7 @@ import PostPage from './pages/PostPage'
 import MediaPage from './pages/MediaPage'
 import ProfilePage from './pages/ProfilePage'
 import CommentsPage from './pages/CommentsPage'
+import LikesPage from './pages/LikesPage';
 import ErrorPage from './pages/ErrorPage'
 
 
@@ -79,6 +80,12 @@ import {
               path='/posts/:id/comments'
               element={
                 <CommentsPage />
+              }>
+            </Route>
+            <Route
+              path='/posts/:id/likes'
+              element={
+                <LikesPage />
               }>
             </Route>
             <Route

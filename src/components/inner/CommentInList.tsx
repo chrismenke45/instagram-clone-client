@@ -15,7 +15,7 @@ const CommentInList: React.FC<Props> = (props) => {
             <div className='commentTextBox'>
                 <div className='commentHeader'>
                     <Link to="/profile" className='commentUserName'>{comment.username}</Link>
-                    <span className='commentDate'>{timeAgo(comment.created_at)}</span>
+                    <span className='commentDate'>{timeAgo(comment.created_at, true)}</span>
                 </div>
 
                 <span>{comment.text}</span>

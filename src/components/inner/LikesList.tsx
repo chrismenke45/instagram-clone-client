@@ -1,22 +1,27 @@
 import React from 'react';
+import LikeInList from './LikeInList';
 
 const LikesList: React.FC = () => {
     const likes = [{
         username: "boby43",
+        user_id: 1,
         name: "bob",
-        id: 1
+        id: 1,
+        profile_picture: "square.jpeg",
     },
     {
         username: "cm45",
-        name: "Chris",
-        id: 2
+        name: "chris",
+        user_id: 2,
+        id: 2,
+        profile_picture: "square.jpeg",
     }
     ]
 
     return (
-        <ul id="LikesList" className='flexVertCenter'>
+        <ul id="likesList" className='flexVertCenter'>
             {likes.map(like => {
-                return <li key={like.id}></li>
+                return <LikeInList key={like.id} like={like}/>
             })}
         </ul>
     );
