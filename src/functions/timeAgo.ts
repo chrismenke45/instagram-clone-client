@@ -1,6 +1,6 @@
 import pluralize from "./pluralize";
 
-const timeAgo = (date: string): string => {
+const timeAgo = (date: string, weeks?: boolean): string => {
     let theDate = new Date(date);
     let theDateSec = theDate.getTime() / 1000
     let currentDateSec = Date.now() / 1000
@@ -16,7 +16,12 @@ const timeAgo = (date: string): string => {
             return `${pluralize(Math.ceil(differenceInSec / 60 / 60 / 24), "day")} ago`
         }
     } else {
-        return theDate.toLocaleDateString('en-us', { month:"long", day:"numeric", year:"numeric"}) 
+        if (weeks) {
+            return `${pluralize(Math.ceil(differenceInSec / 60 / 60 / 24 / 7), "week")} ago`
+        } else {
+            return theDate.toLocaleDateString('en-us', { month:"long", day:"numeric", year:"numeric"})
+        }
+         
     }
 }
 export default timeAgo
