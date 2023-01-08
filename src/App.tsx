@@ -7,7 +7,10 @@ import MediaPage from './pages/MediaPage'
 import ProfilePage from './pages/ProfilePage'
 import CommentsPage from './pages/CommentsPage'
 import LikesPage from './pages/LikesPage';
+import LoginPage from './pages/LoginPage';
 import ErrorPage from './pages/ErrorPage'
+
+import getUserObject from './functions/user/getUserObject';
 
 
 import {
@@ -21,6 +24,8 @@ import {
 
 
   const App: React.FC = () => {
+
+    console.log(getUserObject())
 
     // useEffect(() => {
     //   let url: string = "http://localhost:5000/posts"
@@ -86,6 +91,12 @@ import {
               path='/posts/:id/likes'
               element={
                 <LikesPage />
+              }>
+            </Route>
+            <Route
+              path='/login'
+              element={
+                <LoginPage />
               }>
             </Route>
             <Route

@@ -60,9 +60,9 @@ header {
   
 }
 #banner > h1 {
-  font-size: 2rem;
-  color: var(--insta-white);
   font-family: "Grand Hotel";
+  color: var(--insta-white);
+  font-size: 2rem;
 }
 main {
   flex: 1;
@@ -273,3 +273,34 @@ nav ul li:hover {
   flex: auto;
   overflow-y: scroll;
 }
+
+
+
+
+#loginOrSignUp {
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+}
+#loginOrSignUp h1 {
+  font-size: 4rem;
+  margin: 15px;
+  font-family: "Grand Hotel";
+}
+
+.openerOption {
+  font-size: 1.5rem;
+  background-color: var(--insta-dark-blue);
+  color: var(--insta-white);
+  font-weight: 500;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  text-align: center;
+  border-radius: 20px;
+  cursor: pointer;
+} 
+
