@@ -26,7 +26,7 @@ import {
 
   const App: React.FC = () => {
 
-    console.log(getUserObject())
+    //console.log(getUserObject())
 
     // useEffect(() => {
     //   let url: string = "http://localhost:5000/posts"

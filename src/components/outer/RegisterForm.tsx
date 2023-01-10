@@ -1,12 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
+import ImageCropper from '../inner/ImageCropper';
+
 import buildFormData from '../../functions/fetch/buildFormData';
 import fetchData from '../../functions/fetch/fetchData';
 import jwt_decode from "jwt-decode";
 import setUserJwt from '../../functions/user/setUserJwt';
 
 const RegisterForm: React.FC = () => {
-    const [registerInfo, setRegisterInfo] = useState({ username: "", name: "", password: "", bio: "" })
+    const [registerInfo, setRegisterInfo] = useState({ username: "", name: "", password: "", bio: "", profile_picture: "" })
+    const [showImageSelect, setShowImageSelect] = useState(false)
+    const [photoUrl, setPhotoUrl] = useState("")
+    const [userCreated, setUserCreated] = useState(false)
+
+    useEffect(() => {
+        setRegisterInfo(prev => {
+            return {...prev, profile_picture: photoUrl }
+        })
+        return () => {
+            if (!userCreated && registerInfo.profile_picture != "") {
+                console.log("need to add fucntionality to delete unused uploaded photo")
+            }
+        }
+    }, [photoUrl])
+
+    useEffect(() => {
+        console.log(registerInfo)
+    }, [registerInfo])
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setRegisterInfo(prev => {
@@ -28,17 +48,21 @@ const RegisterForm: React.FC = () => {
             return { ...prev, bio: e.target.value }
         })
     }
+    const handleImageSelect = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        setShowImageSelect(prev => !prev)
+    }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         let data = buildFormData([
-            ["user[username]", registerInfo.username], 
+            ["user[username]", registerInfo.username],
             ["user[password]", registerInfo.password],
-            ["user[name]", registerInfo.name], 
-            ["user[bio]", registerInfo.bio], 
-            ["user[profile_picture]", "https://example.com"],
+            ["user[name]", registerInfo.name],
+            ["user[bio]", registerInfo.bio],
+            ["user[profile_picture]", registerInfo.profile_picture],
         ])
-        fetchData("/users", "POST", data)
+        fetchData("users", "POST", data)
             .then(data => {
                 console.log(data)
                 if (data.t) {
@@ -47,6 +71,7 @@ const RegisterForm: React.FC = () => {
                     let currentDate = new Date()
                     let secondsSinceEpoch = Math.round(currentDate.getTime() / 1000)
                     console.log(secondsSinceEpoch, decoded)
+                    setUserCreated(true)
                 }
 
 
@@ -72,7 +97,7 @@ const RegisterForm: React.FC = () => {
                     <input
                         type="text"
                         name="name"
-                        placeholder="name"
+                        placeholder="Name"
                         minLength={3}
                         maxLength={30}
                         value={registerInfo.name}
@@ -99,6 +124,8 @@ const RegisterForm: React.FC = () => {
                         onChange={handleBioChange}>
                     </textarea>
                 </div>
+                <button className='openerOption' onClick={handleImageSelect}>{registerInfo.profile_picture ? "Change Profile Picture" : "Select Image" }</button>
+                {showImageSelect && <ImageCropper imageFolder={'profilePictures'} ruleOfThirds={false} circularCrop={true} setPhotoUrl={setPhotoUrl} setShowImageSelect={setShowImageSelect} />}
                 <button className="openerOption" type='submit'>Register</button>
             </form>
             <span>Already have an account?</span>

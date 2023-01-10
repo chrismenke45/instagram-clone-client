@@ -9,6 +9,7 @@
   --insta-selected-dark-grey: #1a1c20;
   --insta-icon-grey: #9fa5aa;
   --insta-white: #FFFFFF;
+  --background-grey: #f1f1f1;
   --banner-height: 50px;
   --footer-height: var(--banner-height);
   --small-profile-pic-diameter: 40px;
@@ -47,6 +48,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 header {
   flex: 0 0 var(--banner-height);
@@ -275,11 +277,16 @@ nav ul li:hover {
 
 
 #loginOrSignUp, #register {
-  background: #f1f1f1;
+  background: var(--background-grey);
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
+  flex-direction: column;
+}
+#loginOrSignUp form, #register form {
+  display: flex;
+  align-items: center;
   flex-direction: column;
 }
 #loginOrSignUp h1, #register h1 {
@@ -307,5 +314,19 @@ nav ul li:hover {
   padding: 10px;
   margin: 5px;
   border: 1px black solid;
+}
+
+#imageCropper {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  background: var(--background-grey);
+  z-index: 2;
+
 }
 

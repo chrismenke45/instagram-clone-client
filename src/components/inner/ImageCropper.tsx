@@ -10,7 +10,16 @@ import {
     image64toCanvasRef
 } from '../../ExternalFiles/ResuableUtils'
 
-const ImageCropper: React.FC = () => {
+interface Props {
+    imageFolder: string;
+    ruleOfThirds: boolean;
+    circularCrop: boolean;
+    setPhotoUrl: React.Dispatch<React.SetStateAction<string>>;
+    setShowImageSelect: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const ImageCropper: React.FC<Props> = (props) => {
+    const { imageFolder, ruleOfThirds, circularCrop, setPhotoUrl, setShowImageSelect } = props
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const originalImageRef = useRef<HTMLImageElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
@@ -72,9 +81,17 @@ const ImageCropper: React.FC = () => {
         if (imgSrc && canvasRef.current && canvasRef.current) {
 
             const imageData64 = canvasRef.current.toDataURL('image/' + imgExt)
-            
-            uploadFile(imageData64)
-            
+            //OLD VERSION LINE DIRECTLY BELOW
+            //const fileName: string = uploadFile(imageData64, imageFolder)
+            uploadFile(imageData64, imageFolder)
+                .then(urlString => {
+                    if (urlString) {
+                        setPhotoUrl(urlString)
+                    }
+                    setShowImageSelect(false)
+                    console.log(urlString)
+                })
+
             // download file
             //downloadBase64File(imageData64, myFilename)
         }
@@ -97,7 +114,7 @@ const ImageCropper: React.FC = () => {
 
 
     return (
-        <div>
+        <div id="imageCropper">
             <label
                 htmlFor='picture'>
                 Photo:
@@ -116,7 +133,9 @@ const ImageCropper: React.FC = () => {
                 onChange={onCropChange}
                 onComplete={onCropComplete}
                 aspect={1}
-                ruleOfThirds={true}>
+                ruleOfThirds={ruleOfThirds}
+                circularCrop={circularCrop}>
+
                 {!!imgSrc && <img
                     src={imgSrc}
                     alt="crop"
@@ -125,8 +144,8 @@ const ImageCropper: React.FC = () => {
                 }
             </ReactCrop>
             <canvas className="previewCanvas" ref={canvasRef}></canvas>
-            {canvasRef.current && <button onClick={(e) => onCropImageClick(e)}>yee</button>}
-            {canvasRef.current && <button onClick={(e) => onClearToDefault(e)}>clear</button>}
+            {crop && <button onClick={(e) => onCropImageClick(e)}>Save</button>}
+            {canvasRef.current && <button onClick={(e) => onClearToDefault(e)}>Clear Image</button>}
         </div>
     );
 }
