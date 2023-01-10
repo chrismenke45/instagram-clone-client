@@ -8,6 +8,7 @@ import ProfilePage from './pages/ProfilePage'
 import CommentsPage from './pages/CommentsPage'
 import LikesPage from './pages/LikesPage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import ErrorPage from './pages/ErrorPage'
 
 import getUserObject from './functions/user/getUserObject';
@@ -97,6 +98,12 @@ import {
               path='/login'
               element={
                 <LoginPage />
+              }>
+            </Route>
+            <Route
+              path='/register'
+              element={
+                <RegisterPage />
               }>
             </Route>
             <Route
