@@ -202,9 +202,6 @@ nav ul li:hover {
   height: calc(var(--footer-height) * 0.5);
   border: none;
 }
-#commentFooter form input:focus {
-  outline: none;
-}
 #commentFooter form button {
   flex: 0 0 var(--footer-height);
   border: none;
@@ -290,7 +287,9 @@ nav ul li:hover {
   margin: 15px;
   font-family: "Grand Hotel";
 }
-
+#loginOrSignUp span {
+  font-size: 1.5rem;
+}
 .openerOption {
   font-size: 1.5rem;
   background-color: var(--insta-dark-blue);
@@ -303,4 +302,10 @@ nav ul li:hover {
   border-radius: 20px;
   cursor: pointer;
 } 
+.formGroup input {
+  width: 200px;
+  padding: 10px;
+  margin: 5px;
+  border: 1px black solid;
+}
 

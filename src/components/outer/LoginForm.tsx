@@ -42,12 +42,26 @@ const LoginForm: React.FC = () => {
             <h1>Instagram</h1>
             <form onSubmit={handleSubmit}>
                 <div className='formGroup'>
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" name="username" value={loginInfo.username} onChange={handleUsernameChange}></input>
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        minLength={3}
+                        maxLength={30}
+                        value={loginInfo.username}
+                        onChange={handleUsernameChange}>
+                    </input>
                 </div>
                 <div className='formGroup'>
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" name="password" value={loginInfo.password} onChange={handlePasswordChange}></input>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Passowrd"
+                        minLength={6}
+                        maxLength={18}
+                        value={loginInfo.password}
+                        onChange={handlePasswordChange}>
+                    </input>
                 </div>
                 <button className="openerOption" type='submit'>Login</button>
             </form>
