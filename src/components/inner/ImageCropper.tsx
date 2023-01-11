@@ -109,7 +109,17 @@ const ImageCropper: React.FC<Props> = (props) => {
         setImgSrc('')
         setImgExt('')
         setCrop(undefined)
-        if (inputRef && inputRef.current) { inputRef.current.value = "" }
+        if (inputRef?.current) { 
+            inputRef.current.value = "" 
+            inputRef.current.click()
+        }
+    }
+    const handleSelectPhoto = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        if (inputRef?.current) {
+            inputRef.current.click()
+        }
+        
     }
 
 
@@ -117,7 +127,7 @@ const ImageCropper: React.FC<Props> = (props) => {
         <div id="imageCropper">
             <label
                 htmlFor='picture'>
-                Photo:
+                Image Cropper
             </label>
             <input
                 type="file"
@@ -125,9 +135,11 @@ const ImageCropper: React.FC<Props> = (props) => {
                 name="picture"
                 accept="image/png, image/gif, image/jpeg"
                 multiple={false}
+                hidden={true}
                 onChange={onSelectFile}>
 
             </input>
+            {!imgSrc && <button onClick={handleSelectPhoto}>Select Photo</button>}
             <ReactCrop
                 crop={crop}
                 onChange={onCropChange}
@@ -145,7 +157,7 @@ const ImageCropper: React.FC<Props> = (props) => {
             </ReactCrop>
             <canvas className="previewCanvas" ref={canvasRef}></canvas>
             {crop && <button onClick={(e) => onCropImageClick(e)}>Save</button>}
-            {canvasRef.current && <button onClick={(e) => onClearToDefault(e)}>Clear Image</button>}
+            {canvasRef.current && <button onClick={(e) => onClearToDefault(e)}>Use Different Photo</button>}
         </div>
     );
 }

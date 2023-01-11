@@ -1,7 +1,5 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
-/*@import url('https://fonts.googleapis.com/css2?family=Rochester&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');*/
 :root {
   --insta-dark-blue: #2a608d;
   --insta-text-blue: #2a608d;
@@ -325,8 +323,21 @@ nav ul li:hover {
   align-items: center;
   justify-content: flex-start;
   height: 100%;
+  padding: 10px 0 0 0;
   background: var(--background-grey);
   z-index: 2;
-
+}
+#imageCropper label {
+  font-size: 2rem;
+}
+#imageCropper button {
+  padding: 10px;
+  font-size: 1.5rem;
+  background: var(--insta-dark-blue);
+  border-radius: 20px;
+  width: 200px;
+  color: var(--insta-white);
+  cursor: pointer;
+  margin: 10px 0 0 0 ;
 }
 

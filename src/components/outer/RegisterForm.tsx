@@ -6,6 +6,8 @@ import buildFormData from '../../functions/fetch/buildFormData';
 import fetchData from '../../functions/fetch/fetchData';
 import jwt_decode from "jwt-decode";
 import setUserJwt from '../../functions/user/setUserJwt';
+import deleteFile from '../../firebase/deleteFile';
+import loginAsGuest from '../../functions/fetch/loginAsGuest';
 
 const RegisterForm: React.FC = () => {
     const [registerInfo, setRegisterInfo] = useState({ username: "", name: "", password: "", bio: "", profile_picture: "" })
@@ -17,16 +19,15 @@ const RegisterForm: React.FC = () => {
         setRegisterInfo(prev => {
             return {...prev, profile_picture: photoUrl }
         })
-        return () => {
-            if (!userCreated && registerInfo.profile_picture != "") {
-                console.log("need to add fucntionality to delete unused uploaded photo")
-            }
-        }
     }, [photoUrl])
 
-    useEffect(() => {
-        console.log(registerInfo)
-    }, [registerInfo])
+    const deleteUploadedPhoto = () => {
+        if (registerInfo.profile_picture !== "") {
+            deleteFile(registerInfo.profile_picture)
+                .then(res => console.log(res))
+                .catch(err => console.error(err))
+        }
+    }
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setRegisterInfo(prev => {
@@ -50,6 +51,11 @@ const RegisterForm: React.FC = () => {
     }
     const handleImageSelect = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
+        if (!showImageSelect && registerInfo.profile_picture !== "") {
+            deleteFile(registerInfo.profile_picture).then(res => {
+                console.log(res)
+            })
+        }
         setShowImageSelect(prev => !prev)
     }
 
@@ -129,9 +135,9 @@ const RegisterForm: React.FC = () => {
                 <button className="openerOption" type='submit'>Register</button>
             </form>
             <span>Already have an account?</span>
-            <Link to="/login" className='openerOption'>Login</Link>
+            <Link to="/login" onClick={deleteUploadedPhoto} className='openerOption'>Login</Link>
             <span>or</span>
-            <button className='openerOption'>Login as Guest</button>
+            <button onClick={() => {deleteUploadedPhoto(); loginAsGuest()}} className='openerOption'>Login as Guest</button>
 
         </main>
     );

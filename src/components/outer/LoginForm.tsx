@@ -4,6 +4,7 @@ import buildFormData from '../../functions/fetch/buildFormData';
 import fetchData from '../../functions/fetch/fetchData';
 import jwt_decode from "jwt-decode";
 import setUserJwt from '../../functions/user/setUserJwt';
+import loginAsGuest from '../../functions/fetch/loginAsGuest';
 
 const LoginForm: React.FC = () => {
     const [loginInfo, setLoginInfo] = useState({ username: "", password: "" })
@@ -68,7 +69,7 @@ const LoginForm: React.FC = () => {
             <span>Don't have an account?</span>
             <Link to="/register" className='openerOption'>Sign up</Link>
             <span>or</span>
-            <button className='openerOption'>Login as Guest</button>
+            <button onClick={loginAsGuest} className='openerOption'>Login as Guest</button>
 
         </main>
     );
