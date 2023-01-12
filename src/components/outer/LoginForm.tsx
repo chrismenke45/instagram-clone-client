@@ -25,16 +25,9 @@ const LoginForm: React.FC = () => {
         let data = buildFormData([["auth[username]", loginInfo.username], ["auth[password]", loginInfo.password]])
         fetchData("/auth/login", "POST", data)
             .then(data => {
-                console.log(data)
                 if (data.t) {
-                    let decoded = jwt_decode(data.t)
                     setUserJwt(data.t)
-                    let currentDate = new Date()
-                    let secondsSinceEpoch = Math.round(currentDate.getTime() / 1000)
-                    console.log(secondsSinceEpoch, decoded)
                 }
-
-
             })
 
     }

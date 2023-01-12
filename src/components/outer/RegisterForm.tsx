@@ -70,17 +70,10 @@ const RegisterForm: React.FC = () => {
         ])
         fetchData("users", "POST", data)
             .then(data => {
-                console.log(data)
                 if (data.t) {
-                    let decoded = jwt_decode(data.t)
                     setUserJwt(data.t)
-                    let currentDate = new Date()
-                    let secondsSinceEpoch = Math.round(currentDate.getTime() / 1000)
-                    console.log(secondsSinceEpoch, decoded)
                     setUserCreated(true)
                 }
-
-
             })
 
     }
