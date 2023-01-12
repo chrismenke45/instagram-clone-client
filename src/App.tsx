@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage'
@@ -11,7 +11,6 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ErrorPage from './pages/ErrorPage'
 
-import getUserObject from './functions/user/getUserObject';
 
 
 import {
@@ -19,104 +18,97 @@ import {
   HashRouter as Router,
   Routes,
   Route,
-  //Navigate
 } from "react-router-dom";
+import RequireAuth from './functions/user/RequireAuth'; //to redirect to login if not logged in
 
 
 
-  const App: React.FC = () => {
+const App: React.FC = () => {
 
-    //console.log(getUserObject())
-
-    // useEffect(() => {
-    //   let url: string = "http://localhost:5000/posts"
-    //   const options: RequestInit = {
-    //     method: 'GET',
-    //     mode: 'cors',
-    //     headers: {
-    //       'Accept': 'application/json',
-    //     }
-    //   };
-    //   fetch(url, options)
-    //     .then(response => response.json())
-    //     .then(shifts => {
-    //       console.log(shifts)
-    //       console.log(typeof shifts[0].created_at)
-    //     })
-    //     .catch(error => {
-    //       console.error('Error:', error)
-    //     })
-    // })
-
-    return (
-      <div id="app">
-        <Router>
-          <Routes>
-            <Route
-              path='/'
-              element={
+  return (
+    <div id="app">
+      <Router>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <RequireAuth>
                 <HomePage />
-              }>
-            </Route>
-            <Route
-              path='/search'
-              element={
+              </RequireAuth>
+            }>
+          </Route>
+          <Route
+            path='/search'
+            element={
+              <RequireAuth>
                 <SearchPage />
-              }>
-            </Route>
-            <Route
-              path='/post'
-              element={
+              </RequireAuth>
+
+            }>
+          </Route>
+          <Route
+            path='/post'
+            element={
+              <RequireAuth>
                 <PostPage />
-              }>
-            </Route>
-            <Route
-              path='/media'
-              element={
+              </RequireAuth>
+            }>
+          </Route>
+          <Route
+            path='/media'
+            element={
+              <RequireAuth>
                 <MediaPage />
-              }>
-            </Route>
-            <Route
-              path='/profile'
-              element={
+              </RequireAuth>
+            }>
+          </Route>
+          <Route
+            path='/profile'
+            element={
+              <RequireAuth>
                 <ProfilePage />
-              }>
-            </Route>
-            <Route
-              path='/posts/:id/comments'
-              element={
+              </RequireAuth>
+            }>
+          </Route>
+          <Route
+            path='/posts/:id/comments'
+            element={
+              <RequireAuth>
                 <CommentsPage />
-              }>
-            </Route>
-            <Route
-              path='/posts/:id/likes'
-              element={
+              </RequireAuth>
+            }>
+          </Route>
+          <Route
+            path='/posts/:id/likes'
+            element={
+              <RequireAuth>
                 <LikesPage />
-              }>
-            </Route>
-            <Route
-              path='/login'
-              element={
-                <LoginPage />
-              }>
-            </Route>
-            <Route
-              path='/register'
-              element={
-                <RegisterPage />
-              }>
-            </Route>
-            <Route
-              path='/*'
-              element={
-                <ErrorPage />
-              }>
-            </Route>
+              </RequireAuth>
+            }>
+          </Route>
+          <Route
+            path='/login'
+            element={
+              <LoginPage />
+            }>
+          </Route>
+          <Route
+            path='/register'
+            element={
+              <RegisterPage />
+            }>
+          </Route>
+          <Route
+            path='/*'
+            element={
+              <ErrorPage />
+            }>
+          </Route>
 
-          </Routes>
-        </Router>
-      </div>
-    );
-  }
+        </Routes>
+      </Router>
+    </div>
+  );
+}
 
-  export default App;
+export default App;
