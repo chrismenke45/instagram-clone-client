@@ -11,7 +11,7 @@ const { header } = props
 
     return (
         <header id="backBanner">
-            <Link to="/"><FaArrowLeft id="backArrow"></FaArrowLeft></Link>
+            <Link to="/"><FaArrowLeft id="backArrow" className='arrowNextBack'></FaArrowLeft></Link>
             <h1>{header}</h1>
         </header>
     );

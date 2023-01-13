@@ -3,6 +3,7 @@
 :root {
   --insta-dark-blue: #2a608d;
   --insta-text-blue: #2a608d;
+  --insta-light-blue: #4a8bc0;
   --insta-dark-grey: #272e30;
   --insta-selected-dark-grey: #1a1c20;
   --insta-icon-grey: #9fa5aa;
@@ -184,9 +185,12 @@ nav ul li:hover {
 #backBanner h1 {
   font-size: 2rem;
 }
+.arrowNextBack {
+  font-size: 2.5rem;
+}
 #backArrow {
   justify-self: flex-start;
-  font-size: 2rem;
+  
   margin: 0 30px 0 0;
 }
 #commentFooter {
@@ -339,5 +343,41 @@ nav ul li:hover {
   color: var(--insta-white);
   cursor: pointer;
   margin: 10px 0 0 0 ;
+}
+
+.photoTextSideBySide {
+  display: flex;
+  --photoTextSideBySideHeight: 75px;
+  padding: 0 10px
+
+}
+.photoTextSideBySide .photoTextPhoto {
+  flex: 0 0 var(--photoTextSideBySideHeight);
+  height: var(--photoTextSideBySideHeight);
+  text-align: center;
+  line-height: calc(var(--photoTextSideBySideHeight) / 4);
+  padding: 0;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.photoTextSideBySide span.photoTextPhoto {
+  padding: calc(var(--photoTextSideBySideHeight) / 4) 0;
+  border: black 1px solid;
+}
+.photoTextSideBySide .photoTextText {
+  flex: 1 1 auto;
+  resize: none;
+  height: var(--photoTextSideBySideHeight);
+  border: none;
+  padding: 5px 0 5px 10px;
+}
+#postBanner {
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--insta-icon-grey);
+}
+#postBanner .next {
+  color: var(--insta-light-blue);
 }
 
