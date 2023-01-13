@@ -12,15 +12,8 @@ import loginAsGuest from '../../functions/fetch/loginAsGuest';
 
 const RegisterForm: React.FC = () => {
     const [registerInfo, setRegisterInfo] = useState({ username: "", name: "", password: "", bio: "", profile_picture: "" })
-    //const [showImageSelect, setShowImageSelect] = useState(false)
-    //const [photoUrl, setPhotoUrl] = useState("")
     const { imageCropperState, imageCropperDispatch } = useContext(ImageCropperContext)
 
-    // useEffect(() => {
-    //     setRegisterInfo(prev => {
-    //         return {...prev, profile_picture: photoUrl }
-    //     })
-    // }, [photoUrl])
     useEffect(() => {
         setRegisterInfo(prev => {
             return {...prev, profile_picture: imageCropperState.photoUrl }
@@ -30,7 +23,6 @@ const RegisterForm: React.FC = () => {
     const deleteUploadedPhoto = () => {
         if (registerInfo.profile_picture !== "") {
             deleteFile(registerInfo.profile_picture)
-                .then(res => console.log(res))
                 .catch(err => console.error(err))
         }
     }
@@ -57,18 +49,13 @@ const RegisterForm: React.FC = () => {
     }
     const handleImageSelect = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        //
         imageCropperDispatch(imageCropperActions.OPEN_CROPPER())
-        //if (!showImageSelect && registerInfo.profile_picture !== "") {
-            console.log("yee")
-            console.log(imageCropperState.showImageSelect)
         if (!imageCropperState.showImageSelect && registerInfo.profile_picture !== "") {
-            console.log("yeehave")
-            deleteFile(registerInfo.profile_picture).then(res => {
-                console.log(res)
+            deleteFile(registerInfo.profile_picture)
+            .catch(err => {
+                console.error(err)
             })
         } 
-        //setShowImageSelect(prev => !prev)
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -135,7 +122,6 @@ const RegisterForm: React.FC = () => {
                     </textarea>
                 </div>
                 <button className='openerOption' onClick={handleImageSelect}>{registerInfo.profile_picture ? "Change Profile Picture" : "Select Image" }</button>
-                {/*showImageSelect && <ImageCropper imageFolder={'profilePictures'} ruleOfThirds={false} circularCrop={true} setPhotoUrl={setPhotoUrl} setShowImageSelect={setShowImageSelect} />*/}
                 {imageCropperState.showImageSelect && <ImageCropper imageFolder={'profilePictures'} ruleOfThirds={false} circularCrop={true} />}
                 <button className="openerOption" type='submit'>Register</button>
             </form>

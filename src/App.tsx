@@ -60,7 +60,9 @@ const App: React.FC = () => {
             path='/post'
             element={
               <RequireAuth>
-                <PostPage />
+                <ImageCropperContext.Provider value={{ imageCropperState, imageCropperDispatch }}>
+                  <PostPage />
+                </ImageCropperContext.Provider>
               </RequireAuth>
             }>
           </Route>
@@ -105,7 +107,7 @@ const App: React.FC = () => {
           <Route
             path='/register'
             element={
-              <ImageCropperContext.Provider value={{imageCropperState, imageCropperDispatch}}>
+              <ImageCropperContext.Provider value={{ imageCropperState, imageCropperDispatch }}>
                 <RegisterPage />
               </ImageCropperContext.Provider>
             }>

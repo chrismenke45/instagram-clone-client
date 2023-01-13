@@ -16,12 +16,9 @@ interface Props {
     imageFolder: string;
     ruleOfThirds: boolean;
     circularCrop: boolean;
-    //setPhotoUrl: React.Dispatch<React.SetStateAction<string>>;
-    //setShowImageSelect: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ImageCropper: React.FC<Props> = (props) => {
-    //const { imageFolder, ruleOfThirds, circularCrop, setPhotoUrl, setShowImageSelect } = props
     const { imageFolder, ruleOfThirds, circularCrop } = props
     const { imageCropperState, imageCropperDispatch } = useContext(ImageCropperContext)
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -88,11 +85,8 @@ const ImageCropper: React.FC<Props> = (props) => {
             uploadFile(imageData64, imageFolder)
                 .then(urlString => {
                     if (urlString) {
-                        //setPhotoUrl(urlString)
                         imageCropperDispatch(imageCropperActions.SET_PHOTO(urlString))
                     } 
-                    //setShowImageSelect(false)
-                    console.log(urlString)
                 })
 
             // download file
@@ -116,6 +110,10 @@ const ImageCropper: React.FC<Props> = (props) => {
             inputRef.current.value = "" 
             inputRef.current.click()
         }
+    }
+    const onCloseCropper = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        imageCropperDispatch(imageCropperActions.CLOSE_CROPPER())
     }
     const handleSelectPhoto = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
@@ -161,6 +159,7 @@ const ImageCropper: React.FC<Props> = (props) => {
             <canvas className="previewCanvas" ref={canvasRef}></canvas>
             {crop && <button onClick={(e) => onCropImageClick(e)}>Save</button>}
             {canvasRef.current && <button onClick={(e) => onClearToDefault(e)}>Use Different Photo</button>}
+            <button onClick={onCloseCropper}>Back</button>
         </div>
     );
 }
