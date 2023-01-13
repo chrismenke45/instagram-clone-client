@@ -4,17 +4,12 @@ import pluralize from '../../functions/pluralize';
 import { Link } from 'react-router-dom'
 import { PostProp } from '../../models/PostProp';
 
-const PostOnFeed: React.FC = () => {
-    const post: PostProp = {
-        id: 1,
-        user_id: 1,
-        profile_picture: "square.jpeg",
-        username: "chris45",
-        picture_url: "square.jpeg",
-        like_count: 3,
-        comment_count: 2,
-        created_at: "2023-01-13T04:01:53.174Z"
-    }
+interface Props {
+    post: PostProp;
+}
+const PostOnFeed: React.FC<Props> = (props) => {
+
+    const { post } = props
 
     return (
         <article className='postOnFeed flexVertCenter'>
