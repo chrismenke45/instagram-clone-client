@@ -1,25 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from "react-router-dom"
 import ImageCropper from '../inner/ImageCropper';
+import ImageCropperContext from '../../stateManagement/contexts/ImageCropperContext';
+import imageCropperActions from '../../stateManagement/actions/imageCropperActions';
 
 import buildFormData from '../../functions/fetch/buildFormData';
 import fetchData from '../../functions/fetch/fetchData';
-import jwt_decode from "jwt-decode";
 import setUserJwt from '../../functions/user/setUserJwt';
 import deleteFile from '../../firebase/deleteFile';
 import loginAsGuest from '../../functions/fetch/loginAsGuest';
 
 const RegisterForm: React.FC = () => {
     const [registerInfo, setRegisterInfo] = useState({ username: "", name: "", password: "", bio: "", profile_picture: "" })
-    const [showImageSelect, setShowImageSelect] = useState(false)
-    const [photoUrl, setPhotoUrl] = useState("")
-    const [userCreated, setUserCreated] = useState(false)
+    //const [showImageSelect, setShowImageSelect] = useState(false)
+    //const [photoUrl, setPhotoUrl] = useState("")
+    const { imageCropperState, imageCropperDispatch } = useContext(ImageCropperContext)
 
+    // useEffect(() => {
+    //     setRegisterInfo(prev => {
+    //         return {...prev, profile_picture: photoUrl }
+    //     })
+    // }, [photoUrl])
     useEffect(() => {
         setRegisterInfo(prev => {
-            return {...prev, profile_picture: photoUrl }
+            return {...prev, profile_picture: imageCropperState.photoUrl }
         })
-    }, [photoUrl])
+    }, [imageCropperState.photoUrl])
 
     const deleteUploadedPhoto = () => {
         if (registerInfo.profile_picture !== "") {
@@ -51,12 +57,18 @@ const RegisterForm: React.FC = () => {
     }
     const handleImageSelect = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        if (!showImageSelect && registerInfo.profile_picture !== "") {
+        //
+        imageCropperDispatch(imageCropperActions.OPEN_CROPPER())
+        //if (!showImageSelect && registerInfo.profile_picture !== "") {
+            console.log("yee")
+            console.log(imageCropperState.showImageSelect)
+        if (!imageCropperState.showImageSelect && registerInfo.profile_picture !== "") {
+            console.log("yeehave")
             deleteFile(registerInfo.profile_picture).then(res => {
                 console.log(res)
             })
-        }
-        setShowImageSelect(prev => !prev)
+        } 
+        //setShowImageSelect(prev => !prev)
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -72,7 +84,6 @@ const RegisterForm: React.FC = () => {
             .then(data => {
                 if (data.t) {
                     setUserJwt(data.t)
-                    setUserCreated(true)
                 }
             })
 
@@ -124,7 +135,8 @@ const RegisterForm: React.FC = () => {
                     </textarea>
                 </div>
                 <button className='openerOption' onClick={handleImageSelect}>{registerInfo.profile_picture ? "Change Profile Picture" : "Select Image" }</button>
-                {showImageSelect && <ImageCropper imageFolder={'profilePictures'} ruleOfThirds={false} circularCrop={true} setPhotoUrl={setPhotoUrl} setShowImageSelect={setShowImageSelect} />}
+                {/*showImageSelect && <ImageCropper imageFolder={'profilePictures'} ruleOfThirds={false} circularCrop={true} setPhotoUrl={setPhotoUrl} setShowImageSelect={setShowImageSelect} />*/}
+                {imageCropperState.showImageSelect && <ImageCropper imageFolder={'profilePictures'} ruleOfThirds={false} circularCrop={true} />}
                 <button className="openerOption" type='submit'>Register</button>
             </form>
             <span>Already have an account?</span>

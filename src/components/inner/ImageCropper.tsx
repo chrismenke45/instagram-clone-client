@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import ReactCrop, {
     Crop,
 } from 'react-image-crop';
@@ -9,17 +9,21 @@ import {
     extractImageFileExtensionFromBase64,
     image64toCanvasRef
 } from '../../ExternalFiles/ResuableUtils'
+import ImageCropperContext from '../../stateManagement/contexts/ImageCropperContext';
+import imageCropperActions from '../../stateManagement/actions/imageCropperActions';
 
 interface Props {
     imageFolder: string;
     ruleOfThirds: boolean;
     circularCrop: boolean;
-    setPhotoUrl: React.Dispatch<React.SetStateAction<string>>;
-    setShowImageSelect: React.Dispatch<React.SetStateAction<boolean>>
+    //setPhotoUrl: React.Dispatch<React.SetStateAction<string>>;
+    //setShowImageSelect: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ImageCropper: React.FC<Props> = (props) => {
-    const { imageFolder, ruleOfThirds, circularCrop, setPhotoUrl, setShowImageSelect } = props
+    //const { imageFolder, ruleOfThirds, circularCrop, setPhotoUrl, setShowImageSelect } = props
+    const { imageFolder, ruleOfThirds, circularCrop } = props
+    const { imageCropperState, imageCropperDispatch } = useContext(ImageCropperContext)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const originalImageRef = useRef<HTMLImageElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
@@ -81,14 +85,13 @@ const ImageCropper: React.FC<Props> = (props) => {
         if (imgSrc && canvasRef.current && canvasRef.current) {
 
             const imageData64 = canvasRef.current.toDataURL('image/' + imgExt)
-            //OLD VERSION LINE DIRECTLY BELOW
-            //const fileName: string = uploadFile(imageData64, imageFolder)
             uploadFile(imageData64, imageFolder)
                 .then(urlString => {
                     if (urlString) {
-                        setPhotoUrl(urlString)
-                    }
-                    setShowImageSelect(false)
+                        //setPhotoUrl(urlString)
+                        imageCropperDispatch(imageCropperActions.SET_PHOTO(urlString))
+                    } 
+                    //setShowImageSelect(false)
                     console.log(urlString)
                 })
 

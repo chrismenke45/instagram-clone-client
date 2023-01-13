@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage'
@@ -20,10 +20,20 @@ import {
   Route,
 } from "react-router-dom";
 import RequireAuth from './functions/user/RequireAuth'; //to redirect to login if not logged in
+import ImageCropperContext from './stateManagement/contexts/ImageCropperContext';
+import imageCropperReducer from './stateManagement/reducers/imageCropperReducer';
 
 
 
 const App: React.FC = () => {
+
+  const [imageCropperState, imageCropperDispatch] = useReducer(
+    imageCropperReducer,
+    {
+      showImageSelect: false,
+      photoUrl: ""
+    }
+  )
 
   return (
     <div id="app">
@@ -95,7 +105,9 @@ const App: React.FC = () => {
           <Route
             path='/register'
             element={
-              <RegisterPage />
+              <ImageCropperContext.Provider value={{imageCropperState, imageCropperDispatch}}>
+                <RegisterPage />
+              </ImageCropperContext.Provider>
             }>
           </Route>
           <Route
