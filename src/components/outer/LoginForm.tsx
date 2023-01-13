@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import buildFormData from '../../functions/fetch/buildFormData';
 import fetchData from '../../functions/fetch/fetchData';
-import jwt_decode from "jwt-decode";
 import setUserJwt from '../../functions/user/setUserJwt';
 import loginAsGuest from '../../functions/fetch/loginAsGuest';
 
 const LoginForm: React.FC = () => {
     const [loginInfo, setLoginInfo] = useState({ username: "", password: "" })
+    const navigate = useNavigate()
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLoginInfo(prev => {
@@ -27,6 +27,7 @@ const LoginForm: React.FC = () => {
             .then(data => {
                 if (data.t) {
                     setUserJwt(data.t)
+                    navigate('/')
                 }
             })
 
@@ -62,7 +63,7 @@ const LoginForm: React.FC = () => {
             <span>Don't have an account?</span>
             <Link to="/register" className='openerOption'>Sign up</Link>
             <span>or</span>
-            <button onClick={loginAsGuest} className='openerOption'>Login as Guest</button>
+            <button onClick={() => {loginAsGuest(); navigate('/');}} className='openerOption'>Login as Guest</button>
 
         </main>
     );

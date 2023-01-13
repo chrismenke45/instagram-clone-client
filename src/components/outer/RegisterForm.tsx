@@ -9,10 +9,15 @@ import fetchData from '../../functions/fetch/fetchData';
 import setUserJwt from '../../functions/user/setUserJwt';
 import deleteFile from '../../firebase/deleteFile';
 import loginAsGuest from '../../functions/fetch/loginAsGuest';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm: React.FC = () => {
     const [registerInfo, setRegisterInfo] = useState({ username: "", name: "", password: "", bio: "", profile_picture: "" })
     const { imageCropperState, imageCropperDispatch } = useContext(ImageCropperContext)
+    const navigate = useNavigate()
+    useEffect(() => {
+        imageCropperDispatch(imageCropperActions.CLOSE_CROPPER())
+    }, [])
 
     useEffect(() => {
         setRegisterInfo(prev => {
@@ -71,6 +76,7 @@ const RegisterForm: React.FC = () => {
             .then(data => {
                 if (data.t) {
                     setUserJwt(data.t)
+                    navigate('/')
                 }
             })
 
@@ -128,7 +134,7 @@ const RegisterForm: React.FC = () => {
             <span>Already have an account?</span>
             <Link to="/login" onClick={deleteUploadedPhoto} className='openerOption'>Login</Link>
             <span>or</span>
-            <button onClick={() => {deleteUploadedPhoto(); loginAsGuest()}} className='openerOption'>Login as Guest</button>
+            <button onClick={() => {deleteUploadedPhoto(); loginAsGuest(); navigate('/')}} className='openerOption'>Login as Guest</button>
 
         </main>
     );
