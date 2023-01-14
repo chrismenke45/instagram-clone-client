@@ -3,5 +3,6 @@ export interface CommentProp {
     username: string;
     profile_picture: string;
     id: number;
+    user_id: number
     created_at: string;
 }

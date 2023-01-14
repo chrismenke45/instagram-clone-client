@@ -14,7 +14,7 @@ const CommentInList: React.FC<Props> = (props) => {
             <img className="smallProfilePic" src={comment.profile_picture} alt={`${comment.username}'s profile picture`}></img>
             <div className='commentTextBox'>
                 <div className='commentHeader'>
-                    <Link to="/profile" className='commentUserName'>{comment.username}</Link>
+                    <Link to={`/profile/${comment.user_id}`} className='commentUserName'>{comment.username}</Link>
                     <span className='commentDate'>{timeAgo(comment.created_at, true)}</span>
                 </div>
 

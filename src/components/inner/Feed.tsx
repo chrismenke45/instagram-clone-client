@@ -26,7 +26,6 @@ const Feed: React.FC = () => {
         // fetchData("posts", "GET", undefined, 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwidXNlcl9pZCI6NiwiZXhwIjoxNjczNTQ0OTcyfQ.QSDoDI2RORSvNnHZ7XP8cV4oQkv1NywgF_8O0i7pxng')
         
         .then(posts => {
-            console.log(posts)
             setPosts(posts)
         })
     }, [])

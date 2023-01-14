@@ -11,7 +11,6 @@ interface Props {
 const PostOnFeed: React.FC<Props> = (props) => {
 
     const { post } = props
-    console.log(post)
     return (
         <article className='postOnFeed flexVertCenter'>
             <div className='postHeader'>

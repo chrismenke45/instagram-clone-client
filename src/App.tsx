@@ -83,7 +83,7 @@ const App: React.FC = () => {
             }>
           </Route>
           <Route
-            path='/posts/:id/comments'
+            path='/posts/:post_id/comments'
             element={
               <RequireAuth>
                 <CommentsPage />
