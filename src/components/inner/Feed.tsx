@@ -14,7 +14,8 @@ const Feed: React.FC = () => {
             picture_url: "",
             like_count: 0,
             comment_count: 0,
-            created_at: ""
+            created_at: "",
+            caption: ""
         }
     ])
 

@@ -108,9 +108,21 @@ nav ul li:hover {
   width: 100%;
   padding: 0 0 15px 0;
 }
-.postHeader, .postLikes, .postOptions {
+.postHeader, .postLikes, .postOptions, .postCaption, .postOnFeed time {
   width: 100%;
   padding: 5px 10px;
+}
+.postCaption span {
+  font-weight: 600;
+  margin-right: 3px;
+  font-size: 1.1rem;
+}
+.postOnFeed time {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 10px;
+  color: var(--insta-icon-grey);
 }
 .smallProfilePic {
   height: var(--small-profile-pic-diameter);
@@ -157,6 +169,7 @@ nav ul li:hover {
   /* width: 100%;
   padding: 5px 10px; */
   color: var(--insta-text-blue);
+  font-size: 1.1rem;
 }
 .postComments, .postCommentsPreview {
   width: 100%;
