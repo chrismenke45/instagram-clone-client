@@ -21,7 +21,6 @@ const CommentFooter: React.FC = () => {
                 })
         }
         
-        console.log(getUserObject())
     }
     const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setComment(e.target.value)

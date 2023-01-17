@@ -3,5 +3,5 @@ export interface LikeProp {
     name: string;
     user_id: number;
     profile_picture: string;
-    id: number;
+    id: number | null;
 }

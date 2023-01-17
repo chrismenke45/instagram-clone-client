@@ -91,7 +91,7 @@ const App: React.FC = () => {
             }>
           </Route>
           <Route
-            path='/posts/:id/likes'
+            path='/posts/:post_id/likes'
             element={
               <RequireAuth>
                 <LikesPage />
