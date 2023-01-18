@@ -1,6 +1,5 @@
 import buildFormData from "./buildFormData"
 import fetchData from "./fetchData"
-import jwt_decode from "jwt-decode"
 import setUserJwt from "../user/setUserJwt"
 
 const loginAsGuest = () => {
@@ -9,7 +8,6 @@ const loginAsGuest = () => {
         .then(data => {
             console.log(data)
             if (data.t) {
-                let decoded = jwt_decode(data.t)
                 setUserJwt(data.t)
             }
         })
