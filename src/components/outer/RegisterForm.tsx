@@ -4,17 +4,16 @@ import ImageCropper from '../inner/ImageCropper';
 import ImageCropperContext from '../../stateManagement/contexts/ImageCropperContext';
 import imageCropperActions from '../../stateManagement/actions/imageCropperActions';
 
-import buildFormData from '../../functions/fetch/buildFormData';
-import fetchData from '../../functions/fetch/fetchData';
+import FetchAPI from '../../functions/fetch/FetchAPI';
 import setUserJwt from '../../functions/user/setUserJwt';
 import deleteFile from '../../firebase/deleteFile';
-import loginAsGuest from '../../functions/fetch/loginAsGuest';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterForm: React.FC = () => {
     const [registerInfo, setRegisterInfo] = useState({ username: "", name: "", password: "", bio: "", profile_picture: "" })
     const { imageCropperState, imageCropperDispatch } = useContext(ImageCropperContext)
     const navigate = useNavigate()
+    let fetcher = new FetchAPI
     useEffect(() => {
         imageCropperDispatch(imageCropperActions.CLOSE_CROPPER())
     }, [])
@@ -65,14 +64,14 @@ const RegisterForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        let data = buildFormData([
+        fetcher.buildFormData([
             ["user[username]", registerInfo.username],
             ["user[password]", registerInfo.password],
             ["user[name]", registerInfo.name],
             ["user[bio]", registerInfo.bio],
             ["user[profile_picture]", registerInfo.profile_picture],
         ])
-        fetchData("users", "POST", data)
+        fetcher.fetchData("users", "POST")
             .then(data => {
                 if (data.t) {
                     setUserJwt(data.t)
@@ -80,6 +79,16 @@ const RegisterForm: React.FC = () => {
                 }
             })
 
+    }
+    const handleGuestLogin = () => {
+        deleteUploadedPhoto();
+        fetcher.loginAsGuest()
+        .then(data => {
+            if (data.t) {
+                setUserJwt(data.t)
+                navigate('/')
+            }
+        })
     }
     return (
         <main id="register">
@@ -134,7 +143,7 @@ const RegisterForm: React.FC = () => {
             <span>Already have an account?</span>
             <Link to="/login" onClick={deleteUploadedPhoto} className='openerOption'>Login</Link>
             <span>or</span>
-            <button onClick={() => {deleteUploadedPhoto(); loginAsGuest(); navigate('/')}} className='openerOption'>Login as Guest</button>
+            <button onClick={handleGuestLogin} className='openerOption'>Login as Guest</button>
 
         </main>
     );

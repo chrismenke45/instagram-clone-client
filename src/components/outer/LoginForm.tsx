@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom"
-import buildFormData from '../../functions/fetch/buildFormData';
-import fetchData from '../../functions/fetch/fetchData';
 import setUserJwt from '../../functions/user/setUserJwt';
-import loginAsGuest from '../../functions/fetch/loginAsGuest';
+import FetchAPI from '../../functions/fetch/FetchAPI';
 
 const LoginForm: React.FC = () => {
     const [loginInfo, setLoginInfo] = useState({ username: "", password: "" })
     const navigate = useNavigate()
+    let fetcher = new FetchAPI
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLoginInfo(prev => {
@@ -22,8 +21,11 @@ const LoginForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        let data = buildFormData([["auth[username]", loginInfo.username], ["auth[password]", loginInfo.password]])
-        fetchData("/auth/login", "POST", data)
+        fetcher.buildFormData([
+            ["auth[username]", loginInfo.username], 
+            ["auth[password]", loginInfo.password]
+        ])
+        fetcher.fetchData("/auth/login", "POST")
             .then(data => {
                 if (data.t) {
                     setUserJwt(data.t)
@@ -31,6 +33,16 @@ const LoginForm: React.FC = () => {
                 }
             })
 
+    }
+
+    const handleGuestLogin = () => {
+        fetcher.loginAsGuest()
+        .then(data => {
+            if (data.t) {
+                setUserJwt(data.t)
+                navigate('/')
+            }
+        })
     }
     return (
         <main id="loginOrSignUp">
@@ -63,7 +75,7 @@ const LoginForm: React.FC = () => {
             <span>Don't have an account?</span>
             <Link to="/register" className='openerOption'>Sign up</Link>
             <span>or</span>
-            <button onClick={() => {loginAsGuest(); navigate('/');}} className='openerOption'>Login as Guest</button>
+            <button onClick={handleGuestLogin} className='openerOption'>Login as Guest</button>
 
         </main>
     );

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PostOnFeed from './PostOnFeed';
 import getUserObject from '../../functions/user/getUserObject';
-import fetchData from '../../functions/fetch/fetchData';
 import { PostProp } from '../../models/PostProp';
+import FetchAPI from '../../functions/fetch/FetchAPI';
 
 const Feed: React.FC = () => {
     const [posts, setPosts] = useState<PostProp[]>([
@@ -19,13 +19,14 @@ const Feed: React.FC = () => {
             current_user_liked: false
         }
     ])
+    let fetcher = new FetchAPI
 
     useEffect(() => {
         const userObject = getUserObject()
-        fetchData("posts", "GET", undefined, (userObject ? userObject.jwt : undefined))
+       
         // below is to test with out of date jwt
-        // fetchData("posts", "GET", undefined, 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwidXNlcl9pZCI6NiwiZXhwIjoxNjczNTQ0OTcyfQ.QSDoDI2RORSvNnHZ7XP8cV4oQkv1NywgF_8O0i7pxng')
-        
+        // fetcher.fetchData("posts", "GET", 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwidXNlcl9pZCI6NiwiZXhwIjoxNjczNTQ0OTcyfQ.QSDoDI2RORSvNnHZ7XP8cV4oQkv1NywgF_8O0i7pxng')
+        fetcher.fetchData("posts", "GET", userObject.jwt)
         .then(posts => {
             setPosts(posts)
         })

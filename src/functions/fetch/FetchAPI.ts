@@ -37,9 +37,9 @@ class FetchAPI {
                 console.error('Error:', error)
             })
     }
-    loginAsGuest() {
+    loginAsGuest(): Promise<any> {
         this.buildFormData([["auth[username]", "guest"], ["auth[password]", process.env.REACT_APP_GUEST_PASSWORD || ""]])
-        this.fetchData("/auth/login", "POST")
+        return this.fetchData("/auth/login", "POST")
         .then(data => {
             return data
         })

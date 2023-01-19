@@ -3,8 +3,7 @@ import ImageCropperContext from '../../stateManagement/contexts/ImageCropperCont
 import ImageCropper from '../inner/ImageCropper';
 import imageCropperActions from '../../stateManagement/actions/imageCropperActions';
 import deleteFile from '../../firebase/deleteFile';
-import buildFormData from '../../functions/fetch/buildFormData';
-import fetchData from '../../functions/fetch/fetchData';
+import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"
 import { Link, useNavigate } from "react-router-dom"
@@ -14,6 +13,7 @@ const Post: React.FC = () => {
     const { imageCropperState, imageCropperDispatch } = useContext(ImageCropperContext)
     const submitRef = useRef<HTMLButtonElement>(null)
     const navigate = useNavigate()
+    const fetcher = new FetchAPI
 
     useEffect(() => {
         imageCropperDispatch(imageCropperActions.CLOSE_CROPPER())
@@ -46,14 +46,14 @@ const Post: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        const user = getUserObject()
         if (postInfo.photoUrl) {
-            let data = buildFormData([
+            fetcher.buildFormData([
                 ["post[caption]", postInfo.caption],
                 ["post[picture_url]", postInfo.photoUrl],
-            ])
-            const userObject = getUserObject()
-            fetchData("posts", "POST", data, (userObject ? userObject.jwt : undefined))
-                .then(data => {
+            ])    
+            fetcher.fetchData("posts", "POST", user.jwt)
+            .then(data => {
                     console.log(data)
                     navigate('/')
                 })

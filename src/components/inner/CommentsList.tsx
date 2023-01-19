@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import CommentInList from './CommentInList';
 import { CommentProp } from '../../models/CommentProp';
-import fetchData from '../../functions/fetch/fetchData';
 import { useParams } from 'react-router-dom';
 import getUserObject from '../../functions/user/getUserObject';
+import FetchAPI from '../../functions/fetch/FetchAPI';
 
 
 const CommentsList: React.FC = () => {
     const { post_id } = useParams()
     const user = getUserObject()
+    let fetcher = new FetchAPI
     const [comments, setComments] = useState<CommentProp[]>([])
 
     useEffect(() => {
-        fetchData(`posts/${post_id}/comments`, "GET", undefined, (user.jwt ? user.jwt : undefined))
+        fetcher.fetchData(`posts/${post_id}/comments`, "GET", user.jwt)
             .then(data => {
-                console.log(data)
                 setComments(data)
             })
     }, [])
@@ -30,7 +30,6 @@ const CommentsList: React.FC = () => {
                     :
                     (
                         comments.map(comment => {
-                            console.log(comment)
                             return <CommentInList key={comment.id} comment={comment} />
                         })
                     )}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import fetchData from '../../functions/fetch/fetchData';
-import buildFormData from '../../functions/fetch/buildFormData';
+import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
 import { useParams } from 'react-router-dom';
 
@@ -8,15 +7,16 @@ const CommentFooter: React.FC = () => {
     const user = getUserObject()
     const [comment, setComment] = useState<string>("")
     const { post_id }= useParams()
+    let fetcher = new FetchAPI
 
     const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (comment) {
-            let data = buildFormData([
+            fetcher.buildFormData([
                 ["comment[text]", comment],
-            ])
-            fetchData(`posts/${post_id}/comments`, "POST", data, (user.jwt ? user.jwt : undefined))
-                .then(data => {
+            ])    
+            fetcher.fetchData(`posts/${post_id}/comments`, "POST", user.jwt)
+            .then(data => {
                     console.log(data)
                 })
         }

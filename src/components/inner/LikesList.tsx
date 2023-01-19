@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import LikeInList from './LikeInList';
-import fetchData from '../../functions/fetch/fetchData';
 import { useParams } from 'react-router-dom';
 import getUserObject from '../../functions/user/getUserObject';
 import { LikeProp } from '../../models/LikeProp';
+import FetchAPI from '../../functions/fetch/FetchAPI';
 
 const LikesList: React.FC = () => {
     const { post_id } = useParams()
     const user = getUserObject()
+    let fetcher = new FetchAPI
     const [likes, setLikes] = useState<LikeProp[]>([{
         username: "",
         name: "",
@@ -17,7 +18,7 @@ const LikesList: React.FC = () => {
     }])
 
     useEffect(() => {
-        fetchData(`posts/${post_id}/likes`, "GET", undefined, (user.jwt ? user.jwt : undefined))
+        fetcher.fetchData(`posts/${post_id}/likes`, "GET", user.jwt)
             .then(data => {
                 console.log(data)
                 setLikes(data)
