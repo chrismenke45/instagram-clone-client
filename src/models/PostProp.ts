@@ -8,4 +8,5 @@ export interface PostProp {
     comment_count: number;
     created_at: string;
     caption: string;
+    current_user_liked: boolean;
 }

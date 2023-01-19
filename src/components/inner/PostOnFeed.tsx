@@ -36,7 +36,7 @@ const PostOnFeed: React.FC<Props> = (props) => {
             </div>
             <img className="postImg" src={post.picture_url} alt=''></img>
             <div className='postOptions'>
-                {false ? <FaHeart className='likedHeart'></FaHeart> : <FaRegHeart onClick={handleLikeSubmit}></FaRegHeart>}
+                {post.current_user_liked ? <FaHeart className='likedHeart'></FaHeart> : <FaRegHeart onClick={handleLikeSubmit}></FaRegHeart>}
                 <Link to={`posts/${post.id}/comments`}><FaRegComment></FaRegComment></Link>
             </div>
             <Link to={`posts/${post.id}/likes`} className='postLikes'><FaHeart></FaHeart>&nbsp;{pluralize(post.like_count, "like")}</Link>
