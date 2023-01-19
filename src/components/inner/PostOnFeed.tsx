@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { PostProp } from '../../models/PostProp';
 import timeAgo from "../../functions/timeAgo"
 import getUserObject from '../../functions/user/getUserObject';
-import fetchData from '../../functions/fetch/fetchData';
+import FetchAPI from '../../functions/fetch/FetchAPI';
 
 interface Props {
     post: PostProp;
@@ -13,18 +13,25 @@ interface Props {
 const PostOnFeed: React.FC<Props> = (props) => {
     const user = getUserObject()
     const { post } = props
-    console.log(post)
+    let fetcher = new FetchAPI()
 
     const handleLikeSubmit = (e: React.FormEvent<SVGElement>) => {
         e.preventDefault()
-            fetchData(`posts/${post.id}/likes`, "POST", undefined, (user.jwt ? user.jwt : undefined))
-                .then(data => {
-                    console.log(data)
-                })
-        }
-        
+        fetcher.fetchData(`posts/${post.id}/likes`, 'POST', user.jwt)
+            .then(data => {
+                console.log(data)
+            })
+    }
 
-    
+    const handleUnlikeSubmit = (e: React.FormEvent<SVGElement>) => {
+        e.preventDefault()
+        fetcher.fetchData(`posts/${post.id}/likes`, 'DELETE', user.jwt)
+            .then(data => {
+                console.log(data)
+            })
+    }
+
+
     return (
         <article className='postOnFeed flexVertCenter'>
             <div className='postHeader'>
@@ -36,7 +43,7 @@ const PostOnFeed: React.FC<Props> = (props) => {
             </div>
             <img className="postImg" src={post.picture_url} alt=''></img>
             <div className='postOptions'>
-                {post.current_user_liked ? <FaHeart className='likedHeart'></FaHeart> : <FaRegHeart onClick={handleLikeSubmit}></FaRegHeart>}
+                {post.current_user_liked ? <FaHeart className='likedHeart' onClick={handleUnlikeSubmit}></FaHeart> : <FaRegHeart onClick={handleLikeSubmit}></FaRegHeart>}
                 <Link to={`posts/${post.id}/comments`}><FaRegComment></FaRegComment></Link>
             </div>
             <Link to={`posts/${post.id}/likes`} className='postLikes'><FaHeart></FaHeart>&nbsp;{pluralize(post.like_count, "like")}</Link>
