@@ -1,5 +1,5 @@
 import React from 'react';
-import Banner from '../components/outer/Banner';
+import ProfileBanner from '../components/outer/ProfileBanner';
 import Profile from '../components/outer/Profile';
 import NavFooter from '../components/outer/NavFooter';
 
@@ -8,7 +8,7 @@ const ProfilePage: React.FC = () => {
 
     return (
         <div id="page">
-            <Banner />
+            <ProfileBanner username='Yeehaw' />
             <Profile />
             <NavFooter />
         </div>

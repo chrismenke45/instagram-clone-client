@@ -4,8 +4,11 @@ import { AiFillHome, AiFillInstagram } from "react-icons/ai"
 import { FiSearch } from "react-icons/fi"
 import { FaRegHeart } from "react-icons/fa"
 import { BsFillPersonFill } from "react-icons/bs"
+import getUserObject from '../../functions/user/getUserObject';
+
 
 const NavFooter: React.FC = () => {
+    const user = getUserObject()
 
 
     return (
@@ -33,7 +36,7 @@ const NavFooter: React.FC = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/profile">
+                        <Link to={`/profile/${user.user_id}`}>
                             <BsFillPersonFill></BsFillPersonFill>
                         </Link>
                     </li>

@@ -1,11 +1,14 @@
 import React from 'react';
+import ProfileSummary from '../inner/ProfileSummary';
+import ProfilePosts from './ProfilePosts';
 
 const Profile: React.FC = () => {
 
 
     return (
         <main>
-            <h1>Profile</h1>
+            <ProfileSummary />
+            <ProfilePosts />
         </main>
     );
 }

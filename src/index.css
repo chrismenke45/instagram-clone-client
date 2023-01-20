@@ -394,3 +394,78 @@ nav ul li:hover {
   color: var(--insta-light-blue);
 }
 
+#profileSummary {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+#profileSummary img {
+  height: calc(var(--small-profile-pic-diameter) * 2.5);
+  width: calc(var(--small-profile-pic-diameter) * 2.5);
+  border-radius: 50%;
+}
+#profileSummary > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.profileCountSummary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profileCountNumber {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.profileCountSubject {
+  font-size: 1.4rem;
+}
+#profileName {
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding: 5px 0;
+}
+#profileBio {
+  font-size: 1.4rem;
+}
+#profileOptionButtons > button {
+  width: 49%;
+  height: 25px;
+  border-radius: 8px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+#profilePostsSelectors {
+  display: flex;
+  justify-content: space-between;
+}
+.profilePostsSelector {
+  font-size: 4rem;
+  width: 49%;
+  padding: 5px 0;
+  color: var(--insta-icon-grey);
+}
+.selectedProfilePostsSelector {
+  border-bottom: 1px solid black;
+  color: black;
+}
+#grid {
+  display: grid;
+  margin: 3px 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3px
+}
+.gridChild {
+  /* aspect-ratio: 1 / 1; */
+  background: red;
+  height: max-content;
+}
+.gridChild img {
+  width: 100%;
+  padding: 0;
+  float: left;
+}
+
