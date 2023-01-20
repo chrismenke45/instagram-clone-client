@@ -37,11 +37,11 @@ const ProfilePosts: React.FC = () => {
             </div>
             {feedOrGrid ?
                 (
-                    <Feed />
+                    <Grid />
                 )
                 :
                 (
-                    <Grid />
+                    <Feed />
                 )}
         </section>
     );
