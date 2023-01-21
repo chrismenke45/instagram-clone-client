@@ -1,13 +1,37 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ProfileSummary from '../inner/ProfileSummary';
 import ProfilePosts from './ProfilePosts';
+import getUserObject from '../../functions/user/getUserObject';
+import { useParams } from 'react-router-dom';
+import FetchAPI from '../../functions/fetch/FetchAPI';
+import { ProfileProp } from '../../models/ProfileProp';
 
 const Profile: React.FC = () => {
+    let fetcher = new FetchAPI
+    const { user_id } = useParams()
+    const [profile, setProfile] = useState<ProfileProp>({
+        post_count: 3,
+        follower_count: 5,
+        following_count: 6,
+        id: 6,
+        username: "bobbymge",
+        name: "Bobby",
+        bio: "I'm bobby mcGee",
+        profile_picture: "square.jpeg"
+    })
+    useEffect(() => {
+        const userObject = getUserObject()
+        fetcher.fetchData(`users/${user_id}`, "GET", userObject.jwt)
+        .then(userProfile => {
+            console.log(userProfile)
+            setProfile(userProfile[0])
+        })
+    }, [])
 
 
     return (
         <main>
-            <ProfileSummary />
+            <ProfileSummary profile={profile}/>
             <ProfilePosts />
         </main>
     );

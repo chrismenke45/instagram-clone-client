@@ -1,28 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link, useParams } from 'react-router-dom';
-import getUserObject from '../../functions/user/getUserObject';
-import FetchAPI from '../../functions/fetch/FetchAPI';
+import { ProfileProp } from '../../models/ProfileProp';
 
-const ProfileSummary: React.FC = () => {
-    let fetcher = new FetchAPI
-    const { user_id } = useParams()
-    const profile = {
-        post_count: 3,
-        follower_count: 5,
-        following_count: 6,
-        id: 6,
-        username: "bobbymge",
-        name: "Bobby",
-        bio: "I'm bobby mcGee",
-        profile_picture: "square.jpeg"
-    }
-    useEffect(() => {
-        const userObject = getUserObject()
-        fetcher.fetchData(`users/${user_id}`, "GET", userObject.jwt)
-        .then(profile => {
-            console.log(profile)
-        })
-    }, [])
+const ProfileSummary: React.FC<{profile: ProfileProp}> = (props) => {
+    const { profile } = props
+    
 
     return (
         <section id="profileSummary">
