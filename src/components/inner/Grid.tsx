@@ -12,40 +12,7 @@ const Grid: React.FC<{gridPath: string}> = (props) => {
         id: number;
     }
     const user = getUserObject()
-    const [posts, setPosts] = useState<PostUrl[]>([
-        {
-            id: 0,
-            picture_url: "square.jpeg",
-        },
-        {
-            id: 1,
-            picture_url: "square.jpeg",
-        },
-        {
-            id: 2,
-            picture_url: "square.jpeg",
-        },
-        {
-            id: 3,
-            picture_url: "square.jpeg",
-        },
-        {
-            id: 4,
-            picture_url: "square.jpeg",
-        },
-        {
-            id: 5,
-            picture_url: "square.jpeg",
-        },
-        {
-            id: 6,
-            picture_url: "square.jpeg",
-        },
-        {
-            id: 7,
-            picture_url: "square.jpeg",
-        },
-    ])
+    const [posts, setPosts] = useState<PostUrl[]>([])
     let fetcher = new FetchAPI
 
     useEffect(() => {

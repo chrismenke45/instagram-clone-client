@@ -6,20 +6,7 @@ import FetchAPI from '../../functions/fetch/FetchAPI';
 
 const Feed: React.FC<{feedPath: string}> = (props) => {
     const { feedPath } = props
-    const [posts, setPosts] = useState<PostProp[]>([
-        {
-            id: 0,
-            user_id: 0,
-            profile_picture: "",
-            username: "",
-            picture_url: "",
-            like_count: 0,
-            comment_count: 0,
-            created_at: "",
-            caption: "",
-            current_user_liked: false
-        }
-    ])
+    const [posts, setPosts] = useState<PostProp[]>([])
     let fetcher = new FetchAPI
 
     useEffect(() => {
