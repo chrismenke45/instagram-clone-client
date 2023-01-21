@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import getUserObject from '../../functions/user/getUserObject';
+import FetchAPI from '../../functions/fetch/FetchAPI';
 // import getUserObject from '../../functions/user/getUserObject';
 // import FetchAPI from '../../functions/fetch/FetchAPI';
 
-const Grid: React.FC = () => {
+const Grid: React.FC<{gridPath: string}> = (props) => {
+    const { gridPath } = props
     interface PostUrl {
         picture_url: string;
         id: number;
     }
+    const user = getUserObject()
     const [posts, setPosts] = useState<PostUrl[]>([
         {
             id: 0,
@@ -42,18 +46,14 @@ const Grid: React.FC = () => {
             picture_url: "square.jpeg",
         },
     ])
-    //let fetcher = new FetchAPI
+    let fetcher = new FetchAPI
 
-    // useEffect(() => {
-    //     const userObject = getUserObject()
-
-    //     // below is to test with out of date jwt
-    //     // fetcher.fetchData("posts", "GET", 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwidXNlcl9pZCI6NiwiZXhwIjoxNjczNTQ0OTcyfQ.QSDoDI2RORSvNnHZ7XP8cV4oQkv1NywgF_8O0i7pxng')
-    //     fetcher.fetchData("posts", "GET", userObject.jwt)
-    //     .then(posts => {
-    //         setPosts(posts)
-    //     })
-    // }, [])
+    useEffect(() => {
+        fetcher.fetchData(gridPath, "GET", user.jwt)
+        .then(posts => {
+            setPosts(posts)
+        })
+    }, [])
 
     return (
         <div id="grid" className='flexVertCenter'>

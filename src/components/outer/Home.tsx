@@ -7,7 +7,7 @@ const Home: React.FC = () => {
 
     return (
         <main>
-            <Feed />
+            <Feed feedPath="posts"/>
         </main>
     );
 }

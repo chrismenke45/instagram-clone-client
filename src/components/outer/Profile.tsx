@@ -8,6 +8,7 @@ import { ProfileProp } from '../../models/ProfileProp';
 
 const Profile: React.FC = () => {
     let fetcher = new FetchAPI
+    const user = getUserObject()
     const { user_id } = useParams()
     const [profile, setProfile] = useState<ProfileProp>({
         post_count: 3,
@@ -20,8 +21,7 @@ const Profile: React.FC = () => {
         profile_picture: "square.jpeg"
     })
     useEffect(() => {
-        const userObject = getUserObject()
-        fetcher.fetchData(`users/${user_id}`, "GET", userObject.jwt)
+        fetcher.fetchData(`users/${user_id}`, "GET", user.jwt)
         .then(userProfile => {
             console.log(userProfile)
             setProfile(userProfile[0])
@@ -32,7 +32,7 @@ const Profile: React.FC = () => {
     return (
         <main>
             <ProfileSummary profile={profile}/>
-            <ProfilePosts />
+            <ProfilePosts profileId={profile.id}/>
         </main>
     );
 }

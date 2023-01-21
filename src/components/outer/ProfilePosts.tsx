@@ -3,7 +3,8 @@ import { MdGridOn } from "react-icons/md"
 import { RxStack } from "react-icons/rx"
 import Feed from '../inner/Feed';
 import Grid from '../inner/Grid';
-const ProfilePosts: React.FC = () => {
+const ProfilePosts: React.FC<{profileId: number}> = (props) => {
+    const { profileId } = props
     const [feedOrGrid, setFeedOrGrid] = useState(true) //true for Grid display, false for feed display 
 
     const handleGridClick = () => {
@@ -37,11 +38,11 @@ const ProfilePosts: React.FC = () => {
             </div>
             {feedOrGrid ?
                 (
-                    <Grid />
+                    <Grid gridPath={`posts?user=${profileId}&preview=true`}/>
                 )
                 :
                 (
-                    <Feed />
+                    <Feed feedPath={`posts?user=${profileId}`}/>
                 )}
         </section>
     );

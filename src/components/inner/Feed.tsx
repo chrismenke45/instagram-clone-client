@@ -4,7 +4,8 @@ import getUserObject from '../../functions/user/getUserObject';
 import { PostProp } from '../../models/PostProp';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 
-const Feed: React.FC = () => {
+const Feed: React.FC<{feedPath: string}> = (props) => {
+    const { feedPath } = props
     const [posts, setPosts] = useState<PostProp[]>([
         {
             id: 0,
@@ -26,7 +27,7 @@ const Feed: React.FC = () => {
        
         // below is to test with out of date jwt
         // fetcher.fetchData("posts", "GET", 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwidXNlcl9pZCI6NiwiZXhwIjoxNjczNTQ0OTcyfQ.QSDoDI2RORSvNnHZ7XP8cV4oQkv1NywgF_8O0i7pxng')
-        fetcher.fetchData("posts", "GET", userObject.jwt)
+        fetcher.fetchData(feedPath, "GET", userObject.jwt)
         .then(posts => {
             setPosts(posts)
         })
