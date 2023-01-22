@@ -13,7 +13,7 @@ const Profile: React.FC = () => {
     const [profile, setProfile] = useState<ProfileProp>({
         post_count: 3,
         follower_count: 5,
-        following_count: 6,
+        followee_count: 6,
         id: 6,
         username: "bobbymge",
         name: "Bobby",

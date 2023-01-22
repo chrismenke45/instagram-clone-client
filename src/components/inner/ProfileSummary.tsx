@@ -19,7 +19,7 @@ const ProfileSummary: React.FC<{profile: ProfileProp}> = (props) => {
                     <span className='profileCountSubject'>followers</span>
                 </Link>
                 <Link to={`/profile/${profile.id}/following`} className='profileCountSummary'>
-                    <span className='profileCountNumber'>{profile.following_count || 0}</span>
+                    <span className='profileCountNumber'>{profile.followee_count || 0}</span>
                     <span className='profileCountSubject'>following</span>
                 </Link>
             </div>
