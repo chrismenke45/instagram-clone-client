@@ -18,7 +18,8 @@ const Profile: React.FC = () => {
         username: "bobbymge",
         name: "Bobby",
         bio: "I'm bobby mcGee",
-        profile_picture: "square.jpeg"
+        profile_picture: "square.jpeg",
+        current_user_follows: false
     })
     useEffect(() => {
         fetcher.fetchData(`users/${user_id}`, "GET", user.jwt)

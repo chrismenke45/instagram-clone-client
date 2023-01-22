@@ -7,4 +7,5 @@ export interface ProfileProp {
     name: string;
     bio: string;
     profile_picture: string;
+    current_user_follows: boolean;
 }

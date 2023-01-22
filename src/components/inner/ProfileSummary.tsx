@@ -4,20 +4,20 @@ import { ProfileProp } from '../../models/ProfileProp';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
 
-const ProfileSummary: React.FC<{profile: ProfileProp}> = (props) => {
+const ProfileSummary: React.FC<{ profile: ProfileProp }> = (props) => {
     const { profile } = props
     const user = getUserObject()
     const fetcher = new FetchAPI
 
     const handleFollow = () => {
         fetcher.fetchData(`users/${profile.id}/follows`, "POST", user.jwt)
-        .then(co => console.log(co))
+            .then(co => console.log(co))
     }
     const handleUnfollow = () => {
         fetcher.fetchData(`users/${profile.id}/follows`, "DELETE", user.jwt)
-        .then(co => console.log(co))
+            .then(co => console.log(co))
     }
-    
+
 
     return (
         <section id="profileSummary">
@@ -39,7 +39,12 @@ const ProfileSummary: React.FC<{profile: ProfileProp}> = (props) => {
             <span id="profileName">{profile.name}</span>
             <p id="profileBio">{profile.bio}</p>
             <div id="profileOptionButtons">
-                <button onClick={handleFollow}>Follow</button>
+                {profile.current_user_follows ? (
+                    <button onClick={handleUnfollow}>Unfollow</button>
+                ) : (
+                    <button onClick={handleFollow}>Follow</button>
+                )
+                }
                 <button>Message</button>
             </div>
         </section>
