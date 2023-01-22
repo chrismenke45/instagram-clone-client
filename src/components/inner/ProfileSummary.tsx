@@ -1,9 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { ProfileProp } from '../../models/ProfileProp';
+import FetchAPI from '../../functions/fetch/FetchAPI';
+import getUserObject from '../../functions/user/getUserObject';
 
 const ProfileSummary: React.FC<{profile: ProfileProp}> = (props) => {
     const { profile } = props
+    const user = getUserObject()
+    const fetcher = new FetchAPI
+
+    const handleFollow = () => {
+        fetcher.fetchData(`users/${profile.id}/follows`, "POST", user.jwt)
+        .then(co => console.log(co))
+    }
+    const handleUnfollow = () => {
+        fetcher.fetchData(`users/${profile.id}/follows`, "DELETE", user.jwt)
+        .then(co => console.log(co))
+    }
     
 
     return (
@@ -26,7 +39,7 @@ const ProfileSummary: React.FC<{profile: ProfileProp}> = (props) => {
             <span id="profileName">{profile.name}</span>
             <p id="profileBio">{profile.bio}</p>
             <div id="profileOptionButtons">
-                <button>Follow</button>
+                <button onClick={handleFollow}>Follow</button>
                 <button>Message</button>
             </div>
         </section>
