@@ -7,7 +7,7 @@ import FetchAPI from '../../functions/fetch/FetchAPI';
 import { ProfileProp } from '../../models/ProfileProp';
 
 const Profile: React.FC = () => {
-    let fetcher = new FetchAPI
+    let fetcher = new FetchAPI()
     const user = getUserObject()
     const { user_id } = useParams()
     const [profile, setProfile] = useState<ProfileProp>({
@@ -24,7 +24,6 @@ const Profile: React.FC = () => {
     useEffect(() => {
         fetcher.fetchData(`users/${user_id}`, "GET", user.jwt)
         .then(userProfile => {
-            console.log(userProfile)
             setProfile(userProfile[0])
         })
     }, [])

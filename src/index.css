@@ -295,7 +295,7 @@ nav ul li:hover {
   width: calc(var(--small-profile-pic-diameter) * 1.2);
 }
 
-#commentsList, #likesList {
+#commentsList, #usersList {
   padding: 0 10px;
   width: 100%;
   flex: auto;
@@ -482,5 +482,23 @@ nav ul li:hover {
   width: 100%;
   padding: 0;
   float: left;
+}
+
+#searchForm {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  justify-content: flex-start;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--background-grey);
+}
+#searchForm input {
+  border: none;
+  background: inherit;
+  font-size: 1.4rem;
+  flex: auto;
+  padding:  0 0 0 8px;
 }
 

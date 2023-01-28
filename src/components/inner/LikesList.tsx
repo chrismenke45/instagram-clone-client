@@ -8,7 +8,7 @@ import FetchAPI from '../../functions/fetch/FetchAPI';
 const LikesList: React.FC = () => {
     const { post_id } = useParams()
     const user = getUserObject()
-    let fetcher = new FetchAPI
+    let fetcher = new FetchAPI()
     const [likes, setLikes] = useState<UserInListProp[]>([{
         username: "",
         name: "",
@@ -27,7 +27,7 @@ const LikesList: React.FC = () => {
     }, [])
 
     return (
-        <ul id="likesList" className='flexVertCenter'>
+        <ul id="usersList" className='flexVertCenter'>
             {likes.map(like => {
                 return <UserInList key={like.user_id} user={like} />
             })}
