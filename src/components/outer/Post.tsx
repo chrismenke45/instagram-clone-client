@@ -51,15 +51,15 @@ const Post: React.FC = () => {
             fetcher.buildFormData([
                 ["post[caption]", postInfo.caption],
                 ["post[picture_url]", postInfo.photoUrl],
-            ])    
+            ])
             fetcher.fetchData("posts", "POST", user.jwt)
-            .then(data => {
+                .then(data => {
                     console.log(data)
                     navigate('/')
                 })
         }
     }
-    const handleSubmitButton = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+    const handleSubmitButton = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
         e.preventDefault()
         if (submitRef?.current) {
             submitRef.current.click()
@@ -70,10 +70,8 @@ const Post: React.FC = () => {
         <main>
             <form onSubmit={handleSubmit}>
                 <div id='postBanner'>
-                    <Link to="/">
-                        <FaArrowLeft className='arrowNextBack'></FaArrowLeft>
-                    </Link>
-                    <FaArrowRight onClick={handleSubmitButton} className='arrowNextBack next'></FaArrowRight>
+                    <FaArrowLeft onClick={() => navigate(-1)} className='arrowNextBack'></FaArrowLeft>
+                    <span onClick={handleSubmitButton} className='arrowNextBack next'>Next</span>
                     <button type='submit' ref={submitRef} hidden={true}>Submit</button>
                 </div>
                 <div className='photoTextSideBySide'>
