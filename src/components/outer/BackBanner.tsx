@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaArrowLeft } from "react-icons/fa"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 interface Props {
     header: string;
@@ -9,10 +9,11 @@ interface Props {
 
 const BackBanner: React.FC<Props> = (props) => {
 const { header, backTo } = props
+const navigate = useNavigate()
 
     return (
         <header id="backBanner">
-            <Link to={backTo}><FaArrowLeft id="backArrow" className='arrowNextBack'></FaArrowLeft></Link>
+            <FaArrowLeft id="backArrow" onClick={() => navigate(-1)}className='arrowNextBack'></FaArrowLeft>
             <h1>{header}</h1>
         </header>
     );

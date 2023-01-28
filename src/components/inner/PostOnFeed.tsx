@@ -44,11 +44,11 @@ const PostOnFeed: React.FC<Props> = (props) => {
             <img className="postImg" src={post.picture_url} alt=''></img>
             <div className='postOptions'>
                 {post.current_user_liked ? <FaHeart className='likedHeart' onClick={handleUnlikeSubmit}></FaHeart> : <FaRegHeart onClick={handleLikeSubmit}></FaRegHeart>}
-                <Link to={`posts/${post.id}/comments`}><FaRegComment></FaRegComment></Link>
+                <Link to={`/posts/${post.id}/comments`}><FaRegComment></FaRegComment></Link>
             </div>
-            <Link to={`posts/${post.id}/likes`} className='postLikes'><FaHeart></FaHeart>&nbsp;{pluralize(post.like_count, "like")}</Link>
+            <Link to={`/posts/${post.id}/likes`} className='postLikes'><FaHeart></FaHeart>&nbsp;{pluralize(post.like_count, "like")}</Link>
             {post.caption && <p className='postCaption'><span>{post.username}</span>{post.caption}</p>}
-            {post.comment_count > 0 && <Link to={`posts/${post.id}/comments`} className='postComments'>View all {pluralize(post.comment_count, "comment")}</Link>}
+            {post.comment_count > 0 && <Link to={`/posts/${post.id}/comments`} className='postComments'>View all {pluralize(post.comment_count, "comment")}</Link>}
             <time>{timeAgo(post.created_at)}</time>
         </article>
     );
