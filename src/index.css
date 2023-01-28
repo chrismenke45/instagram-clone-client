@@ -487,12 +487,19 @@ nav ul li:hover {
 #searchForm {
   display: flex;
   align-items: center;
-  font-size: 1.6rem;
+  flex-direction: column;
   justify-content: flex-start;
   margin: 10px;
+}
+#searchBar {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  justify-content: flex-start;
   padding: 10px;
   border-radius: 10px;
   background: var(--background-grey);
+  width: 100%;
 }
 #searchForm input {
   border: none;
@@ -500,5 +507,29 @@ nav ul li:hover {
   font-size: 1.4rem;
   flex: auto;
   padding:  0 0 0 8px;
+}
+#searchOptions {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+}
+#searchOptions > * {
+  flex: auto;
+  text-align: center;
+  padding: 5px;
+  font-size: 1.2rem;
+  color: var(--insta-icon-grey);
+  border-bottom: var(--insta-white) 1px solid;
+}
+#searchOptions > input[type="radio"]:checked + label {
+  color: var(--insta-selected-dark-grey);
+  border-bottom: var(--insta-selected-dark-grey) 1px solid;
+}
+#noResults {
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+  padding: 10px;
 }
 
