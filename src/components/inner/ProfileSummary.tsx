@@ -3,19 +3,17 @@ import { Link } from 'react-router-dom';
 import { ProfileProp } from '../../models/ProfileProp';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
+import { follow, unfollow } from '../../functions/eventHandlers/followHandlers';
 
 const ProfileSummary: React.FC<{ profile: ProfileProp }> = (props) => {
     const { profile } = props
     const user = getUserObject()
     const fetcher = new FetchAPI
-
     const handleFollow = () => {
-        fetcher.fetchData(`users/${profile.id}/follows`, "POST", user.jwt)
-            .then(co => console.log(co))
+        follow(profile.id)
     }
     const handleUnfollow = () => {
-        fetcher.fetchData(`users/${profile.id}/follows`, "DELETE", user.jwt)
-            .then(co => console.log(co))
+        unfollow(profile.id)
     }
 
 

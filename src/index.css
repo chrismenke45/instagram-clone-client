@@ -232,7 +232,7 @@ nav ul li:hover {
   border-radius: 50%;
 }
 
-.commentInList, .likeInList {
+.commentInList, .userInList {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -243,17 +243,31 @@ nav ul li:hover {
 .commentInList, .commentInList .commentTextBox {
   align-items: flex-start;
 }
-.likeInList, .likeInList .likeTextBox {
+.userInList, .userInList .userListTextBox {
   align-items: center;
 } 
 
-.commentInList .commentUserName, .likeInList .likeUserName {
+.userInList .buttonContainer {
+  flex: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.userInList .buttonContainer button {
+  background: var(--insta-dark-blue);
+  color: var(--insta-white);
+  max-width: 100%;
+  padding: 10px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.commentInList .commentUserName, .userInList .userListUserName {
   font-weight: 600;
 }
 .commentInList .commentUserName {
   color: var(--insta-dark-blue);
 }
-.commentInList *, .likeInList * {
+.commentInList *, .userInList * {
   font-size: 1.1rem;
 }
 .commentHeader {
@@ -265,18 +279,18 @@ nav ul li:hover {
   font-size: 1rem;
   padding: 0 5px;
 }
-.commentInList .commentTextBox, .likeInList .likeTextBox {
+.commentInList .commentTextBox, .userInList .userListTextBox {
   padding: 0 0 0 10px;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   height: 100%;
 }
-.likeInList .likeTextBox {
+.userInList .userListTextBox {
   justify-content: center;
   align-items: flex-start;
 }
-.likeInList .smallProfilePic {
+.userInList .smallProfilePic {
   height: calc(var(--small-profile-pic-diameter) * 1.2);
   width: calc(var(--small-profile-pic-diameter) * 1.2);
 }
@@ -292,7 +306,7 @@ nav ul li:hover {
 
 
 #loginOrSignUp, #register {
-  background: var(--background-grey);
+  background: var(--insta-white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -329,6 +343,7 @@ nav ul li:hover {
   padding: 10px;
   margin: 5px;
   border: 1px black solid;
+  background: var(--background-grey);
 }
 
 #imageCropper {
@@ -341,7 +356,7 @@ nav ul li:hover {
   justify-content: flex-start;
   height: 100%;
   padding: 10px 0 0 0;
-  background: var(--background-grey);
+  background: var(--insta-white);
   z-index: 2;
 }
 #imageCropper label {

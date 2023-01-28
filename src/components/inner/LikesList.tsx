@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import LikeInList from './LikeInList';
+import UserInList from './UserInList';
 import { useParams } from 'react-router-dom';
 import getUserObject from '../../functions/user/getUserObject';
-import { LikeProp } from '../../models/LikeProp';
+import { UserInListProp } from '../../models/UserInListProp';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 
 const LikesList: React.FC = () => {
     const { post_id } = useParams()
     const user = getUserObject()
     let fetcher = new FetchAPI
-    const [likes, setLikes] = useState<LikeProp[]>([{
+    const [likes, setLikes] = useState<UserInListProp[]>([{
         username: "",
         name: "",
         user_id: 0,
         profile_picture: "",
-        id: null
+        id: null,
+        current_user_follows: false
     }])
 
     useEffect(() => {
@@ -28,7 +29,7 @@ const LikesList: React.FC = () => {
     return (
         <ul id="likesList" className='flexVertCenter'>
             {likes.map(like => {
-                return <LikeInList key={like.id} like={like} />
+                return <UserInList key={like.user_id} user={like} />
             })}
         </ul>
     );

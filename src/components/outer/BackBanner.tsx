@@ -4,14 +4,15 @@ import { Link } from "react-router-dom"
 
 interface Props {
     header: string;
+    backTo: string;
 }
 
 const BackBanner: React.FC<Props> = (props) => {
-const { header } = props
+const { header, backTo } = props
 
     return (
         <header id="backBanner">
-            <Link to="/"><FaArrowLeft id="backArrow" className='arrowNextBack'></FaArrowLeft></Link>
+            <Link to={backTo}><FaArrowLeft id="backArrow" className='arrowNextBack'></FaArrowLeft></Link>
             <h1>{header}</h1>
         </header>
     );
