@@ -6,6 +6,7 @@ import PostPage from './pages/PostPage'
 import MediaPage from './pages/MediaPage'
 import ProfilePage from './pages/ProfilePage'
 import FollowPage from './pages/FollowPage';
+import IndividualPostPage from './pages/IndividualPostPage';
 import CommentsPage from './pages/CommentsPage'
 import LikesPage from './pages/LikesPage';
 import LoginPage from './pages/LoginPage';
@@ -96,6 +97,14 @@ const App: React.FC = () => {
             element={
               <RequireAuth>
                 <FollowPage title="Followers" />
+              </RequireAuth>
+            }>
+          </Route>
+          <Route
+            path='/posts/:post_id'
+            element={
+              <RequireAuth>
+                <IndividualPostPage />
               </RequireAuth>
             }>
           </Route>
