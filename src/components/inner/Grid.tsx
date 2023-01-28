@@ -29,7 +29,7 @@ const Grid: React.FC<{ gridPath: string }> = (props) => {
                 posts.map(post => {
                     return (
                         <Link
-                            to={`posts/${post.id}`}
+                            to={`/posts/${post.id}`}
                             key={post.id}
                             className="gridChild"
                         >
