@@ -19,8 +19,7 @@ const UserInList: React.FC<Props> = (props) => {
     const handleUnfollow = () => {
         unfollow(user.user_id)
     }
-
-    console.log(currentUser.user_id, user.user_id)
+    
     return (
         <li className='userInList'>
             <img className="smallProfilePic" src={user.profile_picture} alt={`${user.username}'s profile picture`}></img>
