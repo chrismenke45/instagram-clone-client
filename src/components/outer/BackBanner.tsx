@@ -1,14 +1,13 @@
 import React from 'react';
 import { FaArrowLeft } from "react-icons/fa"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 interface Props {
     header: string;
-    backTo: string;
 }
 
 const BackBanner: React.FC<Props> = (props) => {
-const { header, backTo } = props
+const { header } = props
 const navigate = useNavigate()
 
     return (

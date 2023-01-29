@@ -21,7 +21,7 @@ const IndividualPostPage: React.FC = () => {
     }, [])
     return (
         <div id="page">
-            <BackBanner header="Post" backTo="/" />
+            <BackBanner header="Post" />
             {postInArray.length === 1 ?
                 <PostOnFeed post={postInArray[0]} />
                 :

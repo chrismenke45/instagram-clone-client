@@ -5,15 +5,15 @@ import imageCropperActions from '../../stateManagement/actions/imageCropperActio
 import deleteFile from '../../firebase/deleteFile';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa"
-import { Link, useNavigate } from "react-router-dom"
+import { FaArrowLeft } from "react-icons/fa"
+import { useNavigate } from "react-router-dom"
 
 const Post: React.FC = () => {
     const [postInfo, setPostInfo] = useState({ photoUrl: "", caption: "" })
     const { imageCropperState, imageCropperDispatch } = useContext(ImageCropperContext)
     const submitRef = useRef<HTMLButtonElement>(null)
     const navigate = useNavigate()
-    const fetcher = new FetchAPI
+    const fetcher = new FetchAPI()
 
     useEffect(() => {
         imageCropperDispatch(imageCropperActions.CLOSE_CROPPER())
@@ -70,7 +70,7 @@ const Post: React.FC = () => {
         <main>
             <form onSubmit={handleSubmit}>
                 <div id='postBanner'>
-                    <FaArrowLeft onClick={() => navigate(-1)} className='arrowNextBack'></FaArrowLeft>
+                    <FaArrowLeft onClick={() => navigate(-1)} className='arrowBack'></FaArrowLeft>
                     <span onClick={handleSubmitButton} className='arrowNextBack next'>Next</span>
                     <button type='submit' ref={submitRef} hidden={true}>Submit</button>
                 </div>

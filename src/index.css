@@ -198,7 +198,7 @@ nav ul li:hover {
 #backBanner h1 {
   font-size: 2rem;
 }
-.arrowNextBack {
+.arrowBack {
   font-size: 2.5rem;
 }
 #backArrow {
@@ -403,10 +403,14 @@ nav ul li:hover {
   padding: 5px 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: var(--insta-icon-grey);
 }
 #postBanner .next {
   color: var(--insta-light-blue);
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 0 5px;
 }
 
 #profileSummary {
