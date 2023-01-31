@@ -477,12 +477,20 @@ nav ul li:hover {
 #profileBio {
   font-size: 1.4rem;
 }
-#profileOptionButtons > button {
-  width: 49%;
-  height: 25px;
+#profileOptionButtons {
+  display: flex;
+  justify-content: center;
+}
+#profileOptionButtons > button, #profileOptionButtons > a{
+  flex: auto;
+  padding: 5px 0;
   border-radius: 8px;
-  margin: 5px 0;
+  margin: 5px 5px;
   cursor: pointer;
+  font-size: 1.3rem;
+  background: var(--background-grey);
+  text-align: center;
+  vertical-align: middle;
 }
 #profilePostsSelectors {
   display: flex;

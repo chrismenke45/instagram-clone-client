@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ProfileProp } from '../../models/ProfileProp';
-import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
 import { follow, unfollow } from '../../functions/eventHandlers/followHandlers';
 
 const ProfileSummary: React.FC<{ profile: ProfileProp }> = (props) => {
     const { profile } = props
     const user = getUserObject()
-    const fetcher = new FetchAPI
     const handleFollow = () => {
         follow(profile.id)
     }
@@ -36,15 +34,23 @@ const ProfileSummary: React.FC<{ profile: ProfileProp }> = (props) => {
             </div>
             <span id="profileName">{profile.name}</span>
             <p id="profileBio">{profile.bio}</p>
-            <div id="profileOptionButtons">
-                {profile.current_user_follows ? (
-                    <button onClick={handleUnfollow}>Unfollow</button>
-                ) : (
-                    <button onClick={handleFollow}>Follow</button>
-                )
-                }
-                <button>Message</button>
-            </div>
+
+
+            {profile.id === user.user_id ? (
+                <div id="profileOptionButtons">
+                        <Link to="edit">Edit Profile</Link>
+                </div>
+            ) : (
+                <div id="profileOptionButtons">
+                    {profile.current_user_follows ? (
+                        <button onClick={handleUnfollow}>Following</button>
+                    ) : (
+                        <button onClick={handleFollow}>Follow</button>
+                    )}
+                    <button>Message</button>
+                </div>
+            )}
+
         </section>
     );
 }
