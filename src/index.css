@@ -129,6 +129,10 @@ nav ul li:hover {
   width: var(--small-profile-pic-diameter);
   border-radius: 50%;
 }
+.smallPostPic {
+  height: var(--small-profile-pic-diameter);
+  width: var(--small-profile-pic-diameter);
+}
 .postHeader img {
   margin-right: 10px;
 }
@@ -231,8 +235,11 @@ nav ul li:hover {
   flex: 0 0 var(--small-profile-pic-diameter);
   border-radius: 50%;
 }
-
-.commentInList, .userInList {
+#media {
+  width: 100%;
+  padding: 0 10px;
+}
+.commentInList, .userInList, .mediaInList {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -240,10 +247,22 @@ nav ul li:hover {
   padding: 5px 0;
   border-bottom: 1px solid var(--insta-icon-grey);
 }
+.mediaInList {
+  border: none;
+  padding: 10px 0;
+}
+.mediaTextBox {
+  flex: auto;
+  margin: 0 15px;
+  font-size: 1.2rem;
+  text-overflow: ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
 .commentInList, .commentInList .commentTextBox {
   align-items: flex-start;
 }
-.userInList, .userInList .userListTextBox {
+.userInList, .userInList .userListTextBox, .mediaInList {
   align-items: center;
 } 
 
@@ -261,10 +280,18 @@ nav ul li:hover {
   border-radius: 10px;
   cursor: pointer;
 }
-.commentInList .commentUserName, .userInList .userListUserName {
+.mediaInList button {
+  background: var(--insta-dark-blue);
+  color: var(--insta-white);
+  padding: 8px 15px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.commentInList .commentUserName, .userInList .userListUserName, .mediaUserName {
   font-weight: 600;
 }
-.commentInList .commentUserName {
+.commentInList .commentUserName, .mediaUserName {
   color: var(--insta-dark-blue);
 }
 .commentInList *, .userInList * {
