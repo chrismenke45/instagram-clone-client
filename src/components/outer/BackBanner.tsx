@@ -12,7 +12,7 @@ const navigate = useNavigate()
 
     return (
         <header id="backBanner">
-            <FaArrowLeft id="backArrow" onClick={() => navigate(-1)}className='arrowNextBack'></FaArrowLeft>
+            <FaArrowLeft id="backArrow" onClick={() => navigate(-1)}className='arrowBack'></FaArrowLeft>
             <h1>{header}</h1>
         </header>
     );
