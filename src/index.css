@@ -571,4 +571,19 @@ nav ul li:hover {
   font-size: 1.4rem;
   padding: 10px;
 }
+#editProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+}
+#editProfile form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#editProfile form img {
+  width: calc(var(--small-profile-pic-diameter) * 3.5);
+  border-radius: 50%;
+}
 

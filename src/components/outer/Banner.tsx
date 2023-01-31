@@ -1,4 +1,5 @@
 import React from 'react';
+import {HiOutlinePaperAirplane} from "react-icons/hi"
 
 const Banner: React.FC = () => {
 

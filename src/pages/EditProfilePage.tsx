@@ -1,17 +1,12 @@
 import React from 'react';
-import BackBanner from '../components/outer/BackBanner';
-import { useNavigate } from 'react-router-dom';
-const EditProfilePage: React.FC = () => {
-    const navigate = useNavigate()
+import EditProfile from '../components/outer/EditProfile';
 
-const logOut = () => {
-    localStorage.clear()
-    navigate("/login")
-}
+const EditProfilePage: React.FC = () => {
+
+
     return (
         <div id="page">
-            <BackBanner header='Edit ' />
-            <button onClick={logOut}>Log out</button>
+            <EditProfile />
         </div>
     );
 }

@@ -7,7 +7,7 @@ import imageCropperActions from '../../stateManagement/actions/imageCropperActio
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import setUserJwt from '../../functions/user/setUserJwt';
 import deleteFile from '../../firebase/deleteFile';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
 const RegisterForm: React.FC = () => {
     const [registerInfo, setRegisterInfo] = useState({ username: "", name: "", password: "", bio: "", profile_picture: "" })
