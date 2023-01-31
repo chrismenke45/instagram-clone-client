@@ -5,6 +5,7 @@ import SearchPage from './pages/SearchPage'
 import PostPage from './pages/PostPage'
 import MediaPage from './pages/MediaPage'
 import ProfilePage from './pages/ProfilePage'
+import EditProfilePage from './pages/EditProfilePage';
 import FollowPage from './pages/FollowPage';
 import IndividualPostPage from './pages/IndividualPostPage';
 import CommentsPage from './pages/CommentsPage'
@@ -85,10 +86,18 @@ const App: React.FC = () => {
             }>
           </Route>
           <Route
+              path='/profile/:user_id/edit'
+              element={
+                <RequireAuth>
+                  <EditProfilePage />
+                </RequireAuth>
+              }>
+            </Route>
+          <Route
             path='/profile/:user_id/following'
             element={
               <RequireAuth>
-                <FollowPage title="Following"/>
+                <FollowPage title="Following" />
               </RequireAuth>
             }>
           </Route>
