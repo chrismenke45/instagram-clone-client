@@ -1,20 +1,29 @@
 const imageCropperActions = {
-    SET_PHOTO(photoUrl: string) {
+    SET_PHOTO(photoUrl: string, oldPhotoUrl: string) {
         return {
             type: "SET_PHOTO",
-            payload: { photoUrl }
+            payload: {
+                photoUrl,
+                oldPhotoUrl
+            }
         }
     },
-    CLOSE_CROPPER(photoUrl = "") {
+    CLOSE_CROPPER(photoUrl = "", oldPhotoUrl = "") {
         return {
             type: "CLOSE_CROPPER",
-            payload: { photoUrl }
+            payload: {
+                photoUrl,
+                oldPhotoUrl
+            }
         }
     },
-    OPEN_CROPPER(photoUrl = "") {
+    OPEN_CROPPER(photoUrl = "", oldPhotoUrl = "") {
         return {
             type: "OPEN_CROPPER",
-            payload: { photoUrl }
+            payload: {
+                photoUrl,
+                oldPhotoUrl
+            }
         }
     }
 }

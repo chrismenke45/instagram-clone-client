@@ -34,7 +34,8 @@ const App: React.FC = () => {
     imageCropperReducer,
     {
       showImageSelect: false,
-      photoUrl: ""
+      photoUrl: "",
+      oldPhotoUrl: ""
     }
   )
 
@@ -86,13 +87,15 @@ const App: React.FC = () => {
             }>
           </Route>
           <Route
-              path='/profile/:user_id/edit'
-              element={
-                <RequireAuth>
+            path='/profile/:user_id/edit'
+            element={
+              <RequireAuth>
+                <ImageCropperContext.Provider value={{ imageCropperState, imageCropperDispatch }}>
                   <EditProfilePage />
-                </RequireAuth>
-              }>
-            </Route>
+                </ImageCropperContext.Provider>
+              </RequireAuth>
+            }>
+          </Route>
           <Route
             path='/profile/:user_id/following'
             element={
@@ -142,9 +145,7 @@ const App: React.FC = () => {
           <Route
             path='/register'
             element={
-              <ImageCropperContext.Provider value={{ imageCropperState, imageCropperDispatch }}>
-                <RegisterPage />
-              </ImageCropperContext.Provider>
+              <RegisterPage />
             }>
           </Route>
           <Route

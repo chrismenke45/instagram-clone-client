@@ -3,6 +3,7 @@ import ReactCrop, {
     Crop,
 } from 'react-image-crop';
 import uploadFile from '../../firebase/uploadFile';
+import deleteFile from '../../firebase/deleteFile';
 import 'react-image-crop/dist/ReactCrop.css';
 
 import {
@@ -28,8 +29,7 @@ const ImageCropper: React.FC<Props> = (props) => {
     const [imgSrc, setImgSrc] = useState<string>('')
     const [imgExt, setImgExt] = useState<string>('')
     const acceptedImageFileTypesArray: string[] = ["image/png", "image/gif", "image/jpeg"]
-    const acceptedImageMaxSize: number = 100000
-
+    const acceptedImageMaxSize: number = 200000
 
     const verifyFile = (files: FileList | null) => {
         if (files && files.length > 0) {
@@ -85,8 +85,8 @@ const ImageCropper: React.FC<Props> = (props) => {
             uploadFile(imageData64, imageFolder)
                 .then(urlString => {
                     if (urlString) {
-                        imageCropperDispatch(imageCropperActions.SET_PHOTO(urlString))
-                    } 
+                        imageCropperDispatch(imageCropperActions.SET_PHOTO(urlString, imageCropperState.photoUrl))
+                    }
                 })
 
             // download file
@@ -106,8 +106,8 @@ const ImageCropper: React.FC<Props> = (props) => {
         setImgSrc('')
         setImgExt('')
         setCrop(undefined)
-        if (inputRef?.current) { 
-            inputRef.current.value = "" 
+        if (inputRef?.current) {
+            inputRef.current.value = ""
             inputRef.current.click()
         }
     }
@@ -120,7 +120,7 @@ const ImageCropper: React.FC<Props> = (props) => {
         if (inputRef?.current) {
             inputRef.current.click()
         }
-        
+
     }
 
 
