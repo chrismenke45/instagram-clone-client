@@ -34,7 +34,6 @@ const EditProfile: React.FC = () => {
         if (Number(user_id) === user.user_id) {
             fetcher.fetchData(`users/${user_id}`, "GET", user.jwt)
                 .then(userProfile => {
-                    console.log(userProfile)
                     setProfile(userProfile[0])
 
                 })

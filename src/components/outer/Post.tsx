@@ -24,7 +24,7 @@ const Post: React.FC = () => {
             return {
                 ...prev,
                 photoUrl: imageCropperState.photoUrl
-            }
+            } 
         })
     }, [imageCropperState.photoUrl])
 
@@ -35,13 +35,7 @@ const Post: React.FC = () => {
     }
     const handleCropperOpen = (e: React.MouseEvent<HTMLImageElement, MouseEvent> | React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
         e.preventDefault()
-        imageCropperDispatch(imageCropperActions.OPEN_CROPPER())
-        if (!imageCropperState.showImageSelect && postInfo.photoUrl !== "") {
-            deleteFile(postInfo.photoUrl)
-                .catch(err => {
-                    console.error(err)
-                })
-        }
+        imageCropperDispatch(imageCropperActions.OPEN_CROPPER(postInfo.photoUrl))
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
