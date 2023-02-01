@@ -37,7 +37,6 @@ const Home: React.FC = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         let url = `users?search=${search}`
-        console.log(search, searchType)
         /// `posts?preview=true&search=${search}`
         if (searchType === "accounts") {
             fetcher.fetchData(url, "GET", user.jwt)

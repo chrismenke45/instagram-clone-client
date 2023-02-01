@@ -22,7 +22,7 @@ const UserInList: React.FC<Props> = (props) => {
         <li className='userInList'>
             <img className="smallProfilePic" src={user.profile_picture} alt={`${user.username}'s profile`}></img>
             <div className='userListTextBox'>
-                <Link to="/profile" className='userListUserName'>{user.username}</Link>
+                <Link to={`/profile/${user.user_id}`} className='userListUserName'>{user.username}</Link>
                 <span className='userListName'>{user.name}</span>
             </div>
             {currentUser.user_id !== user.user_id && user.current_user_follows !== undefined ?
