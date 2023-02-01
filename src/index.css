@@ -57,13 +57,18 @@ header {
   background: var(--insta-dark-blue);
   display: flex;
   align-items: center;
-  justify-content: center;
-  
+  justify-content: space-between;
+  padding: 0 10px;
 }
 #banner > h1 {
   font-family: "Grand Hotel";
   color: var(--insta-white);
   font-size: 2rem;
+}
+#banner  #messageIcon {
+  color: var(--insta-white);
+  font-size: 2rem;
+  transform: rotate(60deg);
 }
 main {
   flex: 1;
@@ -258,6 +263,9 @@ nav ul li:hover {
   text-overflow: ellipsis;
   overflow:hidden;
   white-space:nowrap;
+}
+.mediaTextBox span {
+  color: var(--insta-icon-grey);
 }
 .commentInList, .commentInList .commentTextBox {
   align-items: flex-start;

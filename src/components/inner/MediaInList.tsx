@@ -17,6 +17,10 @@ const MediaInList: React.FC<Props> = (props) => {
     const handleUnfollow = (id: number) => {
         unfollow(id)
     }
+    const shortenTime = (timeStr: string): string => {
+        let timePieces = timeStr.split(" ")
+        return timePieces[0] + timePieces[1].slice(0,1)
+    }
     return (
         <li className='mediaInList'>
             <img className="smallProfilePic" src={media.profile_picture} alt={`${media.username}'s profile picture`}></img>
@@ -30,6 +34,7 @@ const MediaInList: React.FC<Props> = (props) => {
                             {media.username}
                         </Link>
                         &nbsp;liked your photo
+                        <span>&nbsp;{shortenTime(timeAgo(media.created_at, true))}</span>
                     </p>
                     :
                     <p className='mediaTextBox'>
@@ -40,6 +45,7 @@ const MediaInList: React.FC<Props> = (props) => {
                             {media.username}
                         </Link>
                         &nbsp;commented on your photo: {media.text}
+                        <span>&nbsp;{shortenTime(timeAgo(media.created_at, true))}</span>
                     </p>
                 :
                 <p className='mediaTextBox'>
@@ -50,6 +56,7 @@ const MediaInList: React.FC<Props> = (props) => {
                         {media.username}
                     </Link>
                     &nbsp;started following you
+                    <span>&nbsp;{shortenTime(timeAgo(media.created_at, true))}</span>
                 </p>
             }
 
