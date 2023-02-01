@@ -5,15 +5,18 @@ import FetchAPI from '../../functions/fetch/FetchAPI';
 import { ProfileProp } from '../../models/ProfileProp';
 import { useNavigate } from 'react-router-dom';
 import { HiXMark, HiCheck } from "react-icons/hi2"
-import { BiCheck} from "react-icons/bi"
+import { BiCheck } from "react-icons/bi"
 
 import ImageCropper from '../inner/ImageCropper';
 import ImageCropperContext from '../../stateManagement/contexts/ImageCropperContext';
 import imageCropperActions from '../../stateManagement/actions/imageCropperActions';
+import deleteUser from '../../functions/user/deleteUser';
 
 const EditProfile: React.FC = () => {
     let fetcher = new FetchAPI()
     const { imageCropperState, imageCropperDispatch } = useContext(ImageCropperContext)
+    const [showConfirmDelete, setShowConfirmDelete] = useState<boolean>(false)
+    const [showNoGuestModify, setShowNoGuestModify] = useState<boolean>(false)
     const user = getUserObject()
     const { user_id } = useParams()
     const navigate = useNavigate()
@@ -60,9 +63,17 @@ const EditProfile: React.FC = () => {
         })
     }
 
+    const toggleConfirmDelete = () => {
+        if (user.username !== "guest") {
+            setShowConfirmDelete(prev => !prev)
+        } else {
+            setShowNoGuestModify(true)
+        }
+    }
+
     useEffect(() => {
         setProfile(prev => {
-            return {...prev, profile_picture: imageCropperState.photoUrl }
+            return { ...prev, profile_picture: imageCropperState.photoUrl }
         })
     }, [imageCropperState.photoUrl])
 
@@ -75,38 +86,54 @@ const EditProfile: React.FC = () => {
         localStorage.clear()
         navigate("/login")
     }
+    const deleteAccout = () => {
+        if (user.username !== "guest") {
+            deleteUser(profile.id)
+        } else {
+            setShowNoGuestModify(true)
+        }
+    }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        fetcher.buildFormData([
-            ["user[username]", profile.username],
-            ["user[name]", profile.name],
-            ["user[bio]", profile.bio],
-            ["user[profile_picture]", profile.profile_picture],
-        ])
-        fetcher.fetchData(`users/${user.user_id}`, "PUT", user.jwt)
-            .then(data => {
-                console.log(data)
+        if (user.username !== "guest") {
+            fetcher.buildFormData([
+                ["user[username]", profile.username],
+                ["user[name]", profile.name],
+                ["user[bio]", profile.bio],
+                ["user[profile_picture]", profile.profile_picture],
+            ])
+            fetcher.fetchData(`users/${user.user_id}`, "PUT", user.jwt)
+                .then(data => {
+                    console.log(data)
                     navigate(`/profile/${user.user_id}`)
-            })
-            .catch(err => console.error(err))
+                })
+                .catch(err => console.error(err))
 
+        } else {
+            setShowNoGuestModify(true)
+        }
     }
     const handleClickSubmitRef = () => {
         if (submitButtonRef?.current) {
             submitButtonRef.current.click()
-        } 
+        }
     }
 
     return (
         <main id="editProfile">
             <form onSubmit={handleSubmit}>
+                
                 <div id='editBanner'>
                     <HiXMark onClick={() => navigate(-1)} className='arrowBack'></HiXMark>
                     <span>Edit Profile</span>
                     <BiCheck className="checkmark" onClick={handleClickSubmitRef}></BiCheck>
                     <button type='submit' hidden={true} ref={submitButtonRef}></button>
                 </div>
+                {showNoGuestModify &&
+                    <div>
+                        <p className='warning'>Guest Profile cannot be modified or deleted</p>
+                    </div>}
                 <img
                     className='profilePicture'
                     src={profile.profile_picture}
@@ -147,7 +174,14 @@ const EditProfile: React.FC = () => {
                 {imageCropperState.showImageSelect && <ImageCropper imageFolder={'profilePictures'} ruleOfThirds={false} circularCrop={true} />}
             </form>
             <button id="logOutButton" onClick={logOut}>Log out</button>
-
+            <button id="deleteUser" onClick={toggleConfirmDelete}>Delete Account</button>
+            {showConfirmDelete &&
+                <div id="confirmDeleteBox">
+                    <p>Are you sure you'd like to delete your account? Once deleted, it can't be recovered</p>
+                    <button id="deleteUser" onClick={deleteAccout}>Delete Account</button>
+                    <button onClick={toggleConfirmDelete}>Back</button>
+                </div>
+            }
         </main>
     );
 }

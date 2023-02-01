@@ -23,4 +23,7 @@ button {
 input:focus, textarea:focus {
     outline: none;
 }
-textarea { resize: vertical; }
+textarea { 
+    resize: vertical; 
+    height: 100px;
+}
