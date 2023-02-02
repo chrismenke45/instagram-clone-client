@@ -31,9 +31,9 @@ const RegisterForm: React.FC = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         fetcher.buildFormData([
-            ["user[username]", registerInfo.username],
-            ["user[password]", registerInfo.password],
-            ["user[name]", registerInfo.name],
+            ["user[username]", registerInfo.username.toLowerCase().trim()],
+            ["user[password]", registerInfo.password.trim()],
+            ["user[name]", registerInfo.name.trim()],
             ["user[bio]", ""],
             ["user[profile_picture]", process.env.REACT_APP_DEFAULT_PROFILE_PICTURE || ""],
         ])

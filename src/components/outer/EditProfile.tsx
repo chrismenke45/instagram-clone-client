@@ -98,10 +98,10 @@ const EditProfile: React.FC = () => {
         e.preventDefault()
         if (user.username !== "guest") {
             fetcher.buildFormData([
-                ["user[username]", profile.username],
-                ["user[name]", profile.name],
-                ["user[bio]", profile.bio],
-                ["user[profile_picture]", profile.profile_picture],
+                ["user[username]", profile.username.toLowerCase().trim()],
+                ["user[name]", profile.name.trim()],
+                ["user[bio]", profile.bio.trim()],
+                ["user[profile_picture]", profile.profile_picture.trim()],
             ])
             fetcher.fetchData(`users/${user.user_id}`, "PUT", user.jwt)
                 .then(data => {

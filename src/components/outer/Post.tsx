@@ -43,7 +43,7 @@ const Post: React.FC = () => {
         const user = getUserObject()
         if (postInfo.photoUrl) {
             fetcher.buildFormData([
-                ["post[caption]", postInfo.caption],
+                ["post[caption]", postInfo.caption.trim()],
                 ["post[picture_url]", postInfo.photoUrl],
             ])
             fetcher.fetchData("posts", "POST", user.jwt)
