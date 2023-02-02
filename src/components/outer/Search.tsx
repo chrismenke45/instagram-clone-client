@@ -15,8 +15,8 @@ const Search: React.FC = () => {
     const user = getUserObject()
 
     const handleSearchTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            setSearchType(e.target.value)
-            if (e.target.value !== "accounts") { setUserList([]) }
+        setSearchType(e.target.value)
+        if (e.target.value !== "accounts") { setUserList([]) }
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -29,7 +29,16 @@ const Search: React.FC = () => {
     }
     return (
         <main>
-            <SearchForm search={search} setSearch={setSearch} searchType={searchType} handleSubmit={handleSubmit} handleSearchTypeChange={handleSearchTypeChange} showSearchOptions={showSearchOptions} setShowSearchOptions={setShowSearchOptions} />
+            <SearchForm
+                search={search}
+                setSearch={setSearch}
+                searchType={searchType}
+                handleSubmit={handleSubmit}
+                handleSearchTypeChange={handleSearchTypeChange}
+                showSearchOptions={showSearchOptions}
+                setShowSearchOptions={setShowSearchOptions}
+                areSearchOptionsAvailable={true}
+            />
             {search && searchType === "accounts" ?
                 userList.length === 0 ?
                     <p id="noResults">No Results</p>

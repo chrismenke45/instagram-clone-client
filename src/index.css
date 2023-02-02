@@ -175,8 +175,6 @@ nav ul li:hover {
   color: red;
 }
 .postLikes {
-  /* width: 100%;
-  padding: 5px 10px; */
   color: var(--insta-text-blue);
   font-size: 1.1rem;
 }

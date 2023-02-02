@@ -10,6 +10,7 @@ import FollowPage from './pages/FollowPage';
 import IndividualPostPage from './pages/IndividualPostPage';
 import CommentsPage from './pages/CommentsPage'
 import LikesPage from './pages/LikesPage';
+import MessagesPage from './pages/MessagesPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ErrorPage from './pages/ErrorPage'
@@ -133,6 +134,14 @@ const App: React.FC = () => {
             element={
               <RequireAuth>
                 <LikesPage />
+              </RequireAuth>
+            }>
+          </Route>
+          <Route
+            path='/messages'
+            element={
+              <RequireAuth>
+                <MessagesPage />
               </RequireAuth>
             }>
           </Route>

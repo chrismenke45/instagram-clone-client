@@ -9,17 +9,19 @@ interface Props {
     handleSearchTypeChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     showSearchOptions: boolean;
     setShowSearchOptions: (value: React.SetStateAction<boolean>) => void;
+    areSearchOptionsAvailable: boolean;
 }
 
 const SearchForm: React.FC<Props> = (props) => {
     const {
         search,
         setSearch,
-        searchType,
+        searchType, //not important if only one search type
         handleSubmit,
-        handleSearchTypeChange,
-        showSearchOptions,
-        setShowSearchOptions,
+        handleSearchTypeChange, //not important if only one search type
+        showSearchOptions, //not important if only one search type
+        setShowSearchOptions, //not important if only one search type
+        areSearchOptionsAvailable //must be false if only one search type
     } = props
     const submitRef = useRef<HTMLButtonElement>(null)
 
@@ -41,7 +43,8 @@ const SearchForm: React.FC<Props> = (props) => {
     return (
         <form id="searchForm" onSubmit={handleSubmit}>
             <SearchBar handleSearchChange={handleSearchChange} />
-            {showSearchOptions ?
+            {/* directly below is irrelivant if only one search type */}
+            {areSearchOptionsAvailable && showSearchOptions ?
                 <div id="searchOptions">
                     <input
                         type="radio"
