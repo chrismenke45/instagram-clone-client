@@ -4,6 +4,7 @@ import getUserObject from '../../functions/user/getUserObject';
 import SearchForm from '../inner/SearchForm';
 import { UserInListProp } from '../../models/UserInListProp';
 import { MessageProp } from '../../models/MessageProp';
+import MessageInList from '../inner/MessageInList';
 
 interface Props {
     messages: MessageProp[];
@@ -44,7 +45,7 @@ const Messages: React.FC<Props> = (props) => {
             />
             <ol>
                 {messages.map(message => {
-                    return <li key={message.id}>{message.text}</li>
+                    return <MessageInList key={message.id} message={message} />
                 })}
             </ol>
         </main>

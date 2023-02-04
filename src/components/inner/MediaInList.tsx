@@ -3,6 +3,7 @@ import { MediaProp } from '../../models/MediaProp';
 import { Link } from 'react-router-dom';
 import timeAgo from '../../functions/timeAgo';
 import { follow, unfollow } from "../../functions/eventHandlers/followHandlers"
+import shortenTime from '../../functions/shortenTime';
 
 interface Props {
     media: MediaProp;
@@ -17,10 +18,7 @@ const MediaInList: React.FC<Props> = (props) => {
     const handleUnfollow = (id: number) => {
         unfollow(id)
     }
-    const shortenTime = (timeStr: string): string => {
-        let timePieces = timeStr.split(" ")
-        return timePieces[0] + timePieces[1].slice(0,1)
-    }
+    
     return (
         <li className='mediaInList'>
             <img className="smallProfilePic" src={media.profile_picture} alt={`${media.username}'s profile picture`}></img>

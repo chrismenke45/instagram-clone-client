@@ -1,5 +1,5 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
+
 :root {
   --insta-dark-blue: #2a608d;
   --insta-text-blue: #2a608d;
@@ -20,10 +20,12 @@ html {
   font-size: 62.5%;
   box-sizing: border-box;
 }
+
 body {
   height: 100vh;
   width: 100wh;
 }
+
 #root {
   height: 100%;
   width: 100%;
@@ -31,6 +33,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 #app {
   width: 100%;
   max-width: 450px;
@@ -41,6 +44,7 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
 #page {
   width: 100%;
   height: 100%;
@@ -49,10 +53,12 @@ body {
   align-items: center;
   position: relative;
 }
+
 header {
   flex: 0 0 var(--banner-height);
   width: 100%;
 }
+
 #banner {
   background: var(--insta-dark-blue);
   display: flex;
@@ -60,42 +66,51 @@ header {
   justify-content: space-between;
   padding: 0 10px;
 }
-#banner > h1 {
+
+#banner>h1 {
   font-family: "Grand Hotel";
   color: var(--insta-white);
   font-size: 2rem;
 }
-#banner  #messageIcon {
+
+#banner #messageIcon {
   color: var(--insta-white);
   font-size: 2rem;
   transform: rotate(60deg);
 }
+
 main {
   flex: 1;
   width: 100%;
   overflow-y: scroll;
 }
+
 footer {
   width: 100%;
   flex: 0 0 var(--footer-height);
 }
+
 #navFooter {
   background: var(--insta-dark-grey);
   color: var(--insta-icon-grey);
   font-size: 3rem;
 }
+
 footer * {
   height: 100%;
 }
-nav > ul {
+
+nav>ul {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 nav ul li {
   flex: 1;
   text-align: center;
 }
+
 nav ul li:hover {
   background-color: var(--insta-selected-dark-grey);
 }
@@ -106,22 +121,31 @@ nav ul li:hover {
   align-items: center;
   justify-content: flex-start;
 }
+
 #feed {
   width: 100%;
 }
+
 .postOnFeed {
   width: 100%;
   padding: 0 0 15px 0;
 }
-.postHeader, .postLikes, .postOptions, .postCaption, .postOnFeed time {
+
+.postHeader,
+.postLikes,
+.postOptions,
+.postCaption,
+.postOnFeed time {
   width: 100%;
   padding: 5px 10px;
 }
+
 .postCaption span {
   font-weight: 600;
   margin-right: 3px;
   font-size: 1.1rem;
 }
+
 .postOnFeed time {
   display: flex;
   justify-content: flex-start;
@@ -129,65 +153,86 @@ nav ul li:hover {
   padding: 0px 10px 0 10x;
   color: var(--insta-icon-grey);
 }
+
 .smallProfilePic {
   height: var(--small-profile-pic-diameter);
   width: var(--small-profile-pic-diameter);
   border-radius: 50%;
 }
+
 .smallPostPic {
   height: var(--small-profile-pic-diameter);
   width: var(--small-profile-pic-diameter);
 }
+
 .postHeader img {
   margin-right: 10px;
 }
-.postHeader div, .postOptions, .postLikes, .postComments, .postCommentsPreview {
+
+.postHeader div,
+.postOptions,
+.postLikes,
+.postComments,
+.postCommentsPreview {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
+
 .postHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .postHeader h4 {
   font-size: 1.5rem;
   font-weight: 600;
 }
+
 .postImg {
   width: 100%;
   aspect-ratio: 1 / 1;
 }
+
 .postOptions {
   font-size: 3rem;
   color: var(--insta-icon-grey);
 }
+
 .postOptions * {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .postOptions svg {
   margin-right: 15px;
 }
+
 .likedHeart {
   color: red;
 }
+
 .postLikes {
   color: var(--insta-text-blue);
   font-size: 1.1rem;
 }
-.postComments, .postCommentsPreview {
+
+.postComments,
+.postCommentsPreview {
   width: 100%;
   padding: 0 10px;
 }
+
 .postComments {
   color: var(--insta-icon-grey);
 }
+
 .postCommentsPreview {
   color: var(--insta-text-blue);
 }
+
 .postCommentsPreview span {
   color: var(--insta-text-blue);
   font-weight: 700;
@@ -196,36 +241,44 @@ nav ul li:hover {
 .previewCanvas {
   display: none;
 }
+
 #backBanner {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding: 0 10px;
 }
+
 #backBanner h1 {
   font-size: 2rem;
 }
+
 .arrowBack {
   font-size: 2.5rem;
 }
+
 #backArrow {
   justify-self: flex-start;
-  
+
   margin: 0 30px 0 0;
 }
+
 #commentFooter {
   padding: 0 10px;
 }
+
 #commentFooter form {
   display: flex;
   align-items: center;
 }
+
 #commentFooter form input {
   flex: 1;
   padding: 0 20px;
   height: calc(var(--footer-height) * 0.5);
   border: none;
 }
+
 #commentFooter form button {
   flex: 0 0 var(--footer-height);
   border: none;
@@ -233,16 +286,21 @@ nav ul li:hover {
   cursor: pointer;
   color: var(--insta-text-blue);
 }
+
 #commentFooter img {
   height: var(--small-profile-pic-diameter);
   flex: 0 0 var(--small-profile-pic-diameter);
   border-radius: 50%;
 }
+
 #media {
   width: 100%;
   padding: 0 10px;
 }
-.commentInList, .userInList, .mediaInList {
+
+.commentInList,
+.userInList,
+.mediaInList {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -250,27 +308,35 @@ nav ul li:hover {
   padding: 5px 0;
   border-bottom: 1px solid var(--insta-icon-grey);
 }
+
 .mediaInList {
   border: none;
   padding: 10px 0;
 }
+
 .mediaTextBox {
   flex: auto;
   margin: 0 15px;
   font-size: 1.2rem;
   text-overflow: ellipsis;
-  overflow:hidden;
-  white-space:nowrap;
+  overflow: hidden;
+  white-space: nowrap;
 }
+
 .mediaTextBox span {
   color: var(--insta-icon-grey);
 }
-.commentInList, .commentInList .commentTextBox {
+
+.commentInList,
+.commentInList .commentTextBox {
   align-items: flex-start;
 }
-.userInList, .userInList .userListTextBox, .mediaInList {
+
+.userInList,
+.userInList .userListTextBox,
+.mediaInList {
   align-items: center;
-} 
+}
 
 .userInList .buttonContainer {
   flex: auto;
@@ -278,6 +344,7 @@ nav ul li:hover {
   align-items: center;
   justify-content: flex-end;
 }
+
 .userInList .buttonContainer button {
   background: var(--insta-dark-blue);
   color: var(--insta-white);
@@ -286,6 +353,7 @@ nav ul li:hover {
   border-radius: 10px;
   cursor: pointer;
 }
+
 .mediaInList button {
   background: var(--insta-dark-blue);
   color: var(--insta-white);
@@ -294,41 +362,60 @@ nav ul li:hover {
   border-radius: 10px;
   cursor: pointer;
 }
-.commentInList .commentUserName, .userInList .userListUserName, .mediaUserName {
+
+.commentInList .commentUserName,
+.userInList .userListUserName,
+.mediaUserName {
   font-weight: 600;
 }
-.commentInList .commentUserName, .mediaUserName {
+
+.commentInList .commentUserName,
+.mediaUserName {
   color: var(--insta-dark-blue);
 }
-.commentInList *, .userInList * {
+
+.commentInList *,
+.userInList * {
   font-size: 1.1rem;
 }
+
 .commentHeader {
   display: flex;
   align-items: center;
   padding: 0 0 2px 0;
 }
+
 .commentDate {
   font-size: 1rem;
   padding: 0 5px;
 }
-.commentInList .commentTextBox, .userInList .userListTextBox {
+
+.commentInList .commentTextBox,
+.userInList .userListTextBox {
   padding: 0 0 0 10px;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   height: 100%;
 }
+
 .userInList .userListTextBox {
   justify-content: center;
   align-items: flex-start;
 }
+
 .userInList .smallProfilePic {
   height: calc(var(--small-profile-pic-diameter) * 1.2);
   width: calc(var(--small-profile-pic-diameter) * 1.2);
 }
 
-#commentsList, #usersList {
+.messageInList img.smallProfilePic {
+  height: calc(var(--small-profile-pic-diameter) * 1.5);
+  width: calc(var(--small-profile-pic-diameter) * 1.5);
+}
+
+#commentsList,
+#usersList {
   padding: 0 10px;
   width: 100%;
   flex: auto;
@@ -338,7 +425,8 @@ nav ul li:hover {
 
 
 
-#loginOrSignUp, #register {
+#loginOrSignUp,
+#register {
   background: var(--insta-white);
   display: flex;
   align-items: center;
@@ -346,19 +434,26 @@ nav ul li:hover {
   height: 100%;
   flex-direction: column;
 }
-#loginOrSignUp form, #register form {
+
+#loginOrSignUp form,
+#register form {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
-#loginOrSignUp h1, #register h1 {
+
+#loginOrSignUp h1,
+#register h1 {
   font-size: 4rem;
   margin: 15px;
   font-family: "Grand Hotel";
 }
-#loginOrSignUp span, #register span {
+
+#loginOrSignUp span,
+#register span {
   font-size: 1.5rem;
 }
+
 .openerOption {
   font-size: 1.5rem;
   background-color: var(--insta-dark-blue);
@@ -370,8 +465,10 @@ nav ul li:hover {
   text-align: center;
   border-radius: 20px;
   cursor: pointer;
-} 
-.formGroup input, .formGroup textarea {
+}
+
+.formGroup input,
+.formGroup textarea {
   width: 200px;
   padding: 10px;
   margin: 5px;
@@ -392,9 +489,11 @@ nav ul li:hover {
   background: var(--insta-white);
   z-index: 2;
 }
+
 #imageCropper label {
   font-size: 2rem;
 }
+
 #imageCropper button {
   padding: 10px;
   font-size: 1.5rem;
@@ -403,15 +502,15 @@ nav ul li:hover {
   width: 200px;
   color: var(--insta-white);
   cursor: pointer;
-  margin: 10px 0 0 0 ;
+  margin: 10px 0 0 0;
 }
 
 .photoTextSideBySide {
   display: flex;
   --photoTextSideBySideHeight: 75px;
   padding: 0 10px
-
 }
+
 .photoTextSideBySide .photoTextPhoto {
   flex: 0 0 var(--photoTextSideBySideHeight);
   height: var(--photoTextSideBySideHeight);
@@ -421,10 +520,12 @@ nav ul li:hover {
   font-size: 1.5rem;
   cursor: pointer;
 }
+
 .photoTextSideBySide span.photoTextPhoto {
   padding: calc(var(--photoTextSideBySideHeight) / 4) 0;
   border: black 1px solid;
 }
+
 .photoTextSideBySide .photoTextText {
   flex: 1 1 auto;
   resize: none;
@@ -432,6 +533,7 @@ nav ul li:hover {
   border: none;
   padding: 5px 0 5px 10px;
 }
+
 #postBanner {
   padding: 5px 10px;
   display: flex;
@@ -439,6 +541,7 @@ nav ul li:hover {
   align-items: center;
   color: var(--insta-icon-grey);
 }
+
 #postBanner .next {
   color: var(--insta-light-blue);
   font-size: 1.5rem;
@@ -452,42 +555,52 @@ nav ul li:hover {
   flex-direction: column;
   align-items: flex-start;
 }
+
 #profileSummary img {
   height: calc(var(--small-profile-pic-diameter) * 2.5);
   width: calc(var(--small-profile-pic-diameter) * 2.5);
   border-radius: 50%;
 }
-#profileSummary > div {
+
+#profileSummary>div {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .profileCountSummary {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .profileCountNumber {
   font-size: 1.6rem;
   font-weight: 600;
 }
+
 .profileCountSubject {
   font-size: 1.4rem;
 }
+
 #profileName {
   font-size: 1.6rem;
   font-weight: 600;
   padding: 5px 0;
 }
+
 #profileBio {
   font-size: 1.4rem;
 }
+
 #profileOptionButtons {
   display: flex;
   justify-content: center;
 }
-#profileOptionButtons > button, #profileOptionButtons > a{
+
+#profileOptionButtons>button,
+#profileOptionButtons>a {
   flex: auto;
   padding: 5px 0;
   border-radius: 8px;
@@ -498,31 +611,37 @@ nav ul li:hover {
   text-align: center;
   vertical-align: middle;
 }
+
 #profilePostsSelectors {
   display: flex;
   justify-content: space-between;
 }
+
 .profilePostsSelector {
   font-size: 4rem;
   width: 49%;
   padding: 5px 0;
   color: var(--insta-icon-grey);
 }
+
 .selectedProfilePostsSelector {
   border-bottom: 1px solid black;
   color: black;
 }
+
 #grid {
   display: grid;
   margin: 3px 0;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 3px
 }
+
 .gridChild {
   /* aspect-ratio: 1 / 1; */
   background: red;
   height: max-content;
 }
+
 .gridChild img {
   width: 100%;
   padding: 0;
@@ -536,6 +655,7 @@ nav ul li:hover {
   justify-content: flex-start;
   margin: 10px;
 }
+
 #searchBar {
   display: flex;
   align-items: center;
@@ -546,20 +666,23 @@ nav ul li:hover {
   background: var(--background-grey);
   width: 100%;
 }
+
 #searchForm input {
   border: none;
   background: inherit;
   font-size: 1.4rem;
   flex: auto;
-  padding:  0 0 0 8px;
+  padding: 0 0 0 8px;
 }
+
 #searchOptions {
   display: flex;
   align-items: center;
 
   width: 100%;
 }
-#searchOptions > * {
+
+#searchOptions>* {
   flex: auto;
   text-align: center;
   padding: 5px;
@@ -567,28 +690,33 @@ nav ul li:hover {
   color: var(--insta-icon-grey);
   border-bottom: var(--insta-white) 1px solid;
 }
-#searchOptions > input[type="radio"]:checked + label {
+
+#searchOptions>input[type="radio"]:checked+label {
   color: var(--insta-selected-dark-grey);
   border-bottom: var(--insta-selected-dark-grey) 1px solid;
 }
+
 #noResults {
   width: 100%;
   text-align: center;
   font-size: 1.4rem;
   padding: 10px;
 }
+
 #editProfile {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 10px;
 }
+
 #editProfile form {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
+
 #editProfile form .profilePicture {
   width: calc(var(--small-profile-pic-diameter) * 3.5);
   height: calc(var(--small-profile-pic-diameter) * 3.5);
@@ -596,6 +724,7 @@ nav ul li:hover {
   cursor: pointer;
   margin: 10px;
 }
+
 #editProfile button {
   color: var(--insta-white);
   border: 2px solid red;
@@ -616,10 +745,12 @@ nav ul li:hover {
   font-size: 2rem;
   justify-items: start;
 }
+
 #editBanner .checkmark {
   justify-self: end;
   color: var(--insta-text-blue);
 }
+
 #confirmDeleteBox {
   position: absolute;
   height: 100%;
@@ -633,15 +764,55 @@ nav ul li:hover {
   text-align: center;
   z-index: 3;
 }
+
 #confirmDeleteBox button {
   color: var(--insta-white);
   background: var(--insta-dark-blue);
   padding: 15px 10px;
   border-radius: 20px;
-  margin: 10px 0 0 0 ;
+  margin: 10px 0 0 0;
 }
+
 .warning {
   color: red;
   font-size: 1.2rem;
+}
+
+.messageInList {
+  width: 100%;
+  padding: 3px 10px;
+}
+
+.messageInList a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
+
+.messagesInfo {
+  flex: 1;
+  padding: 0 5px;
+  font-size: 1.4rem;
+  min-width: 0;
+}
+
+.messagesUsername, .messageDate {
+  font-weight: 600;
+}
+.messageDate {
+  padding: 0 0 0 15px;
+}
+
+.messageText {
+  display: flex;
+  flex: 1;
+}
+
+.messageText p {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
