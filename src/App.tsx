@@ -26,6 +26,7 @@ import {
 import RequireAuth from './functions/user/RequireAuth'; //to redirect to login if not logged in
 import ImageCropperContext from './stateManagement/contexts/ImageCropperContext';
 import imageCropperReducer from './stateManagement/reducers/imageCropperReducer';
+import ConversationPage from './pages/ConversationPage';
 
 
 
@@ -142,6 +143,14 @@ const App: React.FC = () => {
             element={
               <RequireAuth>
                 <MessagesPage />
+              </RequireAuth>
+            }>
+          </Route>
+          <Route
+            path='/messages/:user_id'
+            element={
+              <RequireAuth>
+                <ConversationPage />
               </RequireAuth>
             }>
           </Route>

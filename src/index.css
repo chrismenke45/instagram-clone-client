@@ -815,4 +815,27 @@ nav ul li:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+#conversation {
+  font-size: 1.3rem;
+}
+#conversation ol {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+}
+.flexAlignSelfLeft {
+  align-self: flex-start;
+  border: 1px solid var(--background-grey);
+}
+.flexAlignSelfRight {
+  align-self: flex-end;
+  background: var(--background-grey);
+}
+.conversationText {
+  padding: 8px;
+  border-radius: 10px;
+  margin: 2px;
+  max-width: 80%;
+}
 
