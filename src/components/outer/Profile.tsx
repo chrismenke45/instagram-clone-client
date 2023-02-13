@@ -1,15 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import ProfileSummary from '../inner/ProfileSummary';
 import ProfilePosts from './ProfilePosts';
 import getUserObject from '../../functions/user/getUserObject';
 import { useParams } from 'react-router-dom';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import { ProfileProp } from '../../models/ProfileProp';
+import ReloadContext from '../../stateManagement/contexts/reloadContext';
 
 const Profile: React.FC = () => {
     let fetcher = new FetchAPI()
     const user = getUserObject()
     const { user_id } = useParams()
+
+    
+    const { reloadState } = useContext(ReloadContext)
+
     const [profile, setProfile] = useState<ProfileProp>({
         post_count: 3,
         follower_count: 5,
@@ -26,7 +31,7 @@ const Profile: React.FC = () => {
         .then(userProfile => {
             setProfile(userProfile[0])
         })
-    }, [])
+    }, [reloadState])
 
 
     return (

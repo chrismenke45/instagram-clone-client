@@ -3,7 +3,6 @@ import ReactCrop, {
     Crop,
 } from 'react-image-crop';
 import uploadFile from '../../firebase/uploadFile';
-import deleteFile from '../../firebase/deleteFile';
 import 'react-image-crop/dist/ReactCrop.css';
 
 import {
