@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import ReactCrop, {
     Crop,
 } from 'react-image-crop';
