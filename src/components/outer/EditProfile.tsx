@@ -46,20 +46,13 @@ const EditProfile: React.FC = () => {
 
     }, [])
 
-    const handleBioChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+        const {name, value} = e.target
         setProfile(prev => {
-            return { ...prev, bio: e.target.value }
-        })
-        console.log(profile)
-    }
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProfile(prev => {
-            return { ...prev, name: e.target.value }
-        })
-    }
-    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProfile(prev => {
-            return { ...prev, username: e.target.value }
+            return {
+                ...prev,
+                [name]: value.trim()
+            }
         })
     }
 
@@ -144,8 +137,9 @@ const EditProfile: React.FC = () => {
                         type="text"
                         minLength={3}
                         maxLength={30}
+                        name="username"
                         value={profile.username}
-                        onChange={handleUsernameChange}
+                        onChange={handleChange}
                         placeholder="Username"
                     >
                     </input>
@@ -155,8 +149,9 @@ const EditProfile: React.FC = () => {
                         type="text"
                         minLength={3}
                         maxLength={30}
+                        name="name"
                         value={profile.name}
-                        onChange={handleNameChange}
+                        onChange={handleChange}
                         placeholder="name"
                     >
                     </input>
@@ -167,7 +162,7 @@ const EditProfile: React.FC = () => {
                         placeholder="Bio (optional)"
                         maxLength={2200}
                         value={profile.bio || ""}
-                        onChange={handleBioChange}
+                        onChange={handleChange}
                     >
                     </textarea>
                 </div>

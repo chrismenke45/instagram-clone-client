@@ -11,22 +11,15 @@ const RegisterForm: React.FC = () => {
     const navigate = useNavigate()
     let fetcher = new FetchAPI
 
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target
         setRegisterInfo(prev => {
-            return { ...prev, password: e.target.value }
+            return {
+                ...prev,
+                [name]: value.trim()
+            }
         })
     }
-    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setRegisterInfo(prev => {
-            return { ...prev, username: e.target.value }
-        })
-    }
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setRegisterInfo(prev => {
-            return { ...prev, name: e.target.value }
-        })
-    }
-
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -67,7 +60,7 @@ const RegisterForm: React.FC = () => {
                         minLength={3}
                         maxLength={30}
                         value={registerInfo.username}
-                        onChange={handleUsernameChange}>
+                        onChange={handleChange}>
                     </input>
                 </div>
                 <div className='formGroup'>
@@ -78,7 +71,7 @@ const RegisterForm: React.FC = () => {
                         minLength={3}
                         maxLength={30}
                         value={registerInfo.name}
-                        onChange={handleNameChange}>
+                        onChange={handleChange}>
                     </input>
                 </div>
                 <div className='formGroup'>
@@ -89,7 +82,7 @@ const RegisterForm: React.FC = () => {
                         minLength={6}
                         maxLength={18}
                         value={registerInfo.password}
-                        onChange={handlePasswordChange}>
+                        onChange={handleChange}>
                     </input>
                 </div>
                 <button className="openerOption" type='submit'>Register</button>

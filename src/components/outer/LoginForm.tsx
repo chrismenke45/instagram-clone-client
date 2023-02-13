@@ -8,22 +8,21 @@ const LoginForm: React.FC = () => {
     const navigate = useNavigate()
     let fetcher = new FetchAPI
 
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target
         setLoginInfo(prev => {
-            return { ...prev, password: e.target.value }
-        })
-    }
-    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLoginInfo(prev => {
-            return { ...prev, username: e.target.value }
+            return {
+                ...prev,
+                [name]: value.trim()
+            }
         })
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         fetcher.buildFormData([
-            ["auth[username]", loginInfo.username], 
-            ["auth[password]", loginInfo.password]
+            ["auth[username]", loginInfo.username.toLowerCase().trim()], 
+            ["auth[password]", loginInfo.password.trim()]
         ])
         fetcher.fetchData("/auth/login", "POST")
             .then(data => {
@@ -56,18 +55,18 @@ const LoginForm: React.FC = () => {
                         minLength={3}
                         maxLength={30}
                         value={loginInfo.username}
-                        onChange={handleUsernameChange}>
+                        onChange={handleChange}>
                     </input>
                 </div>
                 <div className='formGroup'>
                     <input
                         type="password"
                         name="password"
-                        placeholder="Passowrd"
+                        placeholder="Password"
                         minLength={6}
                         maxLength={18}
                         value={loginInfo.password}
-                        onChange={handlePasswordChange}>
+                        onChange={handleChange}>
                     </input>
                 </div>
                 <button className="openerOption" type='submit'>Login</button>
