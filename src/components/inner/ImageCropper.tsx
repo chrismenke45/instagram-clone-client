@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import ReactCrop, {
     Crop,
 } from 'react-image-crop';
@@ -23,12 +23,19 @@ const ImageCropper: React.FC<Props> = (props) => {
     const { imageCropperState, imageCropperDispatch } = useContext(ImageCropperContext)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const originalImageRef = useRef<HTMLImageElement>(null)
+    const selectImageButtonRef = useRef<HTMLButtonElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
     const [crop, setCrop] = useState<Crop>()
     const [imgSrc, setImgSrc] = useState<string>('')
     const [imgExt, setImgExt] = useState<string>('')
     const acceptedImageFileTypesArray: string[] = ["image/png", "image/gif", "image/jpeg"]
     const acceptedImageMaxSize: number = 200000
+
+    useEffect(() => {
+        if (selectImageButtonRef?.current) {
+            selectImageButtonRef.current.click()
+        }
+    })
 
     const verifyFile = (files: FileList | null) => {
         if (files && files.length > 0) {
@@ -139,7 +146,7 @@ const ImageCropper: React.FC<Props> = (props) => {
                 onChange={onSelectFile}>
 
             </input>
-            {!imgSrc && <button onClick={handleSelectPhoto}>Select Photo</button>}
+            {!imgSrc && <button ref={selectImageButtonRef} onClick={handleSelectPhoto}>Select Photo</button>}
             <ReactCrop
                 crop={crop}
                 onChange={onCropChange}
