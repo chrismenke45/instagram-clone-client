@@ -24,7 +24,7 @@ const NavFooter: React.FC = () => {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/">
+                        <Link to="/" onClick={handleReloadIncrement}>
                             <AiFillHome></AiFillHome>
                         </Link>
                     </li>
