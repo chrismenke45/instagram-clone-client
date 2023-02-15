@@ -1,6 +1,6 @@
 import { PostProp } from "../../models/PostProp"
 
-const postActions = {
+const postsActions = {
     LIKE_POST(post_id: number) {
         return {
             type: "LIKE_POST",
@@ -26,4 +26,4 @@ const postActions = {
         }
     },
 }
-export default postActions
+export default postsActions

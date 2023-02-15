@@ -69,7 +69,7 @@ const App: React.FC = () => {
               path='/'
               element={
                 <RequireAuth>
-                  <PostsContext.Provider value={{ postsState, postsDispatch}}>
+                  <PostsContext.Provider value={{ postsState, postsDispatch }}>
                     <HomePage />
                   </PostsContext.Provider>
                 </RequireAuth>
@@ -106,7 +106,9 @@ const App: React.FC = () => {
               path='/profile/:user_id'
               element={
                 <RequireAuth>
-                  <ProfilePage />
+                  <PostsContext.Provider value={{ postsState, postsDispatch }}>
+                    <ProfilePage />
+                  </PostsContext.Provider>
                 </RequireAuth>
               }>
             </Route>
@@ -140,7 +142,9 @@ const App: React.FC = () => {
               path='/posts/:post_id'
               element={
                 <RequireAuth>
-                  <IndividualPostPage />
+                  <PostsContext.Provider value={{ postsState, postsDispatch }}>
+                    <IndividualPostPage />
+                  </PostsContext.Provider>
                 </RequireAuth>
               }>
             </Route>
