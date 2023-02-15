@@ -65,7 +65,7 @@ const Post: React.FC = () => {
             <form onSubmit={handleSubmit}>
                 <div id='postBanner'>
                     <FaArrowLeft onClick={() => navigate(-1)} className='arrowBack'></FaArrowLeft>
-                    <span onClick={handleSubmitButton} className='arrowNextBack next'>Next</span>
+                    <span onClick={handleSubmitButton} className='arrowNextBack next'>Post</span>
                     <button type='submit' ref={submitRef} hidden={true}>Submit</button>
                 </div>
                 <div className='photoTextSideBySide'>
