@@ -16,14 +16,14 @@ const Profile: React.FC = () => {
     const { reloadState } = useContext(ReloadContext)
 
     const [profile, setProfile] = useState<ProfileProp>({
-        post_count: 3,
-        follower_count: 5,
-        followee_count: 6,
-        id: 6,
-        username: "bobbymge",
-        name: "Bobby",
-        bio: "I'm bobby mcGee",
-        profile_picture: "square.jpeg",
+        post_count: 0,
+        follower_count: 0,
+        followee_count: 0,
+        id: 0,
+        username: "-",
+        name: "-",
+        bio: "",
+        profile_picture: process.env.REACT_APP_DEFAULT_PROFILE_PICTURE || "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/White_square_50%25_transparency.svg/2048px-White_square_50%25_transparency.svg.png",
         current_user_follows: false
     })
     useEffect(() => {
