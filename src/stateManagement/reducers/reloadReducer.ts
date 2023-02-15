@@ -3,11 +3,11 @@ import deleteFile from "../../firebase/deleteFile";
 export interface reloadStateInterface {
   count: number;
 }
-export interface imageCropperActionInterface {
+export interface reloadActionInterface {
   type: string;
 }
 
-const reloadReducer = (state: reloadStateInterface, action: imageCropperActionInterface) => {
+const reloadReducer = (state: reloadStateInterface, action: reloadActionInterface) => {
   switch (action.type) {
     case "INCREMENT":
       return { count: state.count + 1}

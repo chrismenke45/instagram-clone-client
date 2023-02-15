@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import { FaRegHeart, FaRegComment, FaHeart, FaEllipsisH } from "react-icons/fa"
 import pluralize from '../../functions/pluralize';
 import { Link } from 'react-router-dom'
@@ -6,6 +6,8 @@ import { PostProp } from '../../models/PostProp';
 import timeAgo from "../../functions/timeAgo"
 import getUserObject from '../../functions/user/getUserObject';
 import FetchAPI from '../../functions/fetch/FetchAPI';
+import postsActions from '../../stateManagement/actions/postsActions';
+import PostsContext from '../../stateManagement/contexts/PostsContext';
 
 interface Props {
     post: PostProp;
@@ -13,21 +15,30 @@ interface Props {
 const PostOnFeed: React.FC<Props> = (props) => {
     const user = getUserObject()
     const { post } = props
+    const { postsDispatch } = useContext(PostsContext)
     let fetcher = new FetchAPI()
 
     const handleLikeSubmit = (e: React.FormEvent<SVGElement>) => {
         e.preventDefault()
+        postsDispatch(postsActions.LIKE_POST(post.id))
         fetcher.fetchData(`posts/${post.id}/likes`, 'POST', user.jwt)
             .then(data => {
                 console.log(data)
+            })
+            .catch(err => {
+                postsDispatch(postsActions.UNLIKE_POST(post.id))
             })
     }
 
     const handleUnlikeSubmit = (e: React.FormEvent<SVGElement>) => {
         e.preventDefault()
+        postsDispatch(postsActions.UNLIKE_POST(post.id))
         fetcher.fetchData(`posts/${post.id}/likes`, 'DELETE', user.jwt)
             .then(data => {
                 console.log(data)
+            })
+            .catch(err => {
+                postsDispatch(postsActions.LIKE_POST(post.id))
             })
     }
 

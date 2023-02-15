@@ -3,13 +3,13 @@ import deleteFile from "../../firebase/deleteFile";
 export interface imageCropperStateInterface {
   showImageSelect: boolean;
   photoUrl: string;
-  oldPhotoUrl: string
+  oldPhotoUrl: string;
 }
 export interface imageCropperActionInterface {
   type: string;
   payload: {
-    photoUrl: string
-    oldPhotoUrl: string
+    photoUrl: string;
+    oldPhotoUrl: string;
   }
 }
 
@@ -17,8 +17,8 @@ const imageCropperReducer = (state: imageCropperStateInterface, action: imageCro
   switch (action.type) {
     case "SET_PHOTO":
       if (state.oldPhotoUrl && state.oldPhotoUrl !== process.env.REACT_APP_DEFAULT_PROFILE_PICTURE) {
-        console.log(state)
-        deleteFile(state.oldPhotoUrl)
+        //this delets unused photo that has been uploaded if photo is changed
+        deleteFile(state.oldPhotoUrl) 
           .catch(err => {
             console.error(err)
           })

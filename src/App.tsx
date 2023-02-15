@@ -14,6 +14,8 @@ import MessagesPage from './pages/MessagesPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ErrorPage from './pages/ErrorPage'
+import ConversationPage from './pages/ConversationPage';
+import RequireAuth from './functions/user/RequireAuth'; //to redirect to login if not logged in
 
 
 
@@ -23,12 +25,14 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import RequireAuth from './functions/user/RequireAuth'; //to redirect to login if not logged in
+
 import ImageCropperContext from './stateManagement/contexts/ImageCropperContext';
 import imageCropperReducer from './stateManagement/reducers/imageCropperReducer';
 import ReloadContext from './stateManagement/contexts/ReloadContext';
 import reloadReducer from './stateManagement/reducers/reloadReducer';
-import ConversationPage from './pages/ConversationPage';
+import PostsContext from './stateManagement/contexts/PostsContext';
+import postsReducer from './stateManagement/reducers/postsReducer';
+
 
 
 
@@ -45,7 +49,14 @@ const App: React.FC = () => {
   const [reloadState, reloadDispatch] = useReducer(
     reloadReducer,
     {
-      count: 0
+      count: 0,
+    }
+  )
+
+  const [postsState, postsDispatch] = useReducer(
+    postsReducer,
+    {
+      posts: []
     }
   )
 
@@ -58,7 +69,9 @@ const App: React.FC = () => {
               path='/'
               element={
                 <RequireAuth>
-                  <HomePage />
+                  <PostsContext.Provider value={{ postsState, postsDispatch}}>
+                    <HomePage />
+                  </PostsContext.Provider>
                 </RequireAuth>
               }>
             </Route>
