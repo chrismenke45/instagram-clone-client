@@ -5,7 +5,7 @@ import getUserObject from '../../functions/user/getUserObject';
 import { useParams } from 'react-router-dom';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import { ProfileProp } from '../../models/ProfileProp';
-import ReloadContext from '../../stateManagement/contexts/reloadContext';
+import ReloadContext from '../../stateManagement/contexts/ReloadContext';
 
 const Profile: React.FC = () => {
     let fetcher = new FetchAPI()

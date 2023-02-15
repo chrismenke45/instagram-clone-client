@@ -6,7 +6,7 @@ import { FaRegHeart } from "react-icons/fa"
 import { BsFillPersonFill } from "react-icons/bs"
 import getUserObject from '../../functions/user/getUserObject';
 
-import ReloadContext from '../../stateManagement/contexts/reloadContext';
+import ReloadContext from '../../stateManagement/contexts/ReloadContext';
 import reloadActions from '../../stateManagement/actions/reloadActions';
 
 

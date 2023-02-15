@@ -26,7 +26,7 @@ import {
 import RequireAuth from './functions/user/RequireAuth'; //to redirect to login if not logged in
 import ImageCropperContext from './stateManagement/contexts/ImageCropperContext';
 import imageCropperReducer from './stateManagement/reducers/imageCropperReducer';
-import ReloadContext from './stateManagement/contexts/reloadContext';
+import ReloadContext from './stateManagement/contexts/ReloadContext';
 import reloadReducer from './stateManagement/reducers/reloadReducer';
 import ConversationPage from './pages/ConversationPage';
 
