@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import getUserObject from '../../functions/user/getUserObject';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import LoadingIcon from './LoadingIcon';
+import ReloadContext from '../../stateManagement/contexts/ReloadContext';
 // import getUserObject from '../../functions/user/getUserObject';
 // import FetchAPI from '../../functions/fetch/FetchAPI';
 
@@ -15,6 +16,7 @@ const Grid: React.FC<{ gridPath: string }> = (props) => {
     const user = getUserObject()
     const [posts, setPosts] = useState<PostUrl[]>([])
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
+    const { reloadState} = useContext(ReloadContext)
     let fetcher = new FetchAPI
 
     useEffect(() => {
@@ -27,7 +29,7 @@ const Grid: React.FC<{ gridPath: string }> = (props) => {
             .catch(err => {
                 setActivelySearching(false)
             })
-    }, [gridPath])
+    }, [gridPath, reloadState])
 
     return (
         <div id="grid" className='flexVertCenter'>
