@@ -2,18 +2,25 @@ import React, { useEffect, useState } from 'react';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
 import { MediaProp } from '../../models/MediaProp';
+import LoadingIcon from '../inner/LoadingIcon';
 import MediaInList from '../inner/MediaInList';
 
 const Media: React.FC = () => {
     const fetcher = new FetchAPI()
     const user = getUserObject()
     const [media, setMedia] = useState<MediaProp[]>([])
+    const [activelySearching, setActivelySearching] = useState<boolean>(false)
 
     useEffect(() => {
+        setActivelySearching(true)
         fetcher.fetchData("/medias", "GET", user.jwt)
             .then(theMedia => {
                 console.log(theMedia)
                 setMedia(theMedia)
+                setActivelySearching(false)
+            })
+            .catch(err => {
+                setActivelySearching(false)
             })
     }, [])
 
@@ -39,6 +46,9 @@ const Media: React.FC = () => {
                     })}
 
                 </ul>
+                :
+                activelySearching ?
+                <LoadingIcon />
                 :
                 <h5>
                     No Media

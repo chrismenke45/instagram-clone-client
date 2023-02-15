@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import getUserObject from '../../functions/user/getUserObject';
 import FetchAPI from '../../functions/fetch/FetchAPI';
+import LoadingIcon from './LoadingIcon';
 // import getUserObject from '../../functions/user/getUserObject';
 // import FetchAPI from '../../functions/fetch/FetchAPI';
 
@@ -13,12 +14,18 @@ const Grid: React.FC<{ gridPath: string }> = (props) => {
     }
     const user = getUserObject()
     const [posts, setPosts] = useState<PostUrl[]>([])
+    const [activelySearching, setActivelySearching] = useState<boolean>(false)
     let fetcher = new FetchAPI
 
     useEffect(() => {
+        setActivelySearching(true)
         fetcher.fetchData(gridPath, "GET", user.jwt)
             .then(posts => {
                 setPosts(posts)
+                setActivelySearching(false)
+            })
+            .catch(err => {
+                setActivelySearching(false)
             })
     }, [gridPath])
 
@@ -38,7 +45,10 @@ const Grid: React.FC<{ gridPath: string }> = (props) => {
                     )
                 })
                 :
-                <p id="noResults">No posts</p>}
+                activelySearching ?
+                    <LoadingIcon />
+                    :
+                    <p id="noResults">No posts</p>}
 
         </div>
     );

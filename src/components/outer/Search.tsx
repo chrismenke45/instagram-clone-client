@@ -5,6 +5,7 @@ import { UserInListProp } from '../../models/UserInListProp';
 import SearchUsersList from '../inner/SearchUsersList';
 import getUserObject from '../../functions/user/getUserObject';
 import SearchForm from '../inner/SearchForm';
+import LoadingIcon from '../inner/LoadingIcon';
 
 const Search: React.FC = () => {
     const fetcher = new FetchAPI()
@@ -52,7 +53,7 @@ const Search: React.FC = () => {
             {search && searchType === "accounts" ?
                 userList.length === 0 ?
                     activelySearching ?
-                    <p id="noResults">Searching for users...</p>
+                    <LoadingIcon />
                     :
                     <p id="noResults">No Results</p>
                     :
