@@ -10,6 +10,7 @@ interface Props {
     showSearchOptions: boolean;
     setShowSearchOptions: (value: React.SetStateAction<boolean>) => void;
     areSearchOptionsAvailable: boolean;
+    setActivelySearching: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SearchForm: React.FC<Props> = (props) => {
@@ -21,7 +22,8 @@ const SearchForm: React.FC<Props> = (props) => {
         handleSearchTypeChange, //not important if only one search type
         showSearchOptions, //not important if only one search type
         setShowSearchOptions, //not important if only one search type
-        areSearchOptionsAvailable //must be false if only one search type
+        areSearchOptionsAvailable, //must be false if only one search type
+        setActivelySearching // will display loading on outer component when true
     } = props
     const submitRef = useRef<HTMLButtonElement>(null)
 
@@ -37,6 +39,7 @@ const SearchForm: React.FC<Props> = (props) => {
             submitRef.current.click()
         } else {
             setShowSearchOptions(false)
+            setActivelySearching(false)
         }
     }, [search])
 

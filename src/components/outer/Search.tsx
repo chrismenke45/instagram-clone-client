@@ -12,6 +12,7 @@ const Search: React.FC = () => {
     const [userList, setUserList] = useState<UserInListProp[]>([])
     const [searchType, setSearchType] = useState<string>("accounts")
     const [showSearchOptions, setShowSearchOptions] = useState<boolean>(false)
+    const [activelySearching, setActivelySearching] = useState<boolean>(false)
     const user = getUserObject()
 
     const handleSearchTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,9 +23,17 @@ const Search: React.FC = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         let url = `users?search=${search}`
+        setActivelySearching(true)
+        setUserList([])
         if (searchType === "accounts") {
             fetcher.fetchData(url, "GET", user.jwt)
-                .then(users => setUserList(users))
+                .then(users => {
+                    setUserList(users)
+                    setActivelySearching(false)
+                })
+                .catch(err => {
+                    setActivelySearching(false)
+                })
         }
     }
     return (
@@ -38,9 +47,13 @@ const Search: React.FC = () => {
                 showSearchOptions={showSearchOptions}
                 setShowSearchOptions={setShowSearchOptions}
                 areSearchOptionsAvailable={true}
+                setActivelySearching={setActivelySearching}
             />
             {search && searchType === "accounts" ?
                 userList.length === 0 ?
+                    activelySearching ?
+                    <p id="noResults">Searching for users...</p>
+                    :
                     <p id="noResults">No Results</p>
                     :
                     <SearchUsersList users={userList} />

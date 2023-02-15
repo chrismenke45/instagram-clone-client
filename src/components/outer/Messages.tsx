@@ -16,16 +16,24 @@ const Messages: React.FC<Props> = (props) => {
     const [search, setSearch] = useState<string>("")
     const searchType = "accounts"
     const [showSearchOptions, setShowSearchOptions] = useState<boolean>(false)
+    const [activelySearching, setActivelySearching] = useState<boolean>(false)
     const [userList, setUserList] = useState<UserInListProp[]>([])
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         let url = `users?search=${search}`
+        setActivelySearching(true)
+        setUserList([])
         fetcher.fetchData(url, "GET", user.jwt)
             .then(users => {
                 console.log(users)
                 setUserList(users)
+                setActivelySearching(false)
             })
+            .catch(err => {
+                setActivelySearching(false)
+            })
+
     }
     const handleSearchTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -42,6 +50,7 @@ const Messages: React.FC<Props> = (props) => {
                 showSearchOptions={showSearchOptions}
                 setShowSearchOptions={setShowSearchOptions}
                 areSearchOptionsAvailable={false}
+                setActivelySearching={setActivelySearching}
             />
             <ol>
                 {messages.map(message => {
