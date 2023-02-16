@@ -1,17 +1,30 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { ProfileProp } from '../../models/ProfileProp';
 import getUserObject from '../../functions/user/getUserObject';
 import { follow, unfollow } from '../../functions/eventHandlers/followHandlers';
+import profileActions from '../../stateManagement/actions/profileActions';
+import ProfileContext from '../../stateManagement/contexts/ProfileContext';
 
 const ProfileSummary: React.FC<{ profile: ProfileProp }> = (props) => {
     const { profile } = props
     const user = getUserObject()
+    const { profileDispatch } = useContext(ProfileContext)
+
     const handleFollow = () => {
+        profileDispatch(profileActions.FOLLOW())
         follow(profile.id)
+        .catch(err => {
+            profileDispatch(profileActions.UNFOLLOW())
+        })
     }
+
     const handleUnfollow = () => {
+        profileDispatch(profileActions.UNFOLLOW())
         unfollow(profile.id)
+        .catch(err => {
+            profileDispatch(profileActions.FOLLOW())
+        })
     }
 
 

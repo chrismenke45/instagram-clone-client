@@ -8,7 +8,9 @@ const { username } = props
 
     return (
         <header id="banner">
+            <div></div>
             <h1>{username}</h1>
+            <div></div>
         </header>
     );
 }

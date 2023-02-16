@@ -1,7 +1,7 @@
 export interface ProfileProp {
     post_count: number;
-    follower_count: number | null;
-    followee_count: number | null;
+    follower_count: number;
+    followee_count: number;
     id: number;
     username: string;
     name: string;
