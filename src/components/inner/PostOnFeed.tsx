@@ -22,9 +22,6 @@ const PostOnFeed: React.FC<Props> = (props) => {
         e.preventDefault()
         postsDispatch(postsActions.LIKE_POST(post.id))
         fetcher.fetchData(`posts/${post.id}/likes`, 'POST', user.jwt)
-            .then(data => {
-                console.log(data)
-            })
             .catch(err => {
                 postsDispatch(postsActions.UNLIKE_POST(post.id))
             })
@@ -34,9 +31,6 @@ const PostOnFeed: React.FC<Props> = (props) => {
         e.preventDefault()
         postsDispatch(postsActions.UNLIKE_POST(post.id))
         fetcher.fetchData(`posts/${post.id}/likes`, 'DELETE', user.jwt)
-            .then(data => {
-                console.log(data)
-            })
             .catch(err => {
                 postsDispatch(postsActions.LIKE_POST(post.id))
             })
