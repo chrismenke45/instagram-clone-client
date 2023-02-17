@@ -17,7 +17,7 @@ const Grid: React.FC<{ gridPath: string }> = (props) => {
     const [posts, setPosts] = useState<PostUrl[]>([])
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
     const { reloadState} = useContext(ReloadContext)
-    let fetcher = new FetchAPI
+    let fetcher = new FetchAPI()
 
     useEffect(() => {
         setActivelySearching(true)

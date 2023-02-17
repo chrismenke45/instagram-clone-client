@@ -10,7 +10,7 @@ const CommentFooter: React.FC = () => {
     const [comment, setComment] = useState<string>("")
     const { commentsDispatch } = useContext(CommentsContext)
     const { post_id } = useParams()
-    let fetcher = new FetchAPI
+    let fetcher = new FetchAPI()
 
     const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()

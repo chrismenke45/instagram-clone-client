@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PostOnFeed from './PostOnFeed';
 import getUserObject from '../../functions/user/getUserObject';
-import { PostProp } from '../../models/PostProp';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import postsActions from '../../stateManagement/actions/postsActions';
 import PostsContext from '../../stateManagement/contexts/PostsContext';
@@ -9,7 +8,7 @@ import PostsContext from '../../stateManagement/contexts/PostsContext';
 const Feed: React.FC<{feedPath: string}> = (props) => {
     const { feedPath } = props
     const { postsState, postsDispatch } = useContext(PostsContext)
-    let fetcher = new FetchAPI
+    let fetcher = new FetchAPI()
  
     useEffect(() => {
         const userObject = getUserObject()

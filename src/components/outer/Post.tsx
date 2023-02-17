@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import ImageCropperContext from '../../stateManagement/contexts/ImageCropperContext';
 import ImageCropper from '../inner/ImageCropper';
 import imageCropperActions from '../../stateManagement/actions/imageCropperActions';
-import deleteFile from '../../firebase/deleteFile';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
 import { FaArrowLeft } from "react-icons/fa"

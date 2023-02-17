@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
 import SearchForm from '../inner/SearchForm';
@@ -27,7 +27,6 @@ const Messages: React.FC<Props> = (props) => {
         fetcher.fetchData(url, "GET", user.jwt)
             .then(users => {
                 console.log(users)
-                setUserList(users)
                 setActivelySearching(false)
             })
             .catch(err => {

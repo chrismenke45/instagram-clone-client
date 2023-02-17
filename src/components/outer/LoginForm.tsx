@@ -6,7 +6,7 @@ import FetchAPI from '../../functions/fetch/FetchAPI';
 const LoginForm: React.FC = () => {
     const [loginInfo, setLoginInfo] = useState({ username: "", password: "" })
     const navigate = useNavigate()
-    let fetcher = new FetchAPI
+    let fetcher = new FetchAPI()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target

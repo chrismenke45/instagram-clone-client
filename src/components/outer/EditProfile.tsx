@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import { ProfileProp } from '../../models/ProfileProp';
 import { useNavigate } from 'react-router-dom';
-import { HiXMark, HiCheck } from "react-icons/hi2"
+import { HiXMark } from "react-icons/hi2"
 import { BiCheck } from "react-icons/bi"
 
 import ImageCropper from '../inner/ImageCropper';

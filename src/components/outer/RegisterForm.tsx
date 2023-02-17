@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const RegisterForm: React.FC = () => {
     const [registerInfo, setRegisterInfo] = useState({ username: "", name: "", password: "" })
     const navigate = useNavigate()
-    let fetcher = new FetchAPI
+    let fetcher = new FetchAPI()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target
