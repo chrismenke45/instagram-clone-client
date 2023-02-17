@@ -21,7 +21,6 @@ const FollowsList: React.FC<Props> = (props) => {
         fetcher.fetchData(url, "GET", user.jwt)
             .then(data => {
                 usersInListDispatch(usersInListActions.SET_USERS(data))
-                console.log(data)
             })
     }, [])
 
