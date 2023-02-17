@@ -4,5 +4,6 @@ export interface UserInListProp {
     user_id: number;
     profile_picture: string;
     id: number | null;
-    current_user_follows: boolean | null;
+    current_user_follows: boolean;
+    //current_user_follows: boolean | null;
 }

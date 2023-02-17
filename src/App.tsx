@@ -32,6 +32,8 @@ import ReloadContext from './stateManagement/contexts/ReloadContext';
 import reloadReducer from './stateManagement/reducers/reloadReducer';
 import PostsContext from './stateManagement/contexts/PostsContext';
 import postsReducer from './stateManagement/reducers/postsReducer';
+import UsersInListContext, { initialUsersInListState } from './stateManagement/contexts/UsersInListContext';
+import usersInListReducer from './stateManagement/reducers/usersInListReducer';
 
 
 
@@ -58,6 +60,11 @@ const App: React.FC = () => {
     {
       posts: []
     }
+  )
+
+  const [usersInListState, usersInListDispatch] = useReducer(
+    usersInListReducer,
+    initialUsersInListState
   )
 
   return (
@@ -126,7 +133,9 @@ const App: React.FC = () => {
               path='/profile/:user_id/following'
               element={
                 <RequireAuth>
-                  <FollowPage title="Following" />
+                  <UsersInListContext.Provider value={{ usersInListState, usersInListDispatch }}>
+                    <FollowPage title="Following" />
+                  </UsersInListContext.Provider>
                 </RequireAuth>
               }>
             </Route>
@@ -134,7 +143,9 @@ const App: React.FC = () => {
               path='/profile/:user_id/followers'
               element={
                 <RequireAuth>
-                  <FollowPage title="Followers" />
+                  <UsersInListContext.Provider value={{ usersInListState, usersInListDispatch }}>
+                    <FollowPage title="Followers" />
+                  </UsersInListContext.Provider>
                 </RequireAuth>
               }>
             </Route>
@@ -142,9 +153,9 @@ const App: React.FC = () => {
               path='/posts/:post_id'
               element={
                 <RequireAuth>
-                  <PostsContext.Provider value={{ postsState, postsDispatch }}>
+                  <UsersInListContext.Provider value={{ usersInListState, usersInListDispatch }}>
                     <IndividualPostPage />
-                  </PostsContext.Provider>
+                  </UsersInListContext.Provider>
                 </RequireAuth>
               }>
             </Route>
@@ -160,7 +171,9 @@ const App: React.FC = () => {
               path='/posts/:post_id/likes'
               element={
                 <RequireAuth>
-                  <LikesPage />
+                  <UsersInListContext.Provider value={{ usersInListState, usersInListDispatch }}>
+                    <LikesPage />
+                  </UsersInListContext.Provider>
                 </RequireAuth>
               }>
             </Route>
