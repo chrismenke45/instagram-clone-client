@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { MediaProp } from '../../models/MediaProp';
 import { Link } from 'react-router-dom';
 import timeAgo from '../../functions/timeAgo';
 import { follow, unfollow } from "../../functions/eventHandlers/followHandlers"
 import shortenTime from '../../functions/shortenTime';
+import MediaContext from '../../stateManagement/contexts/MediaContext';
+import mediaActions from '../../stateManagement/actions/mediaActions';
 
 interface Props {
     media: MediaProp;
@@ -11,14 +13,25 @@ interface Props {
 
 const MediaInList: React.FC<Props> = (props) => {
     const { media } = props
+    const { mediaDispatch } = useContext(MediaContext)
 
     const handleFollow = (id: number) => {
+        mediaDispatch(mediaActions.FOLLOW(id))
         follow(id)
+            .catch(err => {
+                console.error(err)
+                mediaDispatch(mediaActions.UNFOLLOW(id))
+            })
     }
     const handleUnfollow = (id: number) => {
+        mediaDispatch(mediaActions.UNFOLLOW(id))
         unfollow(id)
+            .catch(err => {
+                console.error(err)
+                mediaDispatch(mediaActions.FOLLOW(id))
+            })
     }
-    
+
     return (
         <li className='mediaInList'>
             <img className="smallProfilePic" src={media.profile_picture} alt={`${media.username}'s profile picture`}></img>
