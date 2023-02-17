@@ -51,7 +51,7 @@ const EditProfile: React.FC = () => {
         setProfile(prev => {
             return {
                 ...prev,
-                [name]: value.trim()
+                [name]: name === "bio" ? value : value.trim()
             }
         })
     }
@@ -94,11 +94,10 @@ const EditProfile: React.FC = () => {
                 ["user[username]", profile.username.toLowerCase().trim()],
                 ["user[name]", profile.name.trim()],
                 ["user[bio]", profile.bio.trim()],
-                ["user[profile_picture]", profile.profile_picture.trim()],
+                ["user[profile_picture]", imageCropperState.photoUrl],
             ])
             fetcher.fetchData(`users/${user.user_id}`, "PUT", user.jwt)
                 .then(data => {
-                    console.log(data)
                     navigate(`/profile/${user.user_id}`)
                 })
                 .catch(err => console.error(err))
