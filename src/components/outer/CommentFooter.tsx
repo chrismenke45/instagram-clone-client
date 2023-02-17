@@ -42,6 +42,7 @@ const CommentFooter: React.FC = () => {
                 })
                 .catch(err => {
                     commentsDispatch(commentsActions.REMOVE_COMMENT(0))
+                    console.error(err)
                 })
         }
 

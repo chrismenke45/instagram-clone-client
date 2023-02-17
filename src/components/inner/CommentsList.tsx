@@ -18,6 +18,9 @@ const CommentsList: React.FC = () => {
             .then(data => {
                 commentsDispatch(commentsActions.SET_COMMENTS(data))
             })
+            .catch(err => {
+                console.error(err)
+            })
     }, [])
 
     return (

@@ -28,6 +28,7 @@ const Grid: React.FC<{ gridPath: string }> = (props) => {
             })
             .catch(err => {
                 setActivelySearching(false)
+                console.error(err)
             })
     }, [gridPath, reloadState])
 

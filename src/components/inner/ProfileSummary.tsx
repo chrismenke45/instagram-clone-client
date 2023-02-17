@@ -16,6 +16,7 @@ const ProfileSummary: React.FC<{ profile: ProfileProp }> = (props) => {
         follow(profile.id)
         .catch(err => {
             profileDispatch(profileActions.UNFOLLOW())
+            console.error(err)
         })
     }
 
@@ -24,6 +25,7 @@ const ProfileSummary: React.FC<{ profile: ProfileProp }> = (props) => {
         unfollow(profile.id)
         .catch(err => {
             profileDispatch(profileActions.FOLLOW())
+            console.error(err)
         })
     }
 

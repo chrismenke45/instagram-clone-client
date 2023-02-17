@@ -37,6 +37,9 @@ const RegisterForm: React.FC = () => {
                     navigate('/')
                 }
             })
+            .catch(err => {
+                console.error(err)
+            })
 
     }
     const handleGuestLogin = () => {
@@ -46,6 +49,9 @@ const RegisterForm: React.FC = () => {
                 setUserJwt(data.t)
                 navigate('/')
             }
+        })
+        .catch(err => {
+            console.error(err)
         })
     }
     return (

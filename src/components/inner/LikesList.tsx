@@ -17,6 +17,9 @@ const LikesList: React.FC = () => {
             .then(data => {
                 usersInListDispatch(usersInListActions.SET_USERS(data))
             })
+            .catch(err => {
+                console.error(err)
+            })
     }, [])
 
     return (

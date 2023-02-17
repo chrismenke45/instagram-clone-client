@@ -38,8 +38,11 @@ const EditProfile: React.FC = () => {
             fetcher.fetchData(`users/${user_id}`, "GET", user.jwt)
                 .then(userProfile => {
                     setProfile(userProfile[0])
-
                 })
+                .catch(err => {
+                    console.error(err)
+                })
+                
         } else {
             navigate(`/profile/${user_id}`)
         }

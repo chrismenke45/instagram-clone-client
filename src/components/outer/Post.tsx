@@ -51,6 +51,9 @@ const Post: React.FC = () => {
                     console.log(data)
                     navigate('/')
                 })
+                .catch(err => {
+                    console.error(err)
+                })
         }
     }
     const handleSubmitButton = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {

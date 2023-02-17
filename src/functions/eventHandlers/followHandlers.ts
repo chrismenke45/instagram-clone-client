@@ -6,9 +6,7 @@ const fetcher = new FetchAPI
 
 export const follow = (profile_id: number) => {
     return fetcher.fetchData(`users/${profile_id}/follows`, "POST", user.jwt)
-        //.then(co => console.log(co))
 }
 export const unfollow = (profile_id: number) => {
     return fetcher.fetchData(`users/${profile_id}/follows`, "DELETE", user.jwt)
-        //.then(co => console.log(co))
 }

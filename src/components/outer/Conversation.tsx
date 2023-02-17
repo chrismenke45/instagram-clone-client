@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-import FetchAPI from '../../functions/fetch/FetchAPI';
+import React from 'react';
 import getUserObject from '../../functions/user/getUserObject';
 import { ConversationProp } from '../../models/ConversationProp';
 
@@ -8,7 +7,6 @@ interface Props {
 }
 const Conversation: React.FC<Props> = (props) => {
     const { messages } = props
-    // const fetcher = new FetchAPI()
     const user = getUserObject()
 
     return (

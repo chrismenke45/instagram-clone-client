@@ -20,6 +20,9 @@ const Feed: React.FC<{feedPath: string}> = (props) => {
         .then(posts => {
             postsDispatch(postsActions.SET_POSTS(posts))
         })
+        .catch(err => {
+            console.error(err)
+        })
     }, [])
 
     return (
