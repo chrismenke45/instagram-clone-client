@@ -10,7 +10,6 @@ import mediaActions from '../../stateManagement/actions/mediaActions';
 const Media: React.FC = () => {
     const fetcher = new FetchAPI()
     const user = getUserObject()
-    //const [media, setMedia] = useState<MediaProp[]>([])
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
     const { mediaState, mediaDispatch } = useContext(MediaContext)
 
@@ -18,7 +17,6 @@ const Media: React.FC = () => {
         setActivelySearching(true)
         fetcher.fetchData("/medias", "GET", user.jwt)
             .then(theMedia => {
-                //setMedia(theMedia)
                 mediaDispatch(mediaActions.SET_MEDIA(theMedia))
                 setActivelySearching(false)
             })
