@@ -31,7 +31,6 @@ const Messages: React.FC<Props> = (props) => {
             })
             .catch(err => {
                 setActivelySearching(false)
-                console.error(err)
             })
 
     }

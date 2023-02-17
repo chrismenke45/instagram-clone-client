@@ -31,10 +31,6 @@ const LoginForm: React.FC = () => {
                     navigate('/')
                 }
             })
-            .catch(err => {
-                console.error(err)
-            })
-
     }
 
     const handleGuestLogin = () => {
@@ -44,9 +40,6 @@ const LoginForm: React.FC = () => {
                 setUserJwt(data.t)
                 navigate('/')
             }
-        })
-        .catch(err => {
-            console.error(err)
         })
     }
     return (

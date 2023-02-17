@@ -22,9 +22,6 @@ const FollowsList: React.FC<Props> = (props) => {
             .then(data => {
                 usersInListDispatch(usersInListActions.SET_USERS(data))
             })
-            .catch(err => {
-                console.error(err)
-            })
     }, [])
 
     return (

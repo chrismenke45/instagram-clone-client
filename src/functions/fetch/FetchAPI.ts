@@ -1,7 +1,3 @@
-interface FetchObjectProp {
-    options: RequestInit
-}
-
 class FetchAPI {
     options: RequestInit;
     constructor() {
@@ -33,6 +29,10 @@ class FetchAPI {
         return fetch(url, this.options)
             .then(response => response.json())
             .then(responseObject => responseObject)
+            .catch(err => {
+                console.error(err)
+                throw new Error(err)
+            })
     }
     loginAsGuest(): Promise<any> {
         this.buildFormData([["auth[username]", "guest"], ["auth[password]", process.env.REACT_APP_GUEST_PASSWORD || ""]])

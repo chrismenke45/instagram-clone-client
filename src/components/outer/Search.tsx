@@ -34,7 +34,6 @@ const Search: React.FC = () => {
                 })
                 .catch(err => {
                     setActivelySearching(false)
-                    console.error(err)
                 })
         }
     }

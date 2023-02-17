@@ -19,7 +19,6 @@ const MediaInList: React.FC<Props> = (props) => {
         mediaDispatch(mediaActions.FOLLOW(id))
         follow(id)
             .catch(err => {
-                //console.error(err)
                 mediaDispatch(mediaActions.UNFOLLOW(id))
             })
     }
@@ -27,7 +26,6 @@ const MediaInList: React.FC<Props> = (props) => {
         mediaDispatch(mediaActions.UNFOLLOW(id))
         unfollow(id)
             .catch(err => {
-                //console.error(err)
                 mediaDispatch(mediaActions.FOLLOW(id))
             })
     }

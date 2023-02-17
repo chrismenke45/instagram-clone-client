@@ -26,10 +26,6 @@ const Grid: React.FC<{ gridPath: string }> = (props) => {
                 setPosts(posts)
                 setActivelySearching(false)
             })
-            .catch(err => {
-                setActivelySearching(false)
-                console.error(err)
-            })
     }, [gridPath, reloadState])
 
     return (

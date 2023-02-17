@@ -24,7 +24,6 @@ const PostOnFeed: React.FC<Props> = (props) => {
         fetcher.fetchData(`posts/${post.id}/likes`, 'POST', user.jwt)
             .catch(err => {
                 postsDispatch(postsActions.UNLIKE_POST(post.id))
-                console.error(err)
             })
     }
 
@@ -34,7 +33,6 @@ const PostOnFeed: React.FC<Props> = (props) => {
         fetcher.fetchData(`posts/${post.id}/likes`, 'DELETE', user.jwt)
             .catch(err => {
                 postsDispatch(postsActions.LIKE_POST(post.id))
-                console.error(err)
             })
     }
 

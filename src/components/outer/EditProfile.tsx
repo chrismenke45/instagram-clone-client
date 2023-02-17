@@ -39,9 +39,6 @@ const EditProfile: React.FC = () => {
                 .then(userProfile => {
                     setProfile(userProfile[0])
                 })
-                .catch(err => {
-                    console.error(err)
-                })
                 
         } else {
             navigate(`/profile/${user_id}`)
@@ -103,8 +100,6 @@ const EditProfile: React.FC = () => {
                 .then(data => {
                     navigate(`/profile/${user.user_id}`)
                 })
-                .catch(err => console.error(err))
-
         } else {
             setShowNoGuestModify(true)
         }

@@ -20,7 +20,6 @@ const UserInList: React.FC<Props> = (props) => {
         follow(user.user_id)
             .catch(err => {
                 usersInListDispatch(usersInListActions.UNFOLLOW(user.user_id))
-                console.error(err)
             })
     }
     const handleUnfollow = () => {
@@ -28,7 +27,6 @@ const UserInList: React.FC<Props> = (props) => {
         unfollow(user.user_id)
             .catch(err => {
                 usersInListDispatch(usersInListActions.FOLLOW(user.user_id))
-                console.error(err)
             })
     }
     return (

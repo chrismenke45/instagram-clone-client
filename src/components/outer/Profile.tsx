@@ -21,9 +21,6 @@ const Profile: React.FC = () => {
         .then(userProfile => {
             profileDispatch(profileActions.SET_PROFILE(userProfile[0]))
         })
-        .catch(err => {
-            console.error(err)
-        })
     }, [reloadState])
 
 
