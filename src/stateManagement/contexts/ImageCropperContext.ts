@@ -5,7 +5,7 @@ export interface ImageCropperContextInterface {
     imageCropperState: imageCropperStateInterface;
     imageCropperDispatch: React.Dispatch<any>;
   }
-const initialImageCropperState = {
+export const initialImageCropperState = {
     photoUrl: "",
     showImageSelect: false,
     oldPhotoUrl: ""

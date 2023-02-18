@@ -5,7 +5,7 @@ export interface PostsContextInterface {
     postsState: postsStateInterface;
     postsDispatch: React.Dispatch<any>;
   }
-const initialPostsState = {
+export const initialPostsState = {
     posts: []
 }
  const PostsContext = createContext<PostsContextInterface>({postsState: initialPostsState, postsDispatch: () => null})

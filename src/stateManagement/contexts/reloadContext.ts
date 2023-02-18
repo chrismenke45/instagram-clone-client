@@ -5,7 +5,7 @@ export interface ReloadContextInterface {
   reloadState: reloadStateInterface;
   reloadDispatch: React.Dispatch<any>;
 }
-const initialReloadState = {
+export const initialReloadState = {
   count: 0
 }
 const ReloadContext = createContext<ReloadContextInterface>({ reloadState: initialReloadState, reloadDispatch: () => null })

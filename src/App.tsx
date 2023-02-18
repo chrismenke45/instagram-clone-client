@@ -26,11 +26,11 @@ import {
   Route,
 } from "react-router-dom";
 
-import ImageCropperContext from './stateManagement/contexts/ImageCropperContext';
+import ImageCropperContext, { initialImageCropperState } from './stateManagement/contexts/ImageCropperContext';
 import imageCropperReducer from './stateManagement/reducers/imageCropperReducer';
-import ReloadContext from './stateManagement/contexts/ReloadContext';
+import ReloadContext, { initialReloadState} from './stateManagement/contexts/ReloadContext';
 import reloadReducer from './stateManagement/reducers/reloadReducer';
-import PostsContext from './stateManagement/contexts/PostsContext';
+import PostsContext, { initialPostsState} from './stateManagement/contexts/PostsContext';
 import postsReducer from './stateManagement/reducers/postsReducer';
 import UsersInListContext, { initialUsersInListState } from './stateManagement/contexts/UsersInListContext';
 import usersInListReducer from './stateManagement/reducers/usersInListReducer';
@@ -42,24 +42,16 @@ const App: React.FC = () => {
 
   const [imageCropperState, imageCropperDispatch] = useReducer(
     imageCropperReducer,
-    {
-      showImageSelect: false,
-      photoUrl: "",
-      oldPhotoUrl: ""
-    }
+    initialImageCropperState
   )
   const [reloadState, reloadDispatch] = useReducer(
     reloadReducer,
-    {
-      count: 0,
-    }
+    initialReloadState
   )
 
   const [postsState, postsDispatch] = useReducer(
     postsReducer,
-    {
-      posts: []
-    }
+    initialPostsState
   )
 
   const [usersInListState, usersInListDispatch] = useReducer(
