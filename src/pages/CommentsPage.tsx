@@ -4,16 +4,14 @@ import CommentsList from '../components/inner/CommentsList';
 import CommentFooter from '../components/outer/CommentFooter';
 
 import commentsReducer from '../stateManagement/reducers/commentsReducer';
-import CommentsContext from '../stateManagement/contexts/CommentsContext';
+import CommentsContext, { initialCommentsState } from '../stateManagement/contexts/CommentsContext';
 
 
 const CommentsPage: React.FC = () => {
 
     const [commentsState, commentsDispatch] = useReducer(
         commentsReducer,
-        {
-            comments: []
-        }
+        initialCommentsState
     )
 
     return (
