@@ -78,7 +78,9 @@ const App: React.FC = () => {
               path='/search'
               element={
                 <RequireAuth>
-                  <SearchPage />
+                  <UsersInListContext.Provider value={{ usersInListState, usersInListDispatch }}>
+                    <SearchPage />
+                  </UsersInListContext.Provider>
                 </RequireAuth>
 
               }>

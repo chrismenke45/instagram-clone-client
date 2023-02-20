@@ -1,35 +1,36 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import Grid from '../inner/Grid';
-import { UserInListProp } from '../../models/UserInListProp';
 import SearchUsersList from '../inner/SearchUsersList';
 import getUserObject from '../../functions/user/getUserObject';
 import SearchForm from '../inner/SearchForm';
 import LoadingIcon from '../inner/LoadingIcon';
+import UsersInListContext from '../../stateManagement/contexts/UsersInListContext';
+import usersInListActions from '../../stateManagement/actions/usersInListActions';
 
 const Search: React.FC = () => {
     const fetcher = new FetchAPI()
     const [search, setSearch] = useState<string>("")
-    const [userList, setUserList] = useState<UserInListProp[]>([])
     const [searchType, setSearchType] = useState<string>("accounts")
     const [showSearchOptions, setShowSearchOptions] = useState<boolean>(false)
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
+    const { usersInListState, usersInListDispatch } = useContext(UsersInListContext)
     const user = getUserObject()
 
     const handleSearchTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchType(e.target.value)
-        if (e.target.value !== "accounts") { setUserList([]) }
+        if (e.target.value !== "accounts") { usersInListDispatch(usersInListActions.SET_USERS([])) }
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         let url = `users?search=${search}`
         setActivelySearching(true)
-        setUserList([])
+        usersInListDispatch(usersInListActions.SET_USERS([]))
         if (searchType === "accounts") {
             fetcher.fetchData(url, "GET", user.jwt)
                 .then(users => {
-                    setUserList(users)
+                    usersInListDispatch(usersInListActions.SET_USERS(users))
                     setActivelySearching(false)
                 })
                 .catch(err => {
@@ -51,13 +52,13 @@ const Search: React.FC = () => {
                 setActivelySearching={setActivelySearching}
             />
             {search && searchType === "accounts" ?
-                userList.length === 0 ?
+                usersInListState.users.length === 0 ?
                     activelySearching ?
                     <LoadingIcon />
                     :
                     <p id="noResults">No Results</p>
                     :
-                    <SearchUsersList users={userList} />
+                    <SearchUsersList users={usersInListState.users} />
                 :
                 search && searchType === "posts" ?
                     <Grid gridPath={`posts?preview=true&search=${search}`} />
