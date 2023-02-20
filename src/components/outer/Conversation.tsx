@@ -17,11 +17,6 @@ const Conversation: React.FC<Props> = (props) => {
                         key={message.id}
                         className={"conversationText " + (user.user_id === message.sender_id ? "flexAlignSelfRight" : "flexAlignSelfLeft")}
                     >
-                        <img
-                            src={(user.user_id !== message.sender_id ? "senderImge" : "")}
-                            hidden={user.user_id !== message.sender_id}
-                        >
-                        </img>
                         <p>
                             {message.text}
                         </p>
