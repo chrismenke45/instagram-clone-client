@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import BackBanner from '../components/outer/BackBanner';
-import { PostProp } from '../models/PostProp';
 import { useParams } from 'react-router-dom';
 import FetchAPI from '../functions/fetch/FetchAPI';
 import getUserObject from '../functions/user/getUserObject';
@@ -13,7 +12,6 @@ const IndividualPostPage: React.FC = () => {
     const fetcher = new FetchAPI()
     const user = getUserObject()
     const { postsState, postsDispatch } = useContext(PostsContext)
-    //const [postInArray, setPostInArray] = useState<PostProp[]>([])
 
     useEffect(() => {
         fetcher.fetchData(`posts/${post_id}`, "GET", user.jwt)
