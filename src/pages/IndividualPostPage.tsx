@@ -15,11 +15,11 @@ const IndividualPostPage: React.FC = () => {
 
     useEffect(() => {
         fetcher.fetchData(`posts/${post_id}`, "GET", user.jwt)
-            .then(postArr => {
-                console.log(postArr)
-                postsDispatch(postsActions.SET_POSTS(postArr))
+            .then(posts => {
+                postsDispatch(postsActions.SET_POSTS(posts))
             })
     }, [])
+
     return (
         <div id="page">
             <BackBanner header="Post" />

@@ -28,9 +28,9 @@ import {
 
 import ImageCropperContext, { initialImageCropperState } from './stateManagement/contexts/ImageCropperContext';
 import imageCropperReducer from './stateManagement/reducers/imageCropperReducer';
-import ReloadContext, { initialReloadState} from './stateManagement/contexts/ReloadContext';
+import ReloadContext, { initialReloadState } from './stateManagement/contexts/ReloadContext';
 import reloadReducer from './stateManagement/reducers/reloadReducer';
-import PostsContext, { initialPostsState} from './stateManagement/contexts/PostsContext';
+import PostsContext, { initialPostsState } from './stateManagement/contexts/PostsContext';
 import postsReducer from './stateManagement/reducers/postsReducer';
 import UsersInListContext, { initialUsersInListState } from './stateManagement/contexts/UsersInListContext';
 import usersInListReducer from './stateManagement/reducers/usersInListReducer';
@@ -145,9 +145,11 @@ const App: React.FC = () => {
               path='/posts/:post_id'
               element={
                 <RequireAuth>
-                  <UsersInListContext.Provider value={{ usersInListState, usersInListDispatch }}>
-                    <IndividualPostPage />
-                  </UsersInListContext.Provider>
+                  <PostsContext.Provider value={{ postsState, postsDispatch }}>
+                    <UsersInListContext.Provider value={{ usersInListState, usersInListDispatch }}>
+                      <IndividualPostPage />
+                    </UsersInListContext.Provider>
+                  </PostsContext.Provider>
                 </RequireAuth>
               }>
             </Route>
