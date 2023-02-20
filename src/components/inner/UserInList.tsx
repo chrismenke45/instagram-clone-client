@@ -8,11 +8,12 @@ import UsersInListContext from '../../stateManagement/contexts/UsersInListContex
 
 interface Props {
     user: UserInListProp;
+    message?: boolean;
 }
 
 const UserInList: React.FC<Props> = (props) => {
     const currentUser = getUserObject()
-    const { user } = props
+    const { user, message } = props
     const { usersInListDispatch } = useContext(UsersInListContext)
 
     const handleFollow = () => {
@@ -31,24 +32,23 @@ const UserInList: React.FC<Props> = (props) => {
     }
     return (
         <li className='userInList'>
-            <img className="smallProfilePic" src={user.profile_picture} alt={`${user.username}'s profile`}></img>
-            <div className='userListTextBox'>
-                <Link to={`/profile/${user.user_id}`} className='userListUserName'>{user.username}</Link>
-                <span className='userListName'>{user.name}</span>
-            </div>
-            {currentUser.user_id !== user.user_id && user.current_user_follows !== undefined ?
-                user.current_user_follows ?
-                    <div className='buttonContainer'>
-                        <button onClick={handleUnfollow}>Following</button>
-                    </div>
+                <img className="smallProfilePic" src={user.profile_picture} alt={`${user.username}'s profile`}></img>
+                <div className='userListTextBox'>
+                    <Link to={`/${message ? 'messages' : 'profile'}/${user.user_id}`} className='userListUserName'>{user.username}</Link>
+                    <span className='userListName'>{user.name}</span>
+                </div>
+                {currentUser.user_id !== user.user_id && user.current_user_follows !== undefined ?
+                    user.current_user_follows ?
+                        <div className='buttonContainer'>
+                            <button onClick={handleUnfollow}>Following</button>
+                        </div>
+                        :
+                        <div className='buttonContainer'>
+                            <button onClick={handleFollow}>Follow</button>
+                        </div>
                     :
-                    <div className='buttonContainer'>
-                        <button onClick={handleFollow}>Follow</button>
-                    </div>
-                :
-                null
-            }
-
+                    null
+                }
         </li>
     );
 }

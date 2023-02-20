@@ -7,6 +7,8 @@ import { MessageProp } from '../../models/MessageProp';
 import MessageInList from '../inner/MessageInList';
 import UsersInListContext from '../../stateManagement/contexts/UsersInListContext';
 import usersInListActions from '../../stateManagement/actions/usersInListActions';
+import LoadingIcon from '../inner/LoadingIcon';
+import SearchUsersList from '../inner/SearchUsersList';
 
 interface Props {
     messages: MessageProp[];
@@ -26,11 +28,11 @@ const Messages: React.FC<Props> = (props) => {
         e.preventDefault()
         let url = `users?search=${search}`
         setActivelySearching(true)
-        setUserList([])
+        usersInListDispatch(usersInListActions.SET_USERS([]))
         fetcher.fetchData(url, "GET", user.jwt)
             .then(users => {
                 console.log(users)
-                setUserList(users)
+                usersInListDispatch(usersInListActions.SET_USERS(users))
                 setActivelySearching(false)
             })
             .catch(err => {
@@ -56,7 +58,13 @@ const Messages: React.FC<Props> = (props) => {
                 setActivelySearching={setActivelySearching}
             />
             {search ?
-                <div></div>
+                usersInListState.users.length === 0 ?
+                    activelySearching ?
+                        <LoadingIcon />
+                        :
+                        <p id="noResults">No Results</p>
+                    :
+                    <SearchUsersList users={usersInListState.users} message={true} />
                 :
                 <ol>
                     {messages.map(message => {
