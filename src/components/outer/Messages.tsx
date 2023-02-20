@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
 import SearchForm from '../inner/SearchForm';
 import { UserInListProp } from '../../models/UserInListProp';
 import { MessageProp } from '../../models/MessageProp';
 import MessageInList from '../inner/MessageInList';
+import UsersInListContext from '../../stateManagement/contexts/UsersInListContext';
+import usersInListActions from '../../stateManagement/actions/usersInListActions';
 
 interface Props {
     messages: MessageProp[];
@@ -18,6 +20,7 @@ const Messages: React.FC<Props> = (props) => {
     const [showSearchOptions, setShowSearchOptions] = useState<boolean>(false)
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
     const [userList, setUserList] = useState<UserInListProp[]>([])
+    const { usersInListState, usersInListDispatch } = useContext(UsersInListContext)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -27,6 +30,7 @@ const Messages: React.FC<Props> = (props) => {
         fetcher.fetchData(url, "GET", user.jwt)
             .then(users => {
                 console.log(users)
+                setUserList(users)
                 setActivelySearching(false)
             })
             .catch(err => {
@@ -51,11 +55,15 @@ const Messages: React.FC<Props> = (props) => {
                 areSearchOptionsAvailable={false}
                 setActivelySearching={setActivelySearching}
             />
-            <ol>
-                {messages.map(message => {
-                    return <MessageInList key={message.id} message={message} />
-                })}
-            </ol>
+            {search ?
+                <div></div>
+                :
+                <ol>
+                    {messages.map(message => {
+                        return <MessageInList key={message.id} message={message} />
+                    })}
+                </ol>
+            }
         </main>
     );
 }

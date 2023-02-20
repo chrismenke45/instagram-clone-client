@@ -175,7 +175,9 @@ const App: React.FC = () => {
               path='/messages'
               element={
                 <RequireAuth>
-                  <MessagesPage />
+                  <UsersInListContext.Provider value={{ usersInListState, usersInListDispatch }}>
+                    <MessagesPage />
+                  </UsersInListContext.Provider>
                 </RequireAuth>
               }>
             </Route>

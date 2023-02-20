@@ -9,7 +9,6 @@ import { MessageProp } from '../models/MessageProp';
 const MessagesPage: React.FC = () => {
     const fetcher = new FetchAPI()
     const user = getUserObject()
-    const [search, setSearch] = useState<string>("")
     const [messages, setMessages] = useState<MessageProp[]>([])
 
     useEffect(() => {
@@ -20,10 +19,6 @@ const MessagesPage: React.FC = () => {
             })
     }, [])
 
-    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setSearch(e.target.value)
-    }
     return (
         <div id="page">
             <BackBanner header="Conversations" />
