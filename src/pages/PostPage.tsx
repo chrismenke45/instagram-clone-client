@@ -8,7 +8,6 @@ const PostPage: React.FC = () => {
 
     return (
         <div id="page">
-            <Banner />
             <Post />
             <NavFooter />
         </div>

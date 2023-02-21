@@ -275,7 +275,6 @@ nav ul li:hover {
 
 #backArrow {
   justify-self: flex-start;
-
   margin: 0 30px 0 0;
 }
 
@@ -551,7 +550,7 @@ nav ul li:hover {
 }
 
 #postBanner {
-  padding: 5px 10px;
+  padding: 15px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -560,7 +559,7 @@ nav ul li:hover {
 
 #postBanner .next {
   color: var(--insta-light-blue);
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   cursor: pointer;
   margin: 0 5px;
 }
