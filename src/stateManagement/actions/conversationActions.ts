@@ -1,15 +1,15 @@
-import { MessageProp } from "../../models/MessageProp"
+import { ConversationProp } from "../../models/ConversationProp"
 
-const messagesActions = {
-    SET_MESSAGES(messages: MessageProp[]) {
+const conversationActions = {
+    SET_CONVERSATION(conversation: ConversationProp[]) {
         return {
-            type: "SET_MESSAGES",
+            type: "SET_CONVERSATION",
             payload: {
-                messages
+                conversation
             }
         }
     },
-    ADD_MESSAGE(message: MessageProp) {
+    ADD_MESSAGE(message: ConversationProp) {
         return {
             type: "ADD_MESSAGE",
             payload: {
@@ -26,4 +26,4 @@ const messagesActions = {
         }
     },
 }
-export default messagesActions
+export default conversationActions

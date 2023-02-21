@@ -21,7 +21,6 @@ const Messages: React.FC<Props> = (props) => {
     const searchType = "accounts"
     const [showSearchOptions, setShowSearchOptions] = useState<boolean>(false)
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
-    const [userList, setUserList] = useState<UserInListProp[]>([])
     const { usersInListState, usersInListDispatch } = useContext(UsersInListContext)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

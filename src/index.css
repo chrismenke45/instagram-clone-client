@@ -818,6 +818,8 @@ nav ul li:hover {
 }
 #conversation {
   font-size: 1.3rem;
+  display: flex;
+  flex-direction: column-reverse;
 }
 #conversation ol {
   display: flex;

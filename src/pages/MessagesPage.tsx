@@ -21,9 +21,8 @@ const MessagesPage: React.FC = () => {
 
     return (
         <div id="page">
-            <BackBanner header="Conversations" />
-            <Messages messages={messages}/>
-
+                <BackBanner header="Conversations" />
+                <Messages messages={messages} />
         </div>
     );
 }
