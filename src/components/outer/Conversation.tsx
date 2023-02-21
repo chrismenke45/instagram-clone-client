@@ -11,6 +11,7 @@ const Conversation: React.FC<Props> = (props) => {
 
     return (
         <main id="conversation">
+            <div className='pushToTop'></div> {/* This pushes messages to topof page if they don't fill the page*/}
             <ol>
                 {messages.map(message => {
                     return <li
@@ -24,6 +25,7 @@ const Conversation: React.FC<Props> = (props) => {
                     </li>
                 })}
             </ol>
+            
         </main>
     );
 }

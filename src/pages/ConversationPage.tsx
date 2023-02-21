@@ -3,6 +3,7 @@ import BackBanner from '../components/outer/BackBanner';
 import FetchAPI from '../functions/fetch/FetchAPI';
 import getUserObject from '../functions/user/getUserObject';
 import { useParams } from 'react-router-dom';
+import { ProfileProp } from '../models/ProfileProp';
 import Conversation from '../components/outer/Conversation';
 import conversationReducer from '../stateManagement/reducers/conversationReducer';
 import conversationActions from '../stateManagement/actions/conversationActions';
@@ -12,7 +13,17 @@ const ConversationPage: React.FC = () => {
     const fetcher = new FetchAPI()
     const user = getUserObject()
     const [newMessage, setNewMessage] = useState<string>("")
-    const [otherUser, setOtherUser] = useState<any>(null)
+    const [otherUser, setOtherUser] = useState<ProfileProp>({
+        username: "",
+        name: "",
+        id: 0,
+        profile_picture: "",
+        post_count: 0,
+        current_user_follows: false,
+        followee_count: 0,
+        follower_count: 0,
+        bio: ""
+    })
     const { user_id } = useParams()
     const [conversationState, conversationDispatch] = useReducer(
         conversationReducer,
@@ -24,7 +35,7 @@ const ConversationPage: React.FC = () => {
     useEffect(() => {
         fetcher.fetchData(`users/${user_id}`, "GET", user.jwt)
             .then(theOtherUser => {
-                setOtherUser(theOtherUser)
+                setOtherUser(theOtherUser[0])
             })
     }, [])
 
@@ -38,6 +49,9 @@ const ConversationPage: React.FC = () => {
 
     const handleNewMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewMessage(e.target.value)
+        console.log(otherUser)
+        console.log(otherUser.username)
+        console.log(!!otherUser.username)
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -68,14 +82,12 @@ const ConversationPage: React.FC = () => {
 
     return (
         <div id="page">
-            {/* <MessagesContext.Provider value={{ messagesState, messagesDispatch }}> */}
-                <BackBanner header={otherUser?.username || "Conversation"} />
+                <BackBanner header={otherUser.username || 'Conversation'} img={otherUser.profile_picture} subHeader={otherUser.name} />
                 <Conversation messages={conversationState.conversation} />
                 <form id="messageForm" onSubmit={handleSubmit}>
                     <input type="text" value={newMessage} onChange={handleNewMessageChange}></input>
                     <button type='submit'>Send</button>
                 </form>
-            {/* </MessagesContext.Provider> */}
         </div>
     );
 }

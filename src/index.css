@@ -250,8 +250,23 @@ nav ul li:hover {
   padding: 0 10px;
 }
 
-#backBanner h1 {
+#backBanner > h1 {
   font-size: 2rem;
+}
+#backBannerUser {
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+#backBannerUser > img {
+  margin: 0 10px 0 0 ;
+}
+#backBannerUser > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .arrowBack {
@@ -826,6 +841,11 @@ nav ul li:hover {
   flex-direction: column-reverse;
   align-items: center;
   justify-content: center;
+}
+.pushToTop { /*this pushes messages to top of page if there isnt that many and disapears if theres enough messages*/
+  flex-grow: 9;
+  flex-shrink: 9;
+  flex-basis: 0px;
 }
 .flexAlignSelfLeft {
   align-self: flex-start;
