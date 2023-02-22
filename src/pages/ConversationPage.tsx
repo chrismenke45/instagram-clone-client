@@ -82,7 +82,7 @@ const ConversationPage: React.FC = () => {
 
     return (
         <div id="page">
-                <BackBanner header={otherUser.username || 'Conversation'} img={otherUser.profile_picture} subHeader={otherUser.name} />
+                <BackBanner header={otherUser.username || 'Conversation'} img={otherUser.profile_picture} subHeader={otherUser.name} headerLink={`/profile/${otherUser.id}`}/>
                 <Conversation messages={conversationState.conversation} />
                 <form id="messageForm" onSubmit={handleSubmit}>
                     <input type="text" value={newMessage} onChange={handleNewMessageChange}></input>
