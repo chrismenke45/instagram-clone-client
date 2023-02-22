@@ -25,5 +25,13 @@ const postsActions = {
             }
         }
     },
+    DELETE_POST(post_id: number) {
+        return {
+            type: "DELETE_POST",
+            payload: {
+                post_id
+            }
+        }
+    },
 }
 export default postsActions

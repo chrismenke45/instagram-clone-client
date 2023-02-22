@@ -33,6 +33,14 @@ const PostOnFeed: React.FC<Props> = (props) => {
     const handleHideOptions = () => {
         setShowOptions(false)
     }
+    const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        fetcher.fetchData(`posts/${post.id}`, 'DELETE', user.jwt)
+            .then(data => {
+                console.log(data)
+                postsDispatch(postsActions.DELETE_POST(post.id))
+            })
+    }
 
     const handleUnlikeSubmit = (e: React.FormEvent<SVGElement>) => {
         e.preventDefault()
@@ -53,7 +61,7 @@ const PostOnFeed: React.FC<Props> = (props) => {
                 <FaEllipsisH onClick={handleShowOptions}></FaEllipsisH>
                 {showOptions ?
                     user.user_id === post.user_id ?
-                        <button className='deletePost optionsForPost' onMouseLeave={handleHideOptions}>Delete Post</button>
+                        <button className='deletePost optionsForPost' onMouseLeave={handleHideOptions} onClick={handleDelete}>Delete Post</button>
                         :
                         <span className="optionsForPost" onMouseLeave={handleHideOptions}>No Options</span>
                     :
