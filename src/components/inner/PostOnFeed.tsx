@@ -8,6 +8,7 @@ import getUserObject from '../../functions/user/getUserObject';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import postsActions from '../../stateManagement/actions/postsActions';
 import PostsContext from '../../stateManagement/contexts/PostsContext';
+import deleteFile from '../../firebase/deleteFile';
 
 interface Props {
     post: PostProp;
@@ -35,10 +36,13 @@ const PostOnFeed: React.FC<Props> = (props) => {
     }
     const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
+        const pictureUrl = post.picture_url
         fetcher.fetchData(`posts/${post.id}`, 'DELETE', user.jwt)
             .then(data => {
                 console.log(data)
                 postsDispatch(postsActions.DELETE_POST(post.id))
+                deleteFile(pictureUrl)
+                .then(res => console.log(res))
             })
     }
 
