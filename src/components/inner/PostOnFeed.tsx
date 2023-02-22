@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext, useState } from 'react';
 import { FaRegHeart, FaRegComment, FaHeart, FaEllipsisH } from "react-icons/fa"
 import pluralize from '../../functions/pluralize';
 import { Link } from 'react-router-dom'
@@ -14,6 +14,7 @@ interface Props {
 }
 const PostOnFeed: React.FC<Props> = (props) => {
     const user = getUserObject()
+    const [showOptions, setShowOptions] = useState<boolean>(false)
     const { post } = props
     const { postsDispatch } = useContext(PostsContext)
     let fetcher = new FetchAPI()
@@ -26,6 +27,12 @@ const PostOnFeed: React.FC<Props> = (props) => {
                 postsDispatch(postsActions.UNLIKE_POST(post.id))
             })
     }
+    const handleShowOptions = () => {
+        setShowOptions(true)
+    }
+    const handleHideOptions = () => {
+        setShowOptions(false)
+    }
 
     const handleUnlikeSubmit = (e: React.FormEvent<SVGElement>) => {
         e.preventDefault()
@@ -36,7 +43,6 @@ const PostOnFeed: React.FC<Props> = (props) => {
             })
     }
 
-
     return (
         <article className='postOnFeed flexVertCenter'>
             <div className='postHeader'>
@@ -44,7 +50,16 @@ const PostOnFeed: React.FC<Props> = (props) => {
                     <img className="smallProfilePic" src={post.profile_picture}></img>
                     <Link to={`/profile/${post.user_id}`}><h4>{post.username}</h4></Link>
                 </div>
-                <FaEllipsisH></FaEllipsisH>
+                <FaEllipsisH onClick={handleShowOptions}></FaEllipsisH>
+                {showOptions ?
+                    user.user_id === post.user_id ?
+                        <button className='deletePost optionsForPost' onMouseLeave={handleHideOptions}>Delete Post</button>
+                        :
+                        <span className="optionsForPost" onMouseLeave={handleHideOptions}>No Options</span>
+                    :
+                    null
+                }
+
             </div>
             <img className="postImg" src={post.picture_url} alt=''></img>
             <div className='postOptions'>

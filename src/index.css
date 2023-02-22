@@ -146,6 +146,21 @@ nav ul li a {
   padding: 5px 10px;
 }
 
+.postHeader {
+  position: relative;
+}
+.optionsForPost {
+  position: absolute;
+  right: 3px;
+  font-size: 1.4rem;
+  background-color: var(--background-grey);
+  padding: 10px;
+  border-radius: 10px;
+}
+.deletePost {
+  color: red;
+  cursor: pointer;
+}
 .postCaption span {
   font-weight: 600;
   margin-right: 3px;
