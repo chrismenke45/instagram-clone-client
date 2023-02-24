@@ -42,7 +42,6 @@ const PostOnFeed: React.FC<Props> = (props) => {
                 console.log(data)
                 postsDispatch(postsActions.DELETE_POST(post.id))
                 deleteFile(pictureUrl)
-                .then(res => console.log(res))
             })
     }
 
