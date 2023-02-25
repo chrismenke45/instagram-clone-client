@@ -10,7 +10,11 @@ async function uploadFile(imageFile: string, imageFolder: string) {
     const imageRef = ref(storage, `${imageFolder}/${v4()}`);
     return uploadString(imageRef, imageFile, 'data_url')
         .then(snapshot => getDownloadURL(snapshot.ref))
-        .then((url) => url);
+        .then((url) => url)
+        .catch(err => {
+            console.error(err)
+            throw new Error(err)
+        })
 };
 
 export default uploadFile

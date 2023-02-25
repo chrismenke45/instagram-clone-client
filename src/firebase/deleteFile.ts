@@ -11,6 +11,10 @@ async function deleteFile(imageFileUrl: string) {
         .then(snapshot => {
             return "File deleted"
         })
+        .catch(err => {
+            console.error(err)
+            throw new Error(err)
+        })
 };
 
 export default deleteFile
