@@ -19,9 +19,6 @@ const imageCropperReducer = (state: imageCropperStateInterface, action: imageCro
       if (state.oldPhotoUrl && state.oldPhotoUrl !== process.env.REACT_APP_DEFAULT_PROFILE_PICTURE) {
         //this delets unused photo that has been uploaded if photo is changed
         deleteFile(state.oldPhotoUrl) 
-          .catch(err => {
-            console.error(err)
-          })
       }
       return { showImageSelect: false, photoUrl: action.payload.photoUrl, oldPhotoUrl: "" }
 

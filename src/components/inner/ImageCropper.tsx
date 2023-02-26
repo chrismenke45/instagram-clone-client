@@ -94,10 +94,6 @@ const ImageCropper: React.FC<Props> = (props) => {
                         imageCropperDispatch(imageCropperActions.SET_PHOTO(urlString, imageCropperState.photoUrl))
                     }
                 })
-                .catch(err => {
-                    console.error(err)
-                })
-
             // download file
             //downloadBase64File(imageData64, myFilename)
         }
