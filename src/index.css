@@ -903,3 +903,8 @@ nav ul li a {
   margin: 0 0 0 20px;
   border: none;
 }
+.error {
+  color: red;
+  font-size: 1.2rem;
+  text-align: center;
+}

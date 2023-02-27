@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 const RegisterForm: React.FC = () => {
     const [registerInfo, setRegisterInfo] = useState({ username: "", name: "", password: "" })
+    const [errorMessage, setErrorMessage] = useState<string>("")
+    const [loading, setLoading] = useState<boolean>(false)
     const navigate = useNavigate()
     let fetcher = new FetchAPI()
 
@@ -31,20 +33,34 @@ const RegisterForm: React.FC = () => {
             ["user[profile_picture]", process.env.REACT_APP_DEFAULT_PROFILE_PICTURE || ""],
         ])
         fetcher.fetchData("users", "POST")
-            .then(data => {
-                if (data.t) {
-                    setUserJwt(data.t)
+            .then(res => {
+                if (res.t) {
+                    setUserJwt(res.t)
                     navigate('/')
+                } else {
+                    setErrorMessage(res.error ? res.error : "There was an error. Please try again")
+                    setLoading(false)
                 }
+            })
+            .catch(err => {
+                setErrorMessage("There was an error. Please try again")
+                setLoading(false)
             })
     }
     const handleGuestLogin = () => {
         fetcher.loginAsGuest()
-        .then(data => {
-            if (data.t) {
-                setUserJwt(data.t)
+        .then(res => {
+            if (res.t) {
+                setUserJwt(res.t)
                 navigate('/')
+            } else {
+                setErrorMessage(res.error ? res.error : "There was an error. Please try again")
+                setLoading(false)
             }
+        })
+        .catch(err => {
+            setErrorMessage("There was an error. Please try again")
+            setLoading(false)
         })
     }
     return (
@@ -84,6 +100,7 @@ const RegisterForm: React.FC = () => {
                         onChange={handleChange}>
                     </input>
                 </div>
+                {errorMessage && <p className='error'>{errorMessage}</p>}
                 <button className="openerOption" type='submit'>Register</button>
             </form>
             <span>Already have an account?</span>
