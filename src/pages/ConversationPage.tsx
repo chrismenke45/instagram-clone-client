@@ -2,7 +2,7 @@ import React, { useEffect, useState, useReducer } from 'react';
 import BackBanner from '../components/outer/BackBanner';
 import FetchAPI from '../functions/fetch/FetchAPI';
 import getUserObject from '../functions/user/getUserObject';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ProfileProp } from '../models/ProfileProp';
 import Conversation from '../components/outer/Conversation';
 import conversationReducer from '../stateManagement/reducers/conversationReducer';
@@ -25,6 +25,7 @@ const ConversationPage: React.FC = () => {
         bio: ""
     })
     const { user_id } = useParams()
+    const navigate = useNavigate()
     const [conversationState, conversationDispatch] = useReducer(
         conversationReducer,
         {
@@ -33,17 +34,19 @@ const ConversationPage: React.FC = () => {
     )
 
     useEffect(() => {
-        fetcher.fetchData(`users/${user_id}`, "GET", user.jwt)
-            .then(theOtherUser => {
-                setOtherUser(theOtherUser[0])
-            })
-    }, [])
+        if (Number(user_id) === Number(user.user_id)) {
+            navigate(`/profile/${user_id}`)
+        } else {
+            fetcher.fetchData(`users/${user_id}`, "GET", user.jwt)
+                .then(theOtherUser => {
+                    setOtherUser(theOtherUser[0])
+                })
+            fetcher.fetchData(`users/${user.user_id}/messages/${user_id}`, "GET", user.jwt)
+                .then(theMessages => {
+                    conversationDispatch(conversationActions.SET_CONVERSATION(theMessages))
+                })
+        }
 
-    useEffect(() => {
-        fetcher.fetchData(`users/${user.user_id}/messages/${user_id}`, "GET", user.jwt)
-            .then(theMessages => {
-                conversationDispatch(conversationActions.SET_CONVERSATION(theMessages))
-            })
     }, [])
 
 
@@ -82,12 +85,12 @@ const ConversationPage: React.FC = () => {
 
     return (
         <div id="page">
-                <BackBanner header={otherUser.username || 'Conversation'} img={otherUser.profile_picture} subHeader={otherUser.name} headerLink={`/profile/${otherUser.id}`}/>
-                <Conversation messages={conversationState.conversation} />
-                <form id="messageForm" onSubmit={handleSubmit}>
-                    <input type="text" value={newMessage} onChange={handleNewMessageChange}></input>
-                    <button type='submit'>Send</button>
-                </form>
+            <BackBanner header={otherUser.username || 'Conversation'} img={otherUser.profile_picture} subHeader={otherUser.name} headerLink={`/profile/${otherUser.id}`} />
+            <Conversation messages={conversationState.conversation} />
+            <form id="messageForm" onSubmit={handleSubmit}>
+                <input type="text" value={newMessage} onChange={handleNewMessageChange}></input>
+                <button type='submit'>Send</button>
+            </form>
         </div>
     );
 }
