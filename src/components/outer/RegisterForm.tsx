@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import setUserJwt from '../../functions/user/setUserJwt';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm: React.FC = () => {
     const [registerInfo, setRegisterInfo] = useState({ username: "", name: "", password: "" })
@@ -14,13 +14,19 @@ const RegisterForm: React.FC = () => {
     let fetcher = new FetchAPI()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target
+        const { name, value } = e.target
         setRegisterInfo(prev => {
             return {
                 ...prev,
                 [name]: value.trim()
             }
         })
+        if (name === "username" && value.trim().length > 2) {
+            fetcher.fetchData(`users?usernameOnly=true&search=${value.trim()}`)
+                .then(res => {
+                    setErrorMessage(res.length > 0 ? "Username already in use" : "")
+                })
+        }
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,19 +55,19 @@ const RegisterForm: React.FC = () => {
     }
     const handleGuestLogin = () => {
         fetcher.loginAsGuest()
-        .then(res => {
-            if (res.t) {
-                setUserJwt(res.t)
-                navigate('/')
-            } else {
-                setErrorMessage(res.error ? res.error : "There was an error. Please try again")
+            .then(res => {
+                if (res.t) {
+                    setUserJwt(res.t)
+                    navigate('/')
+                } else {
+                    setErrorMessage(res.error ? res.error : "There was an error. Please try again")
+                    setLoading(false)
+                }
+            })
+            .catch(err => {
+                setErrorMessage("There was an error. Please try again")
                 setLoading(false)
-            }
-        })
-        .catch(err => {
-            setErrorMessage("There was an error. Please try again")
-            setLoading(false)
-        })
+            })
     }
     return (
         <main id="register">
