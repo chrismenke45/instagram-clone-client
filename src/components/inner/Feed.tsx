@@ -1,31 +1,41 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import PostOnFeed from './PostOnFeed';
 import getUserObject from '../../functions/user/getUserObject';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import postsActions from '../../stateManagement/actions/postsActions';
 import PostsContext from '../../stateManagement/contexts/PostsContext';
+import LoadingIcon from './LoadingIcon';
 
-const Feed: React.FC<{feedPath: string}> = (props) => {
+const Feed: React.FC<{ feedPath: string }> = (props) => {
     const { feedPath } = props
     const { postsState, postsDispatch } = useContext(PostsContext)
+    const [loading, setLoading] = useState<boolean>(true)
     let fetcher = new FetchAPI()
- 
+    const userObject = getUserObject()
+
     useEffect(() => {
-        const userObject = getUserObject()
-       
-        // below is to test with out of date jwt
-        // fetcher.fetchData("posts", "GET", 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwidXNlcl9pZCI6NiwiZXhwIjoxNjczNTQ0OTcyfQ.QSDoDI2RORSvNnHZ7XP8cV4oQkv1NywgF_8O0i7pxng')
         fetcher.fetchData(feedPath, "GET", userObject.jwt)
-        .then(posts => {
-            postsDispatch(postsActions.SET_POSTS(posts))
-        })
+            .then(posts => {
+                postsDispatch(postsActions.SET_POSTS(posts))
+                setLoading(false)
+            })
+            .catch(err => {
+                setLoading(false)
+            })
     }, [])
 
     return (
         <div id="feed" className='flexVertCenter'>
-            {postsState.posts.map(post => {
-                return <PostOnFeed key={post.id} post={post} />
-            })}
+            {loading ?
+                <LoadingIcon />
+                :
+                postsState.posts.length ?
+                    postsState.posts.map(post => {
+                        return <PostOnFeed key={post.id} post={post} />
+                    })
+                    :
+                    <p id="noResults">No posts</p>
+            }
         </div>
     );
 }
