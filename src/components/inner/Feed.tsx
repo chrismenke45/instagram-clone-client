@@ -5,9 +5,10 @@ import FetchAPI from '../../functions/fetch/FetchAPI';
 import postsActions from '../../stateManagement/actions/postsActions';
 import PostsContext from '../../stateManagement/contexts/PostsContext';
 import LoadingIcon from './LoadingIcon';
+import { Link } from 'react-router-dom';
 
-const Feed: React.FC<{ feedPath: string }> = (props) => {
-    const { feedPath } = props
+const Feed: React.FC<{ feedPath: string, homePage?: boolean }> = (props) => {
+    const { feedPath, homePage } = props
     const { postsState, postsDispatch } = useContext(PostsContext)
     const [loading, setLoading] = useState<boolean>(true)
     let fetcher = new FetchAPI()
@@ -33,6 +34,9 @@ const Feed: React.FC<{ feedPath: string }> = (props) => {
                     postsState.posts.map(post => {
                         return <PostOnFeed key={post.id} post={post} />
                     })
+                    :
+                    homePage ?
+                    <Link to='/search' id='toSearchPage'>Find people</Link>
                     :
                     <p id="noResults">No posts</p>
             }

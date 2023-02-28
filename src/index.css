@@ -380,13 +380,17 @@ nav ul li a {
   justify-content: flex-end;
 }
 
-.userInList .buttonContainer button {
+.userInList .buttonContainer button, #toSearchPage {
   background: var(--insta-dark-blue);
   color: var(--insta-white);
   max-width: 100%;
   padding: 10px 30px;
   border-radius: 10px;
   cursor: pointer;
+}
+#toSearchPage {
+  font-size: 1.5rem;
+  margin: 15px;
 }
 
 .mediaInList button {
