@@ -6,6 +6,7 @@ import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
 import { FaArrowLeft } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
+import deleteFile from '../../firebase/deleteFile';
 
 const Post: React.FC = () => {
     const [postInfo, setPostInfo] = useState({ photoUrl: "", caption: "" })
@@ -59,11 +60,19 @@ const Post: React.FC = () => {
         }
     }
 
+    const handleBackButton = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+        if (postInfo.photoUrl) {
+            deleteFile(postInfo.photoUrl)
+            .then(() => console.log("unused photo deleted"))
+        }
+        navigate(-1)
+    }
+
     return (
         <main>
             <form onSubmit={handleSubmit}>
                 <div id='postBanner'>
-                    <FaArrowLeft onClick={() => navigate(-1)} className='arrowBack'></FaArrowLeft>
+                    <FaArrowLeft onClick={handleBackButton} className='arrowBack'></FaArrowLeft>
                     <span onClick={handleSubmitButton} className='arrowNextBack next'>Post</span>
                     <button type='submit' ref={submitRef} hidden={true}>Submit</button>
                 </div>
