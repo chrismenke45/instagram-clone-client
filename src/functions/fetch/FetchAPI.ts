@@ -31,7 +31,6 @@ class FetchAPI {
             .then(responseObject => responseObject)
             .catch(err => {
                 console.error(err)
-                console.log("yee")
                 throw new Error(err)
             })
     }
