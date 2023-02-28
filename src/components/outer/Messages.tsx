@@ -30,7 +30,6 @@ const Messages: React.FC<Props> = (props) => {
         usersInListDispatch(usersInListActions.SET_USERS([]))
         fetcher.fetchData(url, "GET", user.jwt)
             .then(users => {
-                console.log(users)
                 usersInListDispatch(usersInListActions.SET_USERS(users))
                 setActivelySearching(false)
             })

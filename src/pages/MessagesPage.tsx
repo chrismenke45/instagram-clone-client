@@ -14,7 +14,6 @@ const MessagesPage: React.FC = () => {
     useEffect(() => {
         fetcher.fetchData(`users/${user.user_id}/messages`, "GET", user.jwt)
             .then(messagess => {
-                console.log(messagess)
                 setMessages(messagess)
             })
     }, [])
