@@ -6,16 +6,19 @@ import postsActions from '../../stateManagement/actions/postsActions';
 import PostsContext from '../../stateManagement/contexts/PostsContext';
 import LoadingIcon from './LoadingIcon';
 import { Link } from 'react-router-dom';
+import ReloadContext from '../../stateManagement/contexts/ReloadContext';
 
-const Feed: React.FC<{ feedPath: string, homePage?: boolean }> = (props) => {
-    const { feedPath, homePage } = props
+const Feed: React.FC<{ feedPath: string, postCount?: number, homePage?: boolean }> = (props) => {
+    const { feedPath, postCount, homePage } = props
     const { postsState, postsDispatch } = useContext(PostsContext)
+    const { reloadState } = useContext(ReloadContext)
     const [loading, setLoading] = useState<boolean>(true)
     let fetcher = new FetchAPI()
     const userObject = getUserObject()
 
     useEffect(() => {
-        fetcher.fetchData(feedPath, "GET", userObject.jwt)
+        let path = feedPath + (postCount ? `?count=${postCount}` : "")
+        fetcher.fetchData(path, "GET", userObject.jwt)
             .then(posts => {
                 postsDispatch(postsActions.SET_POSTS(posts))
                 setLoading(false)
@@ -23,7 +26,7 @@ const Feed: React.FC<{ feedPath: string, homePage?: boolean }> = (props) => {
             .catch(err => {
                 setLoading(false)
             })
-    }, [])
+    }, [reloadState])
 
     return (
         <div id="feed" className='flexVertCenter'>

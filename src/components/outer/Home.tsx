@@ -1,13 +1,25 @@
-import React, {useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import Feed from '../inner/Feed';
+import ReloadContext from '../../stateManagement/contexts/ReloadContext';
+import reloadActions from '../../stateManagement/actions/reloadActions';
 
 
 const Home: React.FC = () => {
+    const [displayCount, setDisplayCount] = useState<number>(15)
+    const { reloadDispatch } = useContext(ReloadContext)
+
+    const scrollIncreaseDisplayCount = (e: React.UIEvent<HTMLElement>) => {
+        if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
+            console.log("yeehaw")
+            setDisplayCount(prev => prev + 15);
+            reloadDispatch(reloadActions.INCREMENT())
+        }
+    }
 
 
     return (
-        <main>
-            <Feed feedPath="posts" homePage={true}/>
+        <main onScroll={scrollIncreaseDisplayCount}>
+            <Feed feedPath="posts" postCount={displayCount} homePage={true}/>
         </main>
     );
 }
