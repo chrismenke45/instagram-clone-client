@@ -7,9 +7,10 @@ import PostsContext from '../../stateManagement/contexts/PostsContext';
 import LoadingIcon from './LoadingIcon';
 import { Link } from 'react-router-dom';
 import ReloadContext from '../../stateManagement/contexts/ReloadContext';
+import generateQueryParams from '../../functions/generateQueryParams';
 
-const Feed: React.FC<{ feedPath: string, postCount?: number, homePage?: boolean }> = (props) => {
-    const { feedPath, postCount, homePage } = props
+const Feed: React.FC<{ feedPath: string, queryParams?: { [key: string]: string | number; }, homePage?: boolean }> = (props) => {
+    const { feedPath, queryParams, homePage } = props
     const { postsState, postsDispatch } = useContext(PostsContext)
     const { reloadState } = useContext(ReloadContext)
     const [loading, setLoading] = useState<boolean>(true)
@@ -17,7 +18,7 @@ const Feed: React.FC<{ feedPath: string, postCount?: number, homePage?: boolean 
     const userObject = getUserObject()
 
     useEffect(() => {
-        let path = feedPath + (postCount ? `?count=${postCount}` : "")
+        let path = feedPath + (queryParams ? generateQueryParams(queryParams) : "")
         fetcher.fetchData(path, "GET", userObject.jwt)
             .then(posts => {
                 postsDispatch(postsActions.SET_POSTS(posts))

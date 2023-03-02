@@ -3,8 +3,8 @@ import { MdGridOn } from "react-icons/md"
 import { RxStack } from "react-icons/rx"
 import Feed from '../inner/Feed';
 import Grid from '../inner/Grid';
-const ProfilePosts: React.FC<{profileId: number}> = (props) => {
-    const { profileId } = props
+const ProfilePosts: React.FC<{profileId: number, postCount: number}> = (props) => {
+    const { profileId, postCount } = props
     const [feedOrGrid, setFeedOrGrid] = useState(true) //true for Grid display, false for feed display 
 
     const handleGridClick = () => {
@@ -13,16 +13,6 @@ const ProfilePosts: React.FC<{profileId: number}> = (props) => {
     const handleFeedClick = () => {
         setFeedOrGrid(false)
     }
-
-    const tiles = [
-        {picture_url: "square.jpeg"},
-        {picture_url: "square.jpeg"},
-        {picture_url: "square.jpeg"},
-        {picture_url: "square.jpeg"},
-        {picture_url: "square.jpeg"},
-        {picture_url: "square.jpeg"},
-        {picture_url: "square.jpeg"},
-    ]
 
     return (
         <section id="profilePosts">
@@ -42,7 +32,7 @@ const ProfilePosts: React.FC<{profileId: number}> = (props) => {
                 )
                 :
                 (
-                    <Feed feedPath={`posts?user=${profileId}`}/>
+                    <Feed feedPath="posts" queryParams={{"user":profileId, "count": postCount}}/>
                 )}
         </section>
     );
