@@ -1,4 +1,6 @@
-const generateQueryParams = (values: { [key: string]: string | number; }): string => {
+import { QueryParamObjProp } from "../models/QueryParamObjProp";
+
+const generateQueryParams = (values: QueryParamObjProp): string => {
     let queryStr = "?"
     for (const [index, [key, value]] of Object.entries(Object.entries(values))) {
         if (Number(index) !== 0) {

@@ -61,9 +61,9 @@ const Search: React.FC = () => {
                     <SearchUsersList users={usersInListState.users} />
                 :
                 search && searchType === "posts" ?
-                    <Grid gridPath={`posts?preview=true&search=${search}`} />
+                    <Grid gridPath={`posts?preview=true&search=${search}`} queryParams={{"preview": "true", "search": search}} />
                     :
-                    <Grid gridPath={`posts?preview=true&discover=true`} />
+                    <Grid gridPath={`posts?preview=true&discover=true`} queryParams={{"preview": "true", "discover": "true"}} />
             }
 
         </main>

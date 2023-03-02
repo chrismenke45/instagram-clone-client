@@ -28,11 +28,11 @@ const ProfilePosts: React.FC<{profileId: number, postCount: number}> = (props) =
             </div>
             {feedOrGrid ?
                 (
-                    <Grid gridPath={`posts?user=${profileId}&preview=true`}/>
+                    <Grid gridPath="posts" queryParams={{"user": profileId, "preview": "true"}}/>
                 )
                 :
                 (
-                    <Feed feedPath="posts" queryParams={{"user":profileId, "count": postCount}}/>
+                    <Feed feedPath="posts" queryParams={{"user": profileId, "count": postCount}}/>
                 )}
         </section>
     );

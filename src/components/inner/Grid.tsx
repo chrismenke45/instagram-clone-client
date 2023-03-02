@@ -4,11 +4,13 @@ import getUserObject from '../../functions/user/getUserObject';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import LoadingIcon from './LoadingIcon';
 import ReloadContext from '../../stateManagement/contexts/ReloadContext';
+import { QueryParamObjProp } from '../../models/QueryParamObjProp';
+import generateQueryParams from '../../functions/generateQueryParams';
 // import getUserObject from '../../functions/user/getUserObject';
 // import FetchAPI from '../../functions/fetch/FetchAPI';
 
-const Grid: React.FC<{ gridPath: string }> = (props) => {
-    const { gridPath } = props
+const Grid: React.FC<{ gridPath: string, queryParams?: QueryParamObjProp }> = (props) => {
+    const { gridPath, queryParams } = props
     interface PostUrl {
         picture_url: string;
         id: number;
@@ -21,7 +23,8 @@ const Grid: React.FC<{ gridPath: string }> = (props) => {
 
     useEffect(() => {
         setActivelySearching(true)
-        fetcher.fetchData(gridPath, "GET", user.jwt)
+        let path = gridPath + (queryParams ? generateQueryParams(queryParams) : "")
+        fetcher.fetchData(path, "GET", user.jwt)
             .then(posts => {
                 setPosts(posts)
                 setActivelySearching(false)

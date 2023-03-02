@@ -8,8 +8,9 @@ import LoadingIcon from './LoadingIcon';
 import { Link } from 'react-router-dom';
 import ReloadContext from '../../stateManagement/contexts/ReloadContext';
 import generateQueryParams from '../../functions/generateQueryParams';
+import { QueryParamObjProp } from '../../models/QueryParamObjProp';
 
-const Feed: React.FC<{ feedPath: string, queryParams?: { [key: string]: string | number; }, homePage?: boolean }> = (props) => {
+const Feed: React.FC<{ feedPath: string, queryParams?: QueryParamObjProp, homePage?: boolean }> = (props) => {
     const { feedPath, queryParams, homePage } = props
     const { postsState, postsDispatch } = useContext(PostsContext)
     const { reloadState } = useContext(ReloadContext)

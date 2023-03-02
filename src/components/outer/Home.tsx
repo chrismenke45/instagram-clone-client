@@ -5,13 +5,13 @@ import reloadActions from '../../stateManagement/actions/reloadActions';
 
 
 const Home: React.FC = () => {
-    const [displayCount, setDisplayCount] = useState<number>(2)
+    const [displayCount, setDisplayCount] = useState<number>(15)
     const { reloadDispatch } = useContext(ReloadContext)
 
     const scrollIncreaseDisplayCount = (e: React.UIEvent<HTMLElement>) => {
         if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
             console.log("yeehaw")
-            setDisplayCount(prev => prev + 2);
+            setDisplayCount(prev => prev + 15);
             reloadDispatch(reloadActions.INCREMENT())
         }
     }
