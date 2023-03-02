@@ -6,16 +6,18 @@ import LoadingIcon from '../inner/LoadingIcon';
 import MediaInList from '../inner/MediaInList';
 import MediaContext from '../../stateManagement/contexts/MediaContext';
 import mediaActions from '../../stateManagement/actions/mediaActions';
+import generateQueryParams from '../../functions/generateQueryParams';
 
 const Media: React.FC = () => {
     const fetcher = new FetchAPI()
     const user = getUserObject()
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
+    const [displayCount, setDisplayCount] = useState<number>(15)
     const { mediaState, mediaDispatch } = useContext(MediaContext)
 
     useEffect(() => {
         setActivelySearching(true)
-        fetcher.fetchData("/medias", "GET", user.jwt)
+        fetcher.fetchData(`/medias${generateQueryParams({"count": displayCount})}`, "GET", user.jwt)
             .then(theMedia => {
                 mediaDispatch(mediaActions.SET_MEDIA(theMedia))
                 setActivelySearching(false)
@@ -23,7 +25,7 @@ const Media: React.FC = () => {
             .catch(err => {
                 setActivelySearching(false)
             })
-    }, [])
+    }, [displayCount])
 
     const createUniqKeyFromMedia = (media: MediaProp): string => {
         switch (media.id) {
@@ -38,8 +40,14 @@ const Media: React.FC = () => {
         }
     }
 
+    const scrollIncreaseDisplayCount = (e: React.UIEvent<HTMLElement>) => {
+        if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
+            setDisplayCount(prev => prev + 15);
+        }
+    }
+
     return (
-        <main id="media">
+        <main id="media" onScroll={scrollIncreaseDisplayCount}>
             {mediaState.media.length > 0 ?
                 <ul>
                     {mediaState.media.map(med => {
