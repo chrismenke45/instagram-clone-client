@@ -7,6 +7,8 @@ import SearchForm from '../inner/SearchForm';
 import LoadingIcon from '../inner/LoadingIcon';
 import UsersInListContext from '../../stateManagement/contexts/UsersInListContext';
 import usersInListActions from '../../stateManagement/actions/usersInListActions';
+import ReloadContext from '../../stateManagement/contexts/ReloadContext';
+import reloadActions from '../../stateManagement/actions/reloadActions';
 
 const Search: React.FC = () => {
     const fetcher = new FetchAPI()
@@ -14,7 +16,9 @@ const Search: React.FC = () => {
     const [searchType, setSearchType] = useState<string>("accounts")
     const [showSearchOptions, setShowSearchOptions] = useState<boolean>(false)
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
+    const [displayCount, setDisplayCount] = useState<number>(15)
     const { usersInListState, usersInListDispatch } = useContext(UsersInListContext)
+    const { reloadDispatch } = useContext(ReloadContext)
     const user = getUserObject()
 
     const handleSearchTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,8 +42,16 @@ const Search: React.FC = () => {
                 })
         }
     }
+
+    const scrollIncreaseDisplayCount = (e: React.UIEvent<HTMLElement>) => {
+        if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
+            setDisplayCount(prev => prev + 15);
+            reloadDispatch(reloadActions.INCREMENT())
+        }
+    }
+
     return (
-        <main>
+        <main onScroll={scrollIncreaseDisplayCount}>
             <SearchForm
                 search={search}
                 setSearch={setSearch}
@@ -61,9 +73,9 @@ const Search: React.FC = () => {
                     <SearchUsersList users={usersInListState.users} />
                 :
                 search && searchType === "posts" ?
-                    <Grid gridPath={`posts?preview=true&search=${search}`} queryParams={{"preview": "true", "search": search}} />
+                    <Grid gridPath={`posts?preview=true&search=${search}`} queryParams={{"preview": "true", "search": search, "count": displayCount}} />
                     :
-                    <Grid gridPath={`posts?preview=true&discover=true`} queryParams={{"preview": "true", "discover": "true"}} />
+                    <Grid gridPath={`posts?preview=true&discover=true`} queryParams={{"preview": "true", "discover": "true", "count": displayCount}} />
             }
 
         </main>

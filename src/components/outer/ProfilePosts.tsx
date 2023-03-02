@@ -28,7 +28,7 @@ const ProfilePosts: React.FC<{profileId: number, postCount: number}> = (props) =
             </div>
             {feedOrGrid ?
                 (
-                    <Grid gridPath="posts" queryParams={{"user": profileId, "preview": "true"}}/>
+                    <Grid gridPath="posts" queryParams={{"user": profileId, "preview": "true", "count": postCount}}/>
                 )
                 :
                 (

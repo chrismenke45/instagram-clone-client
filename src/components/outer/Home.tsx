@@ -10,7 +10,6 @@ const Home: React.FC = () => {
 
     const scrollIncreaseDisplayCount = (e: React.UIEvent<HTMLElement>) => {
         if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
-            console.log("yeehaw")
             setDisplayCount(prev => prev + 15);
             reloadDispatch(reloadActions.INCREMENT())
         }
