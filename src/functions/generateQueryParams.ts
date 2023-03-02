@@ -2,7 +2,7 @@ const generateQueryParams = (values: { [key: string]: string | number; }): strin
     let queryStr = "?"
     for (const [index, [key, value]] of Object.entries(Object.entries(values))) {
         if (Number(index) !== 0) {
-            queryStr += "?"
+            queryStr += "&"
         }
         queryStr += `${key}=${value}`
     }
