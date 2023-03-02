@@ -9,6 +9,7 @@ import conversationReducer from '../stateManagement/reducers/conversationReducer
 import conversationActions from '../stateManagement/actions/conversationActions';
 import generateQueryParams from '../functions/generateQueryParams';
 import ReloadContext from '../stateManagement/contexts/ReloadContext';
+import LoadingIcon from '../components/inner/LoadingIcon';
 
 
 const ConversationPage: React.FC = () => {
@@ -16,6 +17,7 @@ const ConversationPage: React.FC = () => {
     const user = getUserObject()
     const [newMessage, setNewMessage] = useState<string>("")
     const [displayCount, setDisplayCount] = useState<number>(25)
+    const [loading, setLoading] = useState<boolean>(true)
     const { reloadState } = useContext(ReloadContext)
     const [otherUser, setOtherUser] = useState<ProfileProp>({
         username: "",
@@ -50,10 +52,14 @@ const ConversationPage: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        fetcher.fetchData(`users/${user.user_id}/messages/${user_id}${generateQueryParams({"count": displayCount})}`, "GET", user.jwt)
-                .then(theMessages => {
-                    conversationDispatch(conversationActions.SET_CONVERSATION(theMessages))
-                })
+        fetcher.fetchData(`users/${user.user_id}/messages/${user_id}${generateQueryParams({ "count": displayCount })}`, "GET", user.jwt)
+            .then(theMessages => {
+                conversationDispatch(conversationActions.SET_CONVERSATION(theMessages))
+                setLoading(false)
+            })
+            .catch(err => {
+                setLoading(false)
+            })
     }, [reloadState.count])
 
 
@@ -93,7 +99,13 @@ const ConversationPage: React.FC = () => {
     return (
         <div id="page">
             <BackBanner header={otherUser.username || 'Conversation'} img={otherUser.profile_picture} subHeader={otherUser.name} headerLink={`/profile/${otherUser.id}`} />
-            <Conversation messages={conversationState.conversation} setDisplayCount={setDisplayCount}/>
+            {loading ?
+                <main>
+                    <LoadingIcon />
+                </main>
+                :
+                <Conversation messages={conversationState.conversation} setDisplayCount={setDisplayCount} />
+            }
             <form id="messageForm" onSubmit={handleSubmit}>
                 <input type="text" value={newMessage} onChange={handleNewMessageChange}></input>
                 <button type='submit'>Send</button>
