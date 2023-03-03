@@ -23,7 +23,21 @@ const Search: React.FC = () => {
 
     const handleSearchTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchType(e.target.value)
-        if (e.target.value !== "accounts") { usersInListDispatch(usersInListActions.SET_USERS([])) }
+        if (e.target.value !== "accounts") {
+            usersInListDispatch(usersInListActions.SET_USERS([]))
+        } else if (e.target.value === "accounts") {
+            let url = `users?search=${search}`
+            setActivelySearching(true)
+            usersInListDispatch(usersInListActions.SET_USERS([]))
+            fetcher.fetchData(url, "GET", user.jwt)
+                .then(users => {
+                    usersInListDispatch(usersInListActions.SET_USERS(users))
+                    setActivelySearching(false)
+                })
+                .catch(err => {
+                    setActivelySearching(false)
+                })
+        }
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,16 +80,16 @@ const Search: React.FC = () => {
             {search && searchType === "accounts" ?
                 usersInListState.users.length === 0 ?
                     activelySearching ?
-                    <LoadingIcon />
-                    :
-                    <p id="noResults">No Results</p>
+                        <LoadingIcon />
+                        :
+                        <p id="noResults">No Results</p>
                     :
                     <SearchUsersList users={usersInListState.users} />
                 :
                 search && searchType === "posts" ?
-                    <Grid gridPath={`posts?preview=true&search=${search}`} queryParams={{"preview": "true", "search": search, "count": displayCount}} />
+                    <Grid gridPath={`posts?preview=true&search=${search}`} queryParams={{ "preview": "true", "search": search, "count": displayCount }} />
                     :
-                    <Grid gridPath={`posts?preview=true&discover=true`} queryParams={{"preview": "true", "discover": "true", "count": displayCount}} />
+                    <Grid gridPath={`posts?preview=true&discover=true`} queryParams={{ "preview": "true", "discover": "true", "count": displayCount }} />
             }
 
         </main>
