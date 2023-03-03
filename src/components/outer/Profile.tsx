@@ -15,7 +15,7 @@ const Profile: React.FC = () => {
     const { user_id } = useParams()
     const { reloadState, reloadDispatch } = useContext(ReloadContext)
     const { profileState, profileDispatch } = useContext(ProfileContext)
-    const [displayCount, setDisplayCount] = useState<number>(2)
+    const [displayCount, setDisplayCount] = useState<number>(15)
 
     useEffect(() => {
         fetcher.fetchData(`users/${user_id}`, "GET", user.jwt)
@@ -27,7 +27,7 @@ const Profile: React.FC = () => {
 
     const scrollIncreaseDisplayCount = (e: React.UIEvent<HTMLElement>) => {
         if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
-            setDisplayCount(prev => prev + 2);
+            setDisplayCount(prev => prev + 15);
             reloadDispatch(reloadActions.INCREMENT())
         }
     }
