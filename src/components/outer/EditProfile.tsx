@@ -83,6 +83,7 @@ const EditProfile: React.FC = () => {
     const deleteAccout = () => {
         if (user.username !== "guest") {
             deleteUser(profile.id)
+            navigate("/login")
         } else {
             setShowNoGuestModify(true)
         }
