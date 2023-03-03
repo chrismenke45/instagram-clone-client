@@ -19,6 +19,7 @@ const Feed: React.FC<{ feedPath: string, queryParams?: QueryParamObjProp, homePa
     const userObject = getUserObject()
 
     useEffect(() => {
+        setLoading(true)
         let path = feedPath + (queryParams ? generateQueryParams(queryParams) : "")
         fetcher.fetchData(path, "GET", userObject.jwt)
             .then(posts => {
@@ -32,13 +33,18 @@ const Feed: React.FC<{ feedPath: string, queryParams?: QueryParamObjProp, homePa
 
     return (
         <div id="feed" className='flexVertCenter'>
-            {loading ?
+            {loading && !postsState.posts.length?
                 <LoadingIcon />
                 :
                 postsState.posts.length ?
-                    postsState.posts.map(post => {
+                <>
+                    {postsState.posts.map(post => {
                         return <PostOnFeed key={post.id} post={post} />
-                    })
+                    })}
+                    {loading && <div id="loadingMoreContainer">
+                        <LoadingIcon />
+                    </div>}
+                </>
                     :
                     homePage ?
                     <Link to='/search' id='toSearchPage'>Find people</Link>
