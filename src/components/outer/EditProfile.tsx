@@ -11,6 +11,7 @@ import ImageCropper from '../inner/ImageCropper';
 import ImageCropperContext from '../../stateManagement/contexts/ImageCropperContext';
 import imageCropperActions from '../../stateManagement/actions/imageCropperActions';
 import deleteUser from '../../functions/user/deleteUser';
+import ImageWithFallback from '../inner/ImageWithFallback';
 
 const EditProfile: React.FC = () => {
     let fetcher = new FetchAPI()
@@ -93,7 +94,7 @@ const EditProfile: React.FC = () => {
             fetcher.buildFormData([
                 ["user[username]", profile.username.toLowerCase().trim()],
                 ["user[name]", profile.name.trim()],
-                ["user[bio]", profile.bio.trim()],
+                ["user[bio]", profile.bio ? profile.bio.trim() : ""],
                 ["user[profile_picture]", imageCropperState.photoUrl],
             ])
             fetcher.fetchData(`users/${user.user_id}`, "PUT", user.jwt)
@@ -128,6 +129,10 @@ const EditProfile: React.FC = () => {
                     className='profilePicture'
                     src={profile.profile_picture}
                     onClick={handleImageSelect}
+                    onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; // prevents looping
+                        currentTarget.src = process.env.REACT_APP_DEFAULT_PROFILE_PICTURE || ""
+                    }}
                 ></img>
                 <div className='formGroup'>
                     <input

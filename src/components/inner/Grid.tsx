@@ -6,6 +6,7 @@ import LoadingIcon from './LoadingIcon';
 import ReloadContext from '../../stateManagement/contexts/ReloadContext';
 import { QueryParamObjProp } from '../../models/QueryParamObjProp';
 import generateQueryParams from '../../functions/generateQueryParams';
+import ImageWithFallback from './ImageWithFallback';
 // import getUserObject from '../../functions/user/getUserObject';
 // import FetchAPI from '../../functions/fetch/FetchAPI';
 
@@ -51,7 +52,7 @@ const Grid: React.FC<{ gridPath: string, queryParams?: QueryParamObjProp }> = (p
                                 key={post.id}
                                 className="gridChild"
                             >
-                                <img src={post.picture_url}></img>
+                                <ImageWithFallback src={post.picture_url} post={true}></ImageWithFallback>
                             </Link>
                         )
                     })

@@ -4,6 +4,7 @@ import getUserObject from '../../functions/user/getUserObject';
 import { useParams } from 'react-router-dom';
 import CommentsContext from '../../stateManagement/contexts/CommentsContext';
 import commentsActions from '../../stateManagement/actions/commentsActions';
+import ImageWithFallback from '../inner/ImageWithFallback';
 
 const CommentFooter: React.FC = () => {
     const user = getUserObject()
@@ -53,7 +54,7 @@ const CommentFooter: React.FC = () => {
     return (
         <footer id="commentFooter">
             <form onSubmit={handleCommentSubmit}>
-                <img src={user.profile_picture}></img>
+                <ImageWithFallback src={user.profile_picture} profilePicture={true}></ImageWithFallback>
                 <input type="text" onChange={handleCommentChange} value={comment} placeholder='Add a comment...'></input>
                 <button type='submit'>Post</button>
             </form>

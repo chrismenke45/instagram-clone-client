@@ -5,6 +5,7 @@ import getUserObject from '../../functions/user/getUserObject';
 import { follow, unfollow } from '../../functions/eventHandlers/followHandlers';
 import profileActions from '../../stateManagement/actions/profileActions';
 import ProfileContext from '../../stateManagement/contexts/ProfileContext';
+import ImageWithFallback from './ImageWithFallback';
 
 const ProfileSummary: React.FC<{ profile: ProfileProp }> = (props) => {
     const { profile } = props
@@ -31,7 +32,7 @@ const ProfileSummary: React.FC<{ profile: ProfileProp }> = (props) => {
     return (
         <section id="profileSummary">
             <div>
-                <img src={profile.profile_picture}></img>
+                <ImageWithFallback src={profile.profile_picture} profilePicture={true}></ImageWithFallback>
                 <div className='profileCountSummary'>
                     <span className='profileCountNumber'>{profile.post_count}</span>
                     <span className='profileCountSubject'>posts</span>

@@ -2,6 +2,7 @@ import React from 'react';
 import { FaArrowLeft } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
 import { Link } from 'react-router-dom';
+import ImageWithFallback from '../inner/ImageWithFallback';
 
 interface Props {
     header: string;
@@ -19,7 +20,7 @@ const BackBanner: React.FC<Props> = (props) => {
             <FaArrowLeft id="backArrow" onClick={() => navigate(-1)} className='arrowBack'></FaArrowLeft>
             {img && subHeader ?
                 <div id='backBannerUser'>
-                    <img src={img} className="smallProfilePic"></img>
+                    <ImageWithFallback src={img} classes="smallProfilePic" profilePicture={true}></ImageWithFallback>
                     <Link to={headerLink || "/messages"}>
                         <h1>{header}</h1>
                         <h2>{subHeader}</h2>

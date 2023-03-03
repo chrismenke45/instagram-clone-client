@@ -3,6 +3,7 @@ import { MessageProp } from '../../models/MessageProp';
 import timeAgo from "../../functions/timeAgo"
 import shortenTime from '../../functions/shortenTime';
 import { Link } from 'react-router-dom';
+import ImageWithFallback from './ImageWithFallback';
 
 interface Props {
     message: MessageProp
@@ -13,7 +14,7 @@ const MessageInList: React.FC<Props> = (props) => {
     return (
         <li className='messageInList'>
             <Link to={`/messages/${message.user_id}`}>
-                <img src={message.profile_picture} className="smallProfilePic"></img>
+                <ImageWithFallback src={message.profile_picture} classes="smallProfilePic" profilePicture={true}></ImageWithFallback>
                 <div className='messagesInfo'>
                     <span className='messagesUsername'>{message.username}</span>
                     <div className='messageText'>

@@ -5,6 +5,7 @@ import getUserObject from '../../functions/user/getUserObject';
 import { follow, unfollow } from '../../functions/eventHandlers/followHandlers';
 import usersInListActions from '../../stateManagement/actions/usersInListActions';
 import UsersInListContext from '../../stateManagement/contexts/UsersInListContext';
+import ImageWithFallback from './ImageWithFallback';
 
 interface Props {
     user: UserInListProp;
@@ -32,7 +33,7 @@ const UserInList: React.FC<Props> = (props) => {
     }
     return (
         <li className='userInList'>
-                <img className="smallProfilePic" src={user.profile_picture} alt={`${user.username}'s profile`}></img>
+                <ImageWithFallback src={user.profile_picture} classes="smallProfilePic" profilePicture={true}></ImageWithFallback>
                 <div className='userListTextBox'>
                     <Link to={`/${message ? 'messages' : 'profile'}/${user.user_id}`} className='userListUserName'>{user.username}</Link>
                     <span className='userListName'>{user.name}</span>

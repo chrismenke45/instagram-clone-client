@@ -9,6 +9,7 @@ import FetchAPI from '../../functions/fetch/FetchAPI';
 import postsActions from '../../stateManagement/actions/postsActions';
 import PostsContext from '../../stateManagement/contexts/PostsContext';
 import deleteFile from '../../firebase/deleteFile';
+import ImageWithFallback from './ImageWithFallback';
 
 interface Props {
     post: PostProp;
@@ -58,7 +59,7 @@ const PostOnFeed: React.FC<Props> = (props) => {
         <article className='postOnFeed flexVertCenter'>
             <div className='postHeader'>
                 <div>
-                    <img className="smallProfilePic" src={post.profile_picture}></img>
+                    <ImageWithFallback src={post.profile_picture} classes="smallProfilePic" profilePicture={true}></ImageWithFallback>
                     <Link to={`/profile/${post.user_id}`}><h4>{post.username}</h4></Link>
                 </div>
                 <FaEllipsisH onClick={handleShowOptions}></FaEllipsisH>
@@ -72,7 +73,7 @@ const PostOnFeed: React.FC<Props> = (props) => {
                 }
 
             </div>
-            <img className="postImg" src={post.picture_url} alt=''></img>
+            <ImageWithFallback src={post.picture_url} classes="postImg" post={true}></ImageWithFallback>
             <div className='postOptions'>
                 {post.current_user_liked ? <FaHeart className='likedHeart' onClick={handleUnlikeSubmit}></FaHeart> : <FaRegHeart onClick={handleLikeSubmit}></FaRegHeart>}
                 <Link to={`/posts/${post.id}/comments`}><FaRegComment></FaRegComment></Link>

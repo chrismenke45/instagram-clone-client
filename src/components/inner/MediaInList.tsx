@@ -6,6 +6,7 @@ import { follow, unfollow } from "../../functions/eventHandlers/followHandlers"
 import shortenTime from '../../functions/shortenTime';
 import MediaContext from '../../stateManagement/contexts/MediaContext';
 import mediaActions from '../../stateManagement/actions/mediaActions';
+import ImageWithFallback from './ImageWithFallback';
 
 interface Props {
     media: MediaProp;
@@ -32,7 +33,7 @@ const MediaInList: React.FC<Props> = (props) => {
 
     return (
         <li className='mediaInList'>
-            <img className="smallProfilePic" src={media.profile_picture} alt={`${media.username}'s profile picture`}></img>
+            <ImageWithFallback src={media.profile_picture} classes="smallProfilePic" profilePicture={true}></ImageWithFallback>
             {media.id === 76 || media.id === 67 ?
                 media.id === 76 ?
                     <p className='mediaTextBox'>
@@ -70,7 +71,7 @@ const MediaInList: React.FC<Props> = (props) => {
             }
 
             {media.picture_url ?
-                <img className="smallPostPic" src={media.picture_url}></img>
+                <ImageWithFallback src={media.picture_url} classes="smallPostPic" post={true}></ImageWithFallback>
                 :
                 media.current_user_follows ?
                     <button onClick={() => handleUnfollow(media.user_id)}>Following</button>

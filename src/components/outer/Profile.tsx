@@ -20,8 +20,8 @@ const Profile: React.FC = () => {
     useEffect(() => {
         fetcher.fetchData(`users/${user_id}`, "GET", user.jwt)
         .then(userProfile => {
-            if (profileState.profile.id === 0) reloadDispatch(reloadActions.INCREMENT())
             profileDispatch(profileActions.SET_PROFILE(userProfile[0]))
+            if (profileState.profile.id === 0) reloadDispatch(reloadActions.INCREMENT())
         })
     }, [reloadState])
 
