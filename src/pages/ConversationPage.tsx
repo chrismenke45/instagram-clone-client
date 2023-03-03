@@ -18,6 +18,7 @@ const ConversationPage: React.FC = () => {
     const [newMessage, setNewMessage] = useState<string>("")
     const [displayCount, setDisplayCount] = useState<number>(25)
     const [loading, setLoading] = useState<boolean>(true)
+    const [lastReload, setLastReload] = useState<number>(new Date().getTime() - 4000)
     const { reloadState } = useContext(ReloadContext)
     const [otherUser, setOtherUser] = useState<ProfileProp>({
         username: "",
@@ -52,15 +53,19 @@ const ConversationPage: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        setLoading(true)
-        fetcher.fetchData(`users/${user.user_id}/messages/${user_id}${generateQueryParams({ "count": displayCount })}`, "GET", user.jwt)
-            .then(theMessages => {
-                conversationDispatch(conversationActions.SET_CONVERSATION(theMessages))
-                setLoading(false)
-            })
-            .catch(err => {
-                setLoading(false)
-            })
+        if (new Date().getTime() - lastReload > 3000) {
+            setLoading(true)
+            fetcher.fetchData(`users/${user.user_id}/messages/${user_id}${generateQueryParams({ "count": displayCount })}`, "GET", user.jwt)
+                .then(theMessages => {
+                    conversationDispatch(conversationActions.SET_CONVERSATION(theMessages))
+                    setLoading(false)
+                    setLastReload(new Date().getTime())
+                })
+                .catch(err => {
+                    setLoading(false)
+                    setLastReload(new Date().getTime())
+                })
+        }
     }, [reloadState.count])
 
 
@@ -96,7 +101,7 @@ const ConversationPage: React.FC = () => {
     return (
         <div id="page">
             <BackBanner header={otherUser.username || 'Conversation'} img={otherUser.profile_picture} subHeader={otherUser.name} headerLink={`/profile/${otherUser.id}`} />
-            {loading && !conversationState.conversation.length?
+            {loading && !conversationState.conversation.length ?
                 <main>
                     <LoadingIcon />
                 </main>
