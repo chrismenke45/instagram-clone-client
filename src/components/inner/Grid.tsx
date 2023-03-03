@@ -18,7 +18,7 @@ const Grid: React.FC<{ gridPath: string, queryParams?: QueryParamObjProp }> = (p
     const user = getUserObject()
     const [posts, setPosts] = useState<PostUrl[]>([])
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
-    const { reloadState} = useContext(ReloadContext)
+    const { reloadState } = useContext(ReloadContext)
     let fetcher = new FetchAPI()
 
     useEffect(() => {
@@ -35,27 +35,32 @@ const Grid: React.FC<{ gridPath: string, queryParams?: QueryParamObjProp }> = (p
     }, [gridPath, reloadState])
 
     return (
-        <div id="grid" className='flexVertCenter'>
-            {posts.length < 1 && <div></div>}
-            {posts.length > 0 ?
-                posts.map(post => {
-                    return (
-                        <Link
-                            to={`/posts/${post.id}`}
-                            key={post.id}
-                            className="gridChild"
-                        >
-                            <img src={post.picture_url}></img>
-                        </Link>
-                    )
-                })
-                :
-                activelySearching ?
-                    <LoadingIcon />
+        <>
+            <div id="grid" className='flexVertCenter'>
+                {posts.length < 1 && <div></div>}
+                {posts.length > 0 ?
+                    posts.map(post => {
+                        return (
+                            <Link
+                                to={`/posts/${post.id}`}
+                                key={post.id}
+                                className="gridChild"
+                            >
+                                <img src={post.picture_url}></img>
+                            </Link>
+                        )
+                    })
                     :
-                    <p id="noResults">No posts</p>}
+                    activelySearching ?
+                        <LoadingIcon />
+                        :
+                        <p id="noResults">No posts</p>}
 
-        </div>
+            </div>
+            {activelySearching && posts.length > 0 && <div id="loadingMoreContainer" className='flexVertCenter'>
+                        <LoadingIcon />
+                    </div>}
+        </>
     );
 }
 
