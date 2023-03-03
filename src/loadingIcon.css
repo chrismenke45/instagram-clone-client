@@ -16,7 +16,7 @@
     height: 40px;
     width: 40px;
     position: absolute;
-    left: calc(50% - 20px);
+    left: calc(50%);
     top: 40%;
     transform: translate3d(-50%, -50%, 0);
     will-change: transform;

@@ -52,6 +52,7 @@ const ConversationPage: React.FC = () => {
     }, [])
 
     useEffect(() => {
+        setLoading(true)
         fetcher.fetchData(`users/${user.user_id}/messages/${user_id}${generateQueryParams({ "count": displayCount })}`, "GET", user.jwt)
             .then(theMessages => {
                 conversationDispatch(conversationActions.SET_CONVERSATION(theMessages))
@@ -65,9 +66,6 @@ const ConversationPage: React.FC = () => {
 
     const handleNewMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewMessage(e.target.value)
-        console.log(otherUser)
-        console.log(otherUser.username)
-        console.log(!!otherUser.username)
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -85,7 +83,6 @@ const ConversationPage: React.FC = () => {
             ])
             fetcher.fetchData(`/users/${user.user_id}/messages`, "POST", user.jwt)
                 .then(message => {
-                    console.log(message)
                     conversationDispatch(conversationActions.REMOVE_MESSAGE(0))
                     conversationDispatch(conversationActions.ADD_MESSAGE(message))
                     setNewMessage("")
@@ -99,12 +96,17 @@ const ConversationPage: React.FC = () => {
     return (
         <div id="page">
             <BackBanner header={otherUser.username || 'Conversation'} img={otherUser.profile_picture} subHeader={otherUser.name} headerLink={`/profile/${otherUser.id}`} />
-            {loading ?
+            {loading && !conversationState.conversation.length?
                 <main>
                     <LoadingIcon />
                 </main>
                 :
-                <Conversation messages={conversationState.conversation} setDisplayCount={setDisplayCount} />
+                <>
+                    {loading && <div id="loadingMoreContainer">
+                        <LoadingIcon />
+                    </div>}
+                    <Conversation messages={conversationState.conversation} setDisplayCount={setDisplayCount} />
+                </>
             }
             <form id="messageForm" onSubmit={handleSubmit}>
                 <input type="text" value={newMessage} onChange={handleNewMessageChange}></input>

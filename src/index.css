@@ -865,6 +865,11 @@ nav ul li a {
   align-items: center;
   justify-content: center;
 }
+#loadingMoreContainer {
+  position: relative;
+  width: 100%;
+  height: 60px;
+}
 .pushToTop { /*this pushes messages to top of page if there isnt that many and disapears if theres enough messages*/
   flex-grow: 9;
   flex-shrink: 9;
