@@ -16,6 +16,7 @@ const Search: React.FC = () => {
     const [searchType, setSearchType] = useState<string>("accounts")
     const [showSearchOptions, setShowSearchOptions] = useState<boolean>(false)
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
+    const [lastReload, setLastReload] = useState<number>(new Date().getTime() - 4000)
     const [displayCount, setDisplayCount] = useState<number>(15)
     const { usersInListState, usersInListDispatch } = useContext(UsersInListContext)
     const { reloadDispatch } = useContext(ReloadContext)
@@ -58,9 +59,10 @@ const Search: React.FC = () => {
     }
 
     const scrollIncreaseDisplayCount = (e: React.UIEvent<HTMLElement>) => {
-        if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
+        if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight && new Date().getTime() - lastReload > 3000) {
             setDisplayCount(prev => prev + 15);
             reloadDispatch(reloadActions.INCREMENT())
+            setLastReload(new Date().getTime())
         }
     }
 

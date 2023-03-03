@@ -19,26 +19,21 @@ const Grid: React.FC<{ gridPath: string, queryParams?: QueryParamObjProp }> = (p
     const user = getUserObject()
     const [posts, setPosts] = useState<PostUrl[]>([])
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
-    const [lastReload, setLastReload] = useState<number>(new Date().getTime() - 4000)
     const { reloadState } = useContext(ReloadContext)
     let fetcher = new FetchAPI()
 
     useEffect(() => {
-        if (new Date().getTime() - lastReload > 3000) {
         setActivelySearching(true)
         let path = gridPath + (queryParams ? generateQueryParams(queryParams) : "")
         fetcher.fetchData(path, "GET", user.jwt)
             .then(posts => {
                 setPosts(posts)
                 setActivelySearching(false)
-                setLastReload(new Date().getTime())
             })
             .catch(err => {
                 setActivelySearching(false)
-                setLastReload(new Date().getTime())
             })
-        }
-    }, [gridPath, reloadState])
+    }, [reloadState])
 
     return (
         <>

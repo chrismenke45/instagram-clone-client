@@ -10,13 +10,15 @@ interface Props {
 }
 const Conversation: React.FC<Props> = (props) => {
     const { messages, setDisplayCount } = props
+    const [lastReload, setLastReload] = useState<number>(new Date().getTime() - 4000)
     const user = getUserObject()
     const { reloadDispatch } = useContext(ReloadContext)
 
     const scrollIncreaseDisplayCount = (e: React.UIEvent<HTMLElement>) => {
-        if (e.currentTarget.scrollHeight === e.currentTarget.clientHeight - e.currentTarget.scrollTop) {
+        if (e.currentTarget.scrollHeight === e.currentTarget.clientHeight - e.currentTarget.scrollTop && new Date().getTime() - lastReload > 3000) {
             setDisplayCount(prev => prev + 15);
             reloadDispatch(reloadActions.INCREMENT())
+            setLastReload(new Date().getTime())
         }
     }
 
