@@ -36,7 +36,7 @@ const RegisterForm: React.FC = () => {
             ["user[password]", registerInfo.password.trim()],
             ["user[name]", registerInfo.name.trim()],
             ["user[bio]", ""],
-            ["user[profile_picture]", process.env.REACT_APP_DEFAULT_PROFILE_PICTURE || ""],
+            ["user[profile_picture]", ""],
         ])
         fetcher.fetchData("users", "POST")
             .then(res => {
