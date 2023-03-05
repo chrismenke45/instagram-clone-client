@@ -27,7 +27,13 @@ class FetchAPI {
             }
         }
         return fetch(url, this.options)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error(response.status.toString())
+                }
+            })
             .then(responseObject => responseObject)
             .catch(err => {
                 console.error(err)
