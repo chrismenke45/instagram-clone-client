@@ -788,6 +788,7 @@ nav ul li a {
 #editBanner .checkmark {
   justify-self: end;
   color: var(--insta-text-blue);
+  font-size: 2rem;
 }
 
 #confirmDeleteBox {
