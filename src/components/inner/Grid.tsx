@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import getUserObject from '../../functions/user/getUserObject';
 import FetchAPI from '../../functions/fetch/FetchAPI';
@@ -14,11 +14,11 @@ const Grid: React.FC<{ gridPath: string, queryParams?: QueryParamObjProp }> = (p
         picture_url: string;
         id: number;
     }
-    const user = getUserObject()
     const [posts, setPosts] = useState<PostUrl[]>([])
     const [activelySearching, setActivelySearching] = useState<boolean>(false)
     const { reloadState } = useContext(ReloadContext)
-    let fetcher = new FetchAPI()
+    const user = useMemo(() => getUserObject(), [])
+    let fetcher = useMemo(() => new FetchAPI(), [] ) 
 
     useEffect(() => {
         setActivelySearching(true)
@@ -31,7 +31,7 @@ const Grid: React.FC<{ gridPath: string, queryParams?: QueryParamObjProp }> = (p
             .catch(err => {
                 setActivelySearching(false)
             })
-    }, [reloadState])
+    }, [reloadState, gridPath, queryParams, fetcher, user])
 
     return (
         <>
