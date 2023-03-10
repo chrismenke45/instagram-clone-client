@@ -7,8 +7,8 @@ import {
 
 async function deleteFile(imageFileUrl: string) {
     const imageRef = ref(storage, imageFileUrl);
-    if (imageFileUrl === process.env.REACT_APP_DEFAULT_PROFILE_PICTURE) {
-        return new Promise((resolve, reject) => reject("Guest profile picture cannot be deleted"))
+    if (imageFileUrl === process.env.REACT_APP_DEFAULT_PROFILE_PICTURE || imageFileUrl === process.env.REACT_APP_NOT_FOUND_PICTURE) {
+        return new Promise((resolve, reject) => reject("Guest profile picture and not found picture cannot be deleted"))
     }
     return deleteObject(imageRef)
         .then(snapshot => {
