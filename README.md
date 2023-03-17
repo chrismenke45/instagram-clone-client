@@ -1,5 +1,5 @@
 # Instagram Clone Front End
-This is the front end of the instagram clone I'm currently building with react.
+This is the front end of the instagram clone I'm currently building with React. The backend can be found [here.](https://github.com/chrismenke45/instagram-clone-api)
 ## How it's made:
 Tech used: TypeScript with React.js, CSS, Google firebase (firestore)
 <br />
