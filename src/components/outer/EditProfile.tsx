@@ -127,7 +127,7 @@ const EditProfile: React.FC = () => {
                     </div>}
                 <img
                     className='profilePicture'
-                    src={profile.profile_picture}
+                    src={profile.profile_picture || ""}
                     onClick={handleImageSelect}
                     alt="Profile"
                     onError={({ currentTarget }) => {
