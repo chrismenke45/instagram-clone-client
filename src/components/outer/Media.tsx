@@ -59,11 +59,11 @@ const Media: React.FC = () => {
                 activelySearching ?
                 <LoadingIcon />
                 :
-                <h5>
+                <h5  id="noResults">
                     No Media
                 </h5>}
         </main>
-    );
+    ); 
 }
 
 export default Media;
