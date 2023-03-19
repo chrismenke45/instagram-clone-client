@@ -17,14 +17,14 @@ const postsReducer = (state: postsStateInterface, action: postsActionInterface) 
       return { posts: action.payload.posts || [] }
     case "LIKE_POST":
       if (action.payload.post_id) {
-        const newPosts = state.posts.map(post => post.id === action.payload.post_id ? { ...post, current_user_liked: true, like_count: post.like_count++ } : post)
+        const newPosts = state.posts.map(post => post.id === action.payload.post_id ? { ...post, current_user_liked: true, like_count: ++post.like_count } : post)
         return { posts: newPosts }
       } else {
         return state
       }
     case "UNLIKE_POST":
       if (action.payload.post_id) {
-        const newPosts = state.posts.map(post => post.id === action.payload.post_id ? { ...post, current_user_liked: false, like_count: post.like_count-- } : post)
+        const newPosts = state.posts.map(post => post.id === action.payload.post_id ? { ...post, current_user_liked: false, like_count: --post.like_count } : post)
         return { posts: newPosts }
       } else {
         return state

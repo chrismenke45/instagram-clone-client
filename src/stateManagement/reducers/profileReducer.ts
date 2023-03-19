@@ -18,7 +18,7 @@ const profileReducer = (state: profileStateInterface, action: profileActionInter
             return {
                 profile: {
                     ...state.profile,
-                    follower_count: state.profile.follower_count++,
+                    follower_count: ++state.profile.follower_count,
                     current_user_follows: true,
                 }
 
@@ -27,7 +27,7 @@ const profileReducer = (state: profileStateInterface, action: profileActionInter
             return {
                 profile: {
                     ...state.profile,
-                    follower_count: state.profile.follower_count--,
+                    follower_count: --state.profile.follower_count,
                     current_user_follows: false,
                 }
 
