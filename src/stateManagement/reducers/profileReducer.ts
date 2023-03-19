@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import { ProfileProp } from "../../models/ProfileProp";
 
 export interface profileStateInterface {

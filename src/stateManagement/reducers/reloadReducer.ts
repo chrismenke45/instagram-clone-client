@@ -1,5 +1,3 @@
-import deleteFile from "../../firebase/deleteFile";
-
 export interface reloadStateInterface {
   count: number;
 }

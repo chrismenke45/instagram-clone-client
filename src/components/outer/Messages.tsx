@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import FetchAPI from '../../functions/fetch/FetchAPI';
 import getUserObject from '../../functions/user/getUserObject';
 import SearchForm from '../inner/SearchForm';
-import { UserInListProp } from '../../models/UserInListProp';
 import { MessageProp } from '../../models/MessageProp';
 import MessageInList from '../inner/MessageInList';
 import UsersInListContext from '../../stateManagement/contexts/UsersInListContext';

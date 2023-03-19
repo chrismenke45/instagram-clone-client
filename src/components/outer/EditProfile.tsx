@@ -11,7 +11,6 @@ import ImageCropper from '../inner/ImageCropper';
 import ImageCropperContext from '../../stateManagement/contexts/ImageCropperContext';
 import imageCropperActions from '../../stateManagement/actions/imageCropperActions';
 import deleteUser from '../../functions/user/deleteUser';
-import ImageWithFallback from '../inner/ImageWithFallback';
 
 const EditProfile: React.FC = () => {
     let fetcher = new FetchAPI()
@@ -130,6 +129,7 @@ const EditProfile: React.FC = () => {
                     className='profilePicture'
                     src={profile.profile_picture}
                     onClick={handleImageSelect}
+                    alt="Profile"
                     onError={({ currentTarget }) => {
                         currentTarget.onerror = null; // prevents looping
                         currentTarget.src = process.env.REACT_APP_DEFAULT_PROFILE_PICTURE || ""
