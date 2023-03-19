@@ -29,7 +29,7 @@ const ImageCropper: React.FC<Props> = (props) => {
     const [imgSrc, setImgSrc] = useState<string>('')
     const [imgExt, setImgExt] = useState<string>('')
     const acceptedImageFileTypesArray: string[] = ["image/png", "image/gif", "image/jpeg"]
-    const acceptedImageMaxSize: number = 200000
+    const acceptedImageMaxSize: number = parseInt(process.env.REACT_APP_MAX_IMAGE_SIZE || "200000")
 
     useEffect(() => {
         if (selectImageButtonRef?.current) {
