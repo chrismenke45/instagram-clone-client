@@ -29,7 +29,8 @@ const ImageWithFallback: React.FC<Props> = (props) => {
             onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
                 currentTarget.src = fallback;
-            }}>
+            }}
+            alt="">
         </img>
     );
 }
