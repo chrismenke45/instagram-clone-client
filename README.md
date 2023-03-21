@@ -1,7 +1,10 @@
 # Instagram Clone Front End
-This is the front end of the instagram clone I'm currently building with React.
+This is the front end of the [instagram clone](https://chrismenke45.github.io/instagram-clone-client) I built with React.
+<br />
+![desktop](https://user-images.githubusercontent.com/86500980/226732356-9a93c9bb-ad56-4168-964f-ba982706ce05.png)
+
 ## How it's made:
-Tech used: TypeScript with React.js, CSS, Google firebase (firestore)
+Tech used: TypeScript with React.js, CSS, Google firebase (photo store)
 <br />
 This front end works with my [instagram clone api](https://github.com/chrismenke45/instagram-clone-api) to give users the full instagram expierence. Reusable components were made with TypeScript with React and styled with vanilla CSS.  The front end currently does all inferfacing with Google firestore for photo storage. I made this architecture decision in order to keep my outbound data transfer low on my backend to keep my backend hosting free.
 ## Optimizations
